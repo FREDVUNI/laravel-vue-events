@@ -261,7 +261,7 @@ export default {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 500px;
+  height: 800px;
 }
 #hero h1 {
   color: #ffffff;
