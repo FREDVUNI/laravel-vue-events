@@ -1,14 +1,11 @@
 <template>
   <div class="bg-gray-100 min-h-screen">
-    <!-- Navbar -->
     <nav class="bg-white shadow fixed top-0 left-0 right-0 z-50">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center py-4">
-          <!-- Logo -->
           <a href="#" class="text-xl font-bold text-gray-800"
             >Events Management</a
           >
-          <!-- Mobile menu toggle button -->
           <button
             @click="toggleMobileMenu"
             class="md:hidden text-gray-600 hover:text-gray-800 focus:outline-none"
