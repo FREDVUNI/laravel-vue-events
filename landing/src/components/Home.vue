@@ -84,7 +84,7 @@
       </ul>
     </div>
 
-    <section id="hero" class="text-center py-20">
+    <section id="hero" class="text-center py-80">
       <h1 class="text-4xl font-bold text-gray-800">
         Welcome to our Events Management
       </h1>
@@ -261,14 +261,16 @@ export default {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 800px;
+  height: 500px;
 }
 #hero h1 {
   color: #ffffff;
+  font-size: 45px;
 }
 
 #hero p {
   color: #ffffff;
+  font-size: 25px;
 }
 
 #hero a {
