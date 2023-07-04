@@ -8,22 +8,6 @@
           <a href="#" class="text-xl font-bold text-gray-800"
             >Events Management</a
           >
-          <!-- Navigation links -->
-          <ul class="hidden md:flex space-x-4">
-            <li>
-              <a href="#" class="text-gray-600 hover:text-gray-800">Home</a>
-            </li>
-            <li>
-              <a href="#" class="text-gray-600 hover:text-gray-800">About</a>
-            </li>
-            <li>
-              <a href="#" class="text-gray-600 hover:text-gray-800">Events</a>
-            </li>
-            <li>
-              <a href="#" class="text-gray-600 hover:text-gray-800">Contact</a>
-            </li>
-          </ul>
-
           <!-- Mobile menu toggle button -->
           <button
             @click="toggleMobileMenu"
@@ -57,6 +41,21 @@
               ></path>
             </svg>
           </button>
+          <!-- Navigation links -->
+          <ul :class="{ hidden: mobileMenuOpen }" class="md:flex space-x-4">
+            <li>
+              <a href="#" class="text-gray-600 hover:text-gray-800">Home</a>
+            </li>
+            <li>
+              <a href="#" class="text-gray-600 hover:text-gray-800">About</a>
+            </li>
+            <li>
+              <a href="#" class="text-gray-600 hover:text-gray-800">Events</a>
+            </li>
+            <li>
+              <a href="#" class="text-gray-600 hover:text-gray-800">Contact</a>
+            </li>
+          </ul>
         </div>
       </div>
     </nav>
@@ -90,26 +89,18 @@
       </ul>
     </div>
 
-    <!-- Hero section -->
-    <section id="hero" class="bg-gray-200 py-40">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center">
-          <h1 class="text-4xl font-bold text-gray-800 mb-4">
-            Discover Amazing Events
-          </h1>
-          <p class="text-xl text-gray-600 mb-8">
-            Find and attend the best events in your area.
-          </p>
-          <a
-            href="#"
-            class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
-            >Browse Events</a
-          >
-        </div>
-      </div>
+    <section id="hero" class="text-center py-20">
+      <h1 class="text-4xl font-bold text-gray-800">
+        Welcome to our Events Management
+      </h1>
+      <p class="mt-4 text-gray-600">We organize amazing events for you!</p>
+      <a
+        href="#about"
+        class="inline-block bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 mt-8 rounded"
+        >Learn More</a
+      >
     </section>
 
-    <!-- About section -->
     <section class="bg-white py-32">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center">
         <div class="w-1/2">
@@ -132,11 +123,9 @@
         </div>
       </div>
     </section>
-    <!-- Features section -->
     <section id="features" class="py-32">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          <!-- Feature card 1 -->
           <div class="bg-white rounded-lg shadow p-6">
             <h2 class="text-2xl font-bold text-gray-800 mb-4">
               Event Management
@@ -147,7 +136,6 @@
             </p>
           </div>
 
-          <!-- Feature card 2 -->
           <div class="bg-white rounded-lg shadow p-6">
             <h2 class="text-2xl font-bold text-gray-800 mb-4">
               Discover Events
@@ -158,7 +146,6 @@
             </p>
           </div>
 
-          <!-- Feature card 3 -->
           <div class="bg-white rounded-lg shadow p-6">
             <h2 class="text-2xl font-bold text-gray-800 mb-4">
               Attendee Management
@@ -172,11 +159,9 @@
       </div>
     </section>
 
-    <!-- Events section -->
     <section class="bg-gray-200 py-32">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          <!-- Event card 1 -->
           <div class="bg-white rounded-lg shadow p-6">
             <img
               src="https://cdn-ajggd.nitrocdn.com/kMoOFpDlsOVtlYJLrnSRNCQXaUFHZPTY/assets/images/optimized/rev-814242f/wp-content/uploads/bb-plugin/cache/event-photography-feat-landscape-b5ebb4965b6271ddb206a62fffa41bde-zybravgx2q47.jpg"
@@ -190,7 +175,6 @@
             </p>
           </div>
 
-          <!-- Event card 2 -->
           <div class="bg-white rounded-lg shadow p-6">
             <img
               src="https://images.unsplash.com/photo-1549451371-64aa98a6f660?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80"
@@ -204,7 +188,6 @@
             </p>
           </div>
 
-          <!-- Event card 3 -->
           <div class="bg-white rounded-lg shadow p-6">
             <img
               src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80"
@@ -220,7 +203,6 @@
         </div>
       </div>
     </section>
-    <!-- Contact section -->
     <section class="bg-white py-32">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h2 class="text-3xl font-bold text-gray-800 mb-8">Contact Us</h2>
@@ -238,7 +220,6 @@
       </div>
     </section>
 
-    <!-- Footer -->
     <footer class="bg-gray-800 py-12">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <p class="text-center text-gray-400">
@@ -277,10 +258,32 @@ export default {
   background-color: rgba(255, 255, 255, 0.1);
 }
 #hero {
-  background: url("https://cdn-ajggd.nitrocdn.com/kMoOFpDlsOVtlYJLrnSRNCQXaUFHZPTY/assets/images/optimized/rev-814242f/wp-content/uploads/bb-plugin/cache/event-photography-feat-landscape-b5ebb4965b6271ddb206a62fffa41bde-zybravgx2q47.jpg");
+  background-image: linear-gradient(
+      rgba(27, 32, 51, 0.6),
+      rgba(27, 32, 51, 0.6)
+    ),
+    url("https://cdn-ajggd.nitrocdn.com/kMoOFpDlsOVtlYJLrnSRNCQXaUFHZPTY/assets/images/optimized/rev-814242f/wp-content/uploads/bb-plugin/cache/event-photography-feat-landscape-b5ebb4965b6271ddb206a62fffa41bde-zybravgx2q47.jpg");
+  background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 500px;
+  height: 800px;
+}
+#hero h1 {
+  color: #ffffff;
+}
+
+#hero p {
+  color: #ffffff;
+}
+
+#hero a {
+  background-color: #ffffff;
+  color: #1b2033;
+}
+
+#hero a:hover {
+  background-color: #e5e7eb;
+  color: #1b2033;
 }
 @media (min-width: 768px) {
   .nav-link {

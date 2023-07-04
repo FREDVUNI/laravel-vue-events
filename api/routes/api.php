@@ -20,6 +20,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('/', function () {
+    return view('welcome');
+});
+
 Route::group(["prefix" => "api/"], function(){
     Route::post('auth/signup', [TestController::class, 'signup']);
     Route::post('auth/signin', [AuthController::class, 'signin']);
