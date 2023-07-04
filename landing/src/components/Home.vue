@@ -1,6 +1,9 @@
 <template>
   <div class="bg-gray-100 min-h-screen">
-    <nav class="bg-white shadow fixed top-0 left-0 right-0 z-50">
+    <nav
+      :class="{ 'bg-transparent': !isScrolled, 'bg-white': isScrolled }"
+      class="fixed top-0 left-0 right-0 z-50 transition-colors duration-300 shadow"
+    >
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center py-4">
           <a href="#" class="text-xl font-bold text-gray-800"
@@ -232,9 +235,19 @@ export default {
   data() {
     return {
       mobileMenuOpen: false,
+      isScrolled: false,
     };
   },
+  mounted() {
+    window.addEventListener("scroll", this.handleScroll);
+  },
+  beforeDestroy() {
+    window.removeEventListener("scroll", this.handleScroll);
+  },
   methods: {
+    handleScroll() {
+      this.isScrolled = window.scrollY > 0;
+    },
     toggleMobileMenu() {
       this.mobileMenuOpen = !this.mobileMenuOpen;
     },
