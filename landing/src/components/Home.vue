@@ -56,8 +56,6 @@
         </div>
       </div>
     </nav>
-
-    <!-- Mobile menu -->
     <div
       :class="{ block: mobileMenuOpen, hidden: !mobileMenuOpen }"
       class="md:hidden bg-white"
