@@ -207,6 +207,11 @@
         </h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mt-16">
           <div class="bg-white rounded-lg p-6 shadow">
+            <img
+              src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80"
+              alt="Conference 2023"
+              class="mb-4 rounded-md"
+            />
             <h3 class="text-xl font-bold text-gray-800">Conference 2023</h3>
             <p class="mt-2 text-gray-600">July 15-18, 2023</p>
             <a
@@ -216,6 +221,11 @@
             >
           </div>
           <div class="bg-white rounded-lg p-6 shadow">
+            <img
+              src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80"
+              alt="Workshop Series"
+              class="mb-4 rounded-md"
+            />
             <h3 class="text-xl font-bold text-gray-800">Workshop Series</h3>
             <p class="mt-2 text-gray-600">August 5-7, 2023</p>
             <a
@@ -225,6 +235,11 @@
             >
           </div>
           <div class="bg-white rounded-lg p-6 shadow">
+            <img
+              src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80"
+              alt="Networking Event"
+              class="mb-4 rounded-md"
+            />
             <h3 class="text-xl font-bold text-gray-800">Networking Event</h3>
             <p class="mt-2 text-gray-600">September 10, 2023</p>
             <a
