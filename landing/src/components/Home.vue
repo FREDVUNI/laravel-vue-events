@@ -41,7 +41,6 @@
               ></path>
             </svg>
           </button>
-          <!-- Navigation links -->
           <ul :class="{ hidden: mobileMenuOpen }" class="md:flex space-x-4">
             <li>
               <a href="#" class="text-gray-600 hover:text-gray-800">Home</a>
@@ -201,19 +200,103 @@
         </div>
       </div>
     </section>
+    <section class="bg-gray-200 py-32">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-4xl font-bold text-gray-800 text-center">
+          Upcoming Events
+        </h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mt-16">
+          <div class="bg-white rounded-lg p-6 shadow">
+            <h3 class="text-xl font-bold text-gray-800">Conference 2023</h3>
+            <p class="mt-2 text-gray-600">July 15-18, 2023</p>
+            <a
+              href="#"
+              class="inline-block bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 mt-4 rounded"
+              >Register Now</a
+            >
+          </div>
+          <div class="bg-white rounded-lg p-6 shadow">
+            <h3 class="text-xl font-bold text-gray-800">Workshop Series</h3>
+            <p class="mt-2 text-gray-600">August 5-7, 2023</p>
+            <a
+              href="#"
+              class="inline-block bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 mt-4 rounded"
+              >Register Now</a
+            >
+          </div>
+          <div class="bg-white rounded-lg p-6 shadow">
+            <h3 class="text-xl font-bold text-gray-800">Networking Event</h3>
+            <p class="mt-2 text-gray-600">September 10, 2023</p>
+            <a
+              href="#"
+              class="inline-block bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 mt-4 rounded"
+              >Register Now</a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="bg-white py-32">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 class="text-3xl font-bold text-gray-800 mb-8">Contact Us</h2>
-        <div class="flex justify-center space-x-8">
-          <a href="#" class="text-4xl text-gray-600 hover:text-gray-800">
-            <i class="fab fa-twitter"></i>
-          </a>
-          <a href="#" class="text-4xl text-gray-600 hover:text-gray-800">
-            <i class="fab fa-facebook"></i>
-          </a>
-          <a href="#" class="text-4xl text-gray-600 hover:text-gray-800">
-            <i class="fab fa-instagram"></i>
-          </a>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 mt-16">
+            <div>
+              <h3 class="text-xl font-bold text-gray-800">Events Management</h3>
+              <p class="mt-4 text-gray-600">123 Main Street, Cityville, USA</p>
+              <p class="mt-2 text-gray-600">Phone: 123-456-7890</p>
+              <p class="mt-2 text-gray-600">Email: info@example.com</p>
+
+              <div class="flex justify-left space-x-8 py-5">
+                <a href="#" class="text-4xl text-gray-600 hover:text-gray-800">
+                  <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" class="text-4xl text-gray-600 hover:text-gray-800">
+                  <i class="fab fa-facebook"></i>
+                </a>
+                <a href="#" class="text-4xl text-gray-600 hover:text-gray-800">
+                  <i class="fab fa-instagram"></i>
+                </a>
+              </div>
+            </div>
+
+            <div>
+              <form class="flex flex-col">
+                <label for="name" class="text-gray-800 font-bold">Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  class="border border-gray-300 rounded-lg py-2 px-4 mt-2"
+                  required
+                />
+                <label for="email" class="text-gray-800 font-bold mt-4"
+                  >Email</label
+                >
+                <input
+                  type="email"
+                  id="email"
+                  class="border border-gray-300 rounded-lg py-2 px-4 mt-2"
+                  required
+                />
+                <label for="message" class="text-gray-800 font-bold mt-4"
+                  >Message</label
+                >
+                <textarea
+                  id="message"
+                  rows="4"
+                  class="border border-gray-300 rounded-lg py-2 px-4 mt-2"
+                  required
+                ></textarea>
+                <button
+                  type="submit"
+                  class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 mt-8 rounded"
+                >
+                  Submit
+                </button>
+              </form>
+            </div>
+          </div>
         </div>
       </div>
     </section>
