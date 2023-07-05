@@ -4,7 +4,7 @@
       :class="{ 'bg-transparent': !isScrolled, 'bg-white': isScrolled }"
       class="fixed top-0 left-0 right-0 z-50 transition-colors duration-300 shadow"
     >
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div id="header" :class="{ scrolled: isScrolled }" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center py-4">
           <a href="#" class="text-xl font-bold text-gray-800"
             >Events Management</a
@@ -64,7 +64,7 @@
     >
       <ul class="py-4">
         <li>
-          <a href="#" class="block px-4 py-2 text-gray-600 hover:text-gray-800"
+          <a href="#" class="block px-4 py-2 text-white-600 hover:text-gray-800"
             >Home</a
           >
         </li>
@@ -372,6 +372,27 @@ export default {
 </script>
 
 <style scoped>
+#header {
+  background-color: transparent;
+  transition: background-color 0.3s;
+  width: 100%;
+
+}
+
+#header.scrolled {
+  background-color: white;
+  width: 100%;
+
+}
+
+#header a {
+  color: white;
+}
+
+#header.scrolled a {
+  color: gray;
+}
+
 .nav-link {
   color: white;
   padding: 0.5rem 1rem;
@@ -411,6 +432,7 @@ export default {
   background-color: #e5e7eb;
   color: #1b2033;
 }
+
 @media (min-width: 768px) {
   .nav-link {
     padding: 0.5rem 1.5rem;
