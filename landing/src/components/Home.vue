@@ -205,48 +205,66 @@
         <h2 class="text-4xl font-bold text-gray-800 text-center">
           Upcoming Events
         </h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mt-16">
-          <div class="bg-white rounded-lg p-6 shadow">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 mt-16">
+          <div class="rounded-lg p-6 relative">
             <img
               src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80"
               alt="Conference 2023"
-              class="mb-4 rounded-md"
+              class="w-full h-80 object-cover rounded-md"
             />
-            <h3 class="text-xl font-bold text-gray-800">Conference 2023</h3>
-            <p class="mt-2 text-gray-600">July 15-18, 2023</p>
-            <a
-              href="#"
-              class="inline-block bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 mt-4 rounded"
-              >Register Now</a
+            <div
+              class="absolute top-0 left-0 w-full h-full flex items-center justify-center text-white text-center"
             >
+              <div>
+                <h3 class="text-xl font-bold">Conference 2023</h3>
+                <p class="mt-2">July 15-18, 2023</p>
+                <a
+                  href="#"
+                  class="inline-block bg-black hover:bg-gray-700 text-white font-bold py-2 px-3 mt-4 rounded"
+                  >Register Now</a
+                >
+              </div>
+            </div>
           </div>
-          <div class="bg-white rounded-lg p-6 shadow">
+          <div class="rounded-lg p-6 relative">
             <img
               src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80"
               alt="Workshop Series"
-              class="mb-4 rounded-md"
+              class="w-full h-80 object-cover rounded-md"
             />
-            <h3 class="text-xl font-bold text-gray-800">Workshop Series</h3>
-            <p class="mt-2 text-gray-600">August 5-7, 2023</p>
-            <a
-              href="#"
-              class="inline-block bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 mt-4 rounded"
-              >Register Now</a
+            <div
+              class="absolute top-0 left-0 w-full h-full flex items-center justify-center text-white text-center"
             >
+              <div>
+                <h3 class="text-xl font-bold">Workshop Series</h3>
+                <p class="mt-2">August 5-7, 2023</p>
+                <a
+                  href="#"
+                  class="inline-block bg-black hover:bg-gray-700 text-white font-bold py-2 px-3 mt-4 rounded"
+                  >Register Now</a
+                >
+              </div>
+            </div>
           </div>
-          <div class="bg-white rounded-lg p-6 shadow">
+          <div class="rounded-lg p-6 relative">
             <img
               src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80"
               alt="Networking Event"
-              class="mb-4 rounded-md"
+              class="w-full h-80 object-cover rounded-md"
             />
-            <h3 class="text-xl font-bold text-gray-800">Networking Event</h3>
-            <p class="mt-2 text-gray-600">September 10, 2023</p>
-            <a
-              href="#"
-              class="inline-block bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 mt-4 rounded"
-              >Register Now</a
+            <div
+              class="absolute top-0 left-0 w-full h-full flex items-center justify-center text-white text-center"
             >
+              <div>
+                <h3 class="text-xl font-bold">Networking Event</h3>
+                <p class="mt-2">September 10, 2023</p>
+                <a
+                  href="#"
+                  class="inline-block bg-black hover:bg-gray-700 text-white font-bold py-2 px-3 mt-4 rounded"
+                  >Register Now</a
+                >
+              </div>
+            </div>
           </div>
         </div>
       </div>
