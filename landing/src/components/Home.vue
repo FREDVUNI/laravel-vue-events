@@ -2,7 +2,7 @@
   <div class="bg-gray-100 min-h-screen">
     <nav
       :class="{ 'bg-transparent': !isScrolled, 'bg-white': isScrolled }"
-      class="fixed top-0 left-0 right-0 z-50 transition-colors duration-300 shadow w-full"
+      class="fixed top-0 left-0 right-0 z-50 transition-colors duration-300 w-full"
     >
       <div
         id="header"
