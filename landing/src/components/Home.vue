@@ -124,16 +124,18 @@
     </section>
 
     <section class="bg-white py-32">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center">
-        <div class="w-1/2">
+      <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center"
+      >
+        <div class="w-full lg:w-1/2">
           <img
             src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80"
             alt="About Image"
             class="w-full rounded-lg"
           />
         </div>
-        <div class="w-1/2 pl-8">
-          <h2 class="text-3xl font-bold text-gray-800 mb-4">About Us</h2>
+        <div class="w-full lg:w-1/2">
+          <h2 class="text-3xl font-bold text-gray-800 mb-4 mt-5">About Us</h2>
           <p class="text-gray-600">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
             fringilla enim ac nulla bibendum, id ullamcorper lorem cursus.
