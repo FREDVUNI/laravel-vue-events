@@ -7,7 +7,7 @@
       <div
         id="header"
         :class="{ scrolled: isScrolled }"
-        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+        class="mx-auto px-4 sm:px-6 lg:px-8"
       >
         <div class="flex justify-between items-center py-4">
           <a href="#" class="text-xl font-bold text-gray-800 md:text-gray-800"
@@ -68,7 +68,7 @@
     >
       <ul class="mt-20">
         <li>
-          <a href="#" class="block px-4 py-2 text-white-600 hover:text-gray-800"
+          <a href="#" class="block px-4 py-2 text-gray-600 hover:text-gray-800"
             >Home</a
           >
         </li>
