@@ -15,16 +15,16 @@
           >
           <ul :class="{ hidden: !mobileMenuOpen }" class="md:flex space-x-4">
             <li>
-              <a href="#" class="text-gray-600 hover:text-gray-800">Home</a>
+              <a href="#" class="text-gray-600 text-lg hover:text-gray-800">Home</a>
             </li>
             <li>
-              <a href="#" class="text-gray-600 hover:text-gray-800">About</a>
+              <a href="#" class="text-gray-600 text-lg hover:text-gray-800">About</a>
             </li>
             <li>
-              <a href="#" class="text-gray-600 hover:text-gray-800">Events</a>
+              <a href="#" class="text-gray-600 text-lg hover:text-gray-800">Events</a>
             </li>
             <li>
-              <a href="#" class="text-gray-600 hover:text-gray-800">Contact</a>
+              <a href="#" class="text-gray-600 text-lg hover:text-gray-800">Contact</a>
             </li>
           </ul>
           <button
