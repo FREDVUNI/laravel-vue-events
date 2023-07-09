@@ -2,13 +2,31 @@
   <div class="bg-gray-100 min-h-screen">
     <nav
       :class="{ 'bg-transparent': !isScrolled, 'bg-white': isScrolled }"
-      class="fixed top-0 left-0 right-0 z-50 transition-colors duration-300 shadow"
+      class="fixed top-0 left-0 right-0 z-50 transition-colors duration-300 shadow w-full"
     >
-      <div id="header" :class="{ scrolled: isScrolled }" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div
+        id="header"
+        :class="{ scrolled: isScrolled }"
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+      >
         <div class="flex justify-between items-center py-4">
-          <a href="#" class="text-xl font-bold text-gray-800"
+          <a href="#" class="text-xl font-bold text-gray-800 md:text-gray-800"
             >Events Management</a
           >
+          <ul :class="{ hidden: !mobileMenuOpen }" class="md:flex space-x-4">
+            <li>
+              <a href="#" class="text-gray-600 hover:text-gray-800">Home</a>
+            </li>
+            <li>
+              <a href="#" class="text-gray-600 hover:text-gray-800">About</a>
+            </li>
+            <li>
+              <a href="#" class="text-gray-600 hover:text-gray-800">Events</a>
+            </li>
+            <li>
+              <a href="#" class="text-gray-600 hover:text-gray-800">Contact</a>
+            </li>
+          </ul>
           <button
             @click="toggleMobileMenu"
             class="md:hidden text-gray-600 hover:text-gray-800 focus:outline-none"
@@ -41,28 +59,14 @@
               ></path>
             </svg>
           </button>
-          <ul :class="{ hidden: mobileMenuOpen }" class="md:flex space-x-4">
-            <li>
-              <a href="#" class="text-gray-600 hover:text-gray-800">Home</a>
-            </li>
-            <li>
-              <a href="#" class="text-gray-600 hover:text-gray-800">About</a>
-            </li>
-            <li>
-              <a href="#" class="text-gray-600 hover:text-gray-800">Events</a>
-            </li>
-            <li>
-              <a href="#" class="text-gray-600 hover:text-gray-800">Contact</a>
-            </li>
-          </ul>
         </div>
       </div>
     </nav>
     <div
       :class="{ block: mobileMenuOpen, hidden: !mobileMenuOpen }"
-      class="md:hidden bg-white"
+      class="md:hidden w-full"
     >
-      <ul class="py-4">
+      <ul class="mt-20">
         <li>
           <a href="#" class="block px-4 py-2 text-white-600 hover:text-gray-800"
             >Home</a
@@ -375,14 +379,12 @@ export default {
 #header {
   background-color: transparent;
   transition: background-color 0.3s;
-  width: 100%;
-
+  /* width: 100%; */
 }
 
 #header.scrolled {
   background-color: white;
-  width: 100%;
-
+  /* width: 100%; */
 }
 
 #header a {
