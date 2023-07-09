@@ -1,94 +1,115 @@
 <template>
   <div class="bg-gray-100 min-h-screen">
     <nav
-      :class="{ 'bg-transparent': !isScrolled, 'bg-white': isScrolled }"
+      :class="{
+        'bg-transparent': !isScrolled && !mobileMenuOpen,
+        'bg-white': isScrolled || mobileMenuOpen,
+      }"
       class="fixed top-0 left-0 right-0 z-50 transition-colors duration-300 w-full"
     >
-      
-    <div
+      <div
         id="header"
-        class="mx-auto px-4 sm:px-6 lg:px-8"
+        :class="{ scrolled: isScrolled }"
+        class="mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center py-4"
       >
-        <div class="flex justify-between items-center py-4">
-          <a href="#" class="text-xl font-bold text-gray-800 md:text-gray-800"
-            >Events Management</a
+        <a href="#" class="text-xl font-bold text-gray-800 md:text-gray-800"
+          >Events Management</a
+        >
+
+        <button
+          @click="toggleMobileMenu"
+          class="md:hidden text-gray-600 hover:text-gray-800 focus:outline-none"
+        >
+          <svg
+            class="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
           >
-          <ul :class="{ hidden: !mobileMenuOpen }" class="md:flex space-x-4">
-            <li>
-              <a href="#" class="text-gray-600 text-lg hover:text-gray-800">Home</a>
-            </li>
-            <li>
-              <a href="#" class="text-gray-600 text-lg hover:text-gray-800">About</a>
-            </li>
-            <li>
-              <a href="#" class="text-gray-600 text-lg hover:text-gray-800">Events</a>
-            </li>
-            <li>
-              <a href="#" class="text-gray-600 text-lg hover:text-gray-800">Contact</a>
-            </li>
-          </ul>
-          <button
-            @click="toggleMobileMenu"
-            class="md:hidden text-gray-600 hover:text-gray-800 focus:outline-none"
-          >
-            <svg
-              class="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+            <path
+              :class="{
+                hidden: mobileMenuOpen,
+                'inline-flex': !mobileMenuOpen,
+              }"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            ></path>
+            <path
+              :class="{
+                hidden: !mobileMenuOpen,
+                'inline-flex': mobileMenuOpen,
+              }"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            ></path>
+          </svg>
+        </button>
+        <ul
+          :class="{ hidden: mobileMenuOpen }"
+          class="md:flex space-x-4 hidden lg:flex"
+        >
+          <li>
+            <a href="#" class="text-gray-600 text-lg hover:text-gray-800"
+              >Home</a
             >
-              <path
-                :class="{
-                  hidden: mobileMenuOpen,
-                  'inline-flex': !mobileMenuOpen,
-                }"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M4 6h16M4 12h16M4 18h16"
-              ></path>
-              <path
-                :class="{
-                  hidden: !mobileMenuOpen,
-                  'inline-flex': mobileMenuOpen,
-                }"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M6 18L18 6M6 6l12 12"
-              ></path>
-            </svg>
-          </button>
-        </div>
+          </li>
+          <li>
+            <a href="#" class="text-gray-600 text-lg hover:text-gray-800"
+              >About</a
+            >
+          </li>
+          <li>
+            <a href="#" class="text-gray-600 text-lg hover:text-gray-800"
+              >Events</a
+            >
+          </li>
+          <li>
+            <a href="#" class="text-gray-600 text-lg hover:text-gray-800"
+              >Contact</a
+            >
+          </li>
+        </ul>
+      </div>
+      <div
+        :class="{ block: mobileMenuOpen, hidden: !mobileMenuOpen }"
+        class="md:hidden w-full"
+      >
+        <ul>
+          <li>
+            <a
+              href="#"
+              class="block px-4 py-2 text-gray-600 hover:text-gray-800"
+              >Home</a
+            >
+          </li>
+          <li>
+            <a
+              href="#"
+              class="block px-4 py-2 text-gray-600 hover:text-gray-800"
+              >About</a
+            >
+          </li>
+          <li>
+            <a
+              href="#"
+              class="block px-4 py-2 text-gray-600 hover:text-gray-800"
+              >Events</a
+            >
+          </li>
+          <li>
+            <a
+              href="#"
+              class="block px-4 py-2 text-gray-600 hover:text-gray-800"
+              >Contact</a
+            >
+          </li>
+        </ul>
       </div>
     </nav>
-    <div
-      :class="{ block: mobileMenuOpen, hidden: !mobileMenuOpen }"
-      class="md:hidden w-full"
-    >
-      <ul class="mt-20">
-        <li>
-          <a href="#" class="block px-4 py-2 text-gray-600 hover:text-gray-800"
-            >Home</a
-          >
-        </li>
-        <li>
-          <a href="#" class="block px-4 py-2 text-gray-600 hover:text-gray-800"
-            >About</a
-          >
-        </li>
-        <li>
-          <a href="#" class="block px-4 py-2 text-gray-600 hover:text-gray-800"
-            >Events</a
-          >
-        </li>
-        <li>
-          <a href="#" class="block px-4 py-2 text-gray-600 hover:text-gray-800"
-            >Contact</a
-          >
-        </li>
-      </ul>
-    </div>
 
     <section id="hero" class="text-center py-80">
       <h1 class="text-4xl font-bold text-gray-800">
@@ -379,7 +400,7 @@ export default {
 #header {
   background-color: transparent;
   transition: background-color 0.3s;
-  /* width: 100%; */
+  position: sticky;
 }
 
 #header.scrolled {
