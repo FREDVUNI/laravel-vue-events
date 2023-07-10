@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
@@ -20,12 +19,7 @@ class AuthController extends Controller
                 'role' => 'required'
             ]);        
     
-            $user = User::create([
-                'name' => $data['name'],
-                'email' => $data['email'],
-                'password' => Hash::make($data['password']),
-                'role' => 'admin',
-            ]);
+            $user = User::createUser($data);
             $token = $user->createToken('auth-token')->plainTextToken;
             return response()->json(['token' => $token], 201);
         }

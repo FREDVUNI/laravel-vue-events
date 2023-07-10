@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
@@ -29,9 +30,21 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+
+
+     public static function createUser(array $data)
+     {
+         return self::create([
+             'name' => $data['name'],
+             'email' => $data['email'],
+             'password' => Hash::make($data['password']),
+             'role' => 'admin',
+         ]);
+     }
     protected $hidden = [
         'password',
-        'remember_token',
+        'remem
+        ber_token',
     ];
 
     /**
