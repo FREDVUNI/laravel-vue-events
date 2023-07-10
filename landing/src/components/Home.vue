@@ -129,7 +129,7 @@
       >
         <div class="w-full lg:w-1/2">
           <img
-            src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80"
+            src="https://www.kindpng.com/picc/m/105-1053384_transparent-group-of-people-png-party-people-silhouette.png"
             alt="About Image"
             class="w-full rounded-lg"
           />
