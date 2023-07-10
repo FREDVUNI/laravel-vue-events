@@ -7,26 +7,31 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
     public function signup(Request $request){
-        $data = $request->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:6',
-            'role' => 'required'
-        ]);
-
-        $user = User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'role' => 'admin',
-        ]);
-        $token = $user->createToken('auth-token')->plainTextToken;
-        return response()->json(['token' => $token], 201);
-
+        try{
+            $data = $request->validate([
+                'name' => 'required',
+                'email' => 'required|email|unique:users',
+                'password' => 'required|min:6',
+                'role' => 'required'
+            ]);        
+    
+            $user = User::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+                'role' => 'admin',
+            ]);
+            $token = $user->createToken('auth-token')->plainTextToken;
+            return response()->json(['token' => $token], 201);
+        }
+        catch(ValidationException $e){
+            return response()->json(['errors' => $e->errors()], 422);
+        }
     }
     public function signin(){
         $data = request()->validate([
