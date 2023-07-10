@@ -134,7 +134,7 @@
             class="w-full rounded-lg"
           />
         </div>
-        <div class="w-full lg:w-1/2">
+        <div class="w-full lg:w-1/2 md:ml-5">
           <h2 class="text-3xl font-bold text-gray-800 mb-4 mt-5">About Us</h2>
           <p class="text-gray-600">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
