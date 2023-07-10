@@ -227,7 +227,7 @@
         </div>
       </div>
     </section>
-    <section class="bg-gray-200 py-32">
+    <section class="py-32">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 class="text-4xl font-bold text-gray-800 text-center">
           Upcoming Events
