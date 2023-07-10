@@ -306,7 +306,7 @@
               <h3 class="text-xl font-bold text-gray-800">Events Management</h3>
               <p class="mt-4 text-gray-600">123 Main Street, Cityville, USA</p>
               <p class="mt-2 text-gray-600">Phone: 123-456-7890</p>
-              <p class="mt-2 text-gray-600">Email: info@example.com</p>
+              <p class="mt-2 text-gray-600">Email: eventsmanagement@gmail.com</p>
 
               <div class="flex justify-left space-x-8 py-5">
                 <a href="#" class="text-4xl text-gray-600 hover:text-gray-800">
@@ -328,6 +328,7 @@
                   type="text"
                   id="name"
                   class="border border-gray-300 rounded-lg py-2 px-4 mt-2"
+                  placeholder="Enter name"
                   required
                 />
                 <label for="email" class="text-gray-800 font-bold mt-4"
@@ -337,6 +338,7 @@
                   type="email"
                   id="email"
                   class="border border-gray-300 rounded-lg py-2 px-4 mt-2"
+                  placeholder="Enter email address"
                   required
                 />
                 <label for="message" class="text-gray-800 font-bold mt-4"
@@ -346,6 +348,7 @@
                   id="message"
                   rows="4"
                   class="border border-gray-300 rounded-lg py-2 px-4 mt-2"
+                  placeholder="Enter message"
                   required
                 ></textarea>
                 <button
