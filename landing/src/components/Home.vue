@@ -12,7 +12,7 @@
         :class="{ scrolled: isScrolled }"
         class="mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center py-4"
       >
-        <a href="#" class="text-xl font-bold text-gray-800 md:text-gray-800"
+        <a href="#" class="text-lg text-gray-900 md:text-gray-900"
           >Events Management</a
         >
 
@@ -53,22 +53,22 @@
           class="md:flex space-x-4 hidden lg:flex"
         >
           <li>
-            <a href="#" class="text-gray-600 text-lg hover:text-gray-800"
+            <a href="#" class="text-gray-600 hover:text-gray-800"
               >Home</a
             >
           </li>
           <li>
-            <a href="#" class="text-gray-600 text-lg hover:text-gray-800"
+            <a href="#" class="text-gray-600 hover:text-gray-800"
               >About</a
             >
           </li>
           <li>
-            <a href="#" class="text-gray-600 text-lg hover:text-gray-800"
+            <a href="#" class="text-gray-600 hover:text-gray-800"
               >Events</a
             >
           </li>
           <li>
-            <a href="#" class="text-gray-600 text-lg hover:text-gray-800"
+            <a href="#" class="text-gray-600 hover:text-gray-800"
               >Contact</a
             >
           </li>
