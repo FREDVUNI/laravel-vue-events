@@ -53,24 +53,16 @@
           class="md:flex space-x-4 hidden lg:flex"
         >
           <li>
-            <a href="#" class="text-gray-600 hover:text-gray-800"
-              >Home</a
-            >
+            <a href="#" class="text-gray-600 hover:text-gray-800">Home</a>
           </li>
           <li>
-            <a href="#" class="text-gray-600 hover:text-gray-800"
-              >About</a
-            >
+            <a href="#" class="text-gray-600 hover:text-gray-800">About</a>
           </li>
           <li>
-            <a href="#" class="text-gray-600 hover:text-gray-800"
-              >Events</a
-            >
+            <a href="#" class="text-gray-600 hover:text-gray-800">Events</a>
           </li>
           <li>
-            <a href="#" class="text-gray-600 hover:text-gray-800"
-              >Contact</a
-            >
+            <a href="#" class="text-gray-600 hover:text-gray-800">Contact</a>
           </li>
         </ul>
       </div>
@@ -185,44 +177,120 @@
 
     <section class="bg-gray-200 py-32">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div class="bg-white rounded-lg shadow">
-            <img
-              src="https://cdn-ajggd.nitrocdn.com/kMoOFpDlsOVtlYJLrnSRNCQXaUFHZPTY/assets/images/optimized/rev-814242f/wp-content/uploads/bb-plugin/cache/event-photography-feat-landscape-b5ebb4965b6271ddb206a62fffa41bde-zybravgx2q47.jpg"
-              alt="Event Image"
-              class="w-full mb-4"
-            />
-            <h2 class="text-2xl font-bold text-gray-800 mb-2 px-4">Event Title</h2>
-            <p class="text-gray-600 px-4 pb-8">
-              Event description goes here. Lorem ipsum dolor sit amet,
-              consectetur adipiscing elit.
-            </p>
+        <div class="grid gap-x-6 lg:grid-cols-3 lg:gap-x-12">
+          <div
+            class="mb-6 block rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700 lg:mb-0"
+            data-te-ripple-init
+            data-te-ripple-color="light"
+          >
+            <div class="relative overflow-hidden bg-cover bg-no-repeat">
+              <img
+                src="https://cdn-ajggd.nitrocdn.com/kMoOFpDlsOVtlYJLrnSRNCQXaUFHZPTY/assets/images/optimized/rev-814242f/wp-content/uploads/bb-plugin/cache/event-photography-feat-landscape-b5ebb4965b6271ddb206a62fffa41bde-zybravgx2q47.jpg"
+                class="w-full rounded-t-lg"
+                alt="event"
+              />
+              <a href="#!">
+                <div
+                  class="absolute top-0 right-0 bottom-0 left-0 h-full w-full bg-fixed opacity-0 transition duration-300 ease-in-out hover:opacity-100 bg-[hsla(0,0%,98.4%,0.2)]"
+                ></div>
+              </a>
+              <svg
+                class="absolute left-0 bottom-0 text-white dark:text-neutral-700"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 1440 320"
+              >
+                <path
+                  fill="currentColor"
+                  d="M0,288L48,272C96,256,192,224,288,197.3C384,171,480,149,576,165.3C672,181,768,235,864,250.7C960,267,1056,245,1152,250.7C1248,256,1344,288,1392,304L1440,320L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+                ></path>
+              </svg>
+            </div>
+            <div class="p-6">
+              <h5 class="mb-4 text-lg font-bold">Nostalgic waves</h5>
+              <p class="mb-6">
+                Ut pretium ultricies dignissim. Sed sit amet mi eget urna
+                placerat vulputate. Ut vulputate est non quam dignissim
+                elementum. Donec a ullamcorper diam.
+              </p>
+            </div>
           </div>
 
-          <div class="bg-white rounded-lg shadow">
-            <img
-              src="https://images.unsplash.com/photo-1549451371-64aa98a6f660?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80"
-              alt="Event Image"
-              class="w-full mb-4"
-            />
-            <h2 class="text-2xl font-bold text-gray-800 mb-2 px-4">Event Title</h2>
-            <p class="text-gray-600 px-4 pb-8">
-              Event description goes here. Lorem ipsum dolor sit amet,
-              consectetur adipiscing elit.
-            </p>
+          <div
+            class="mb-6 block rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700 lg:mb-0"
+          >
+            <div
+              class="relative overflow-hidden bg-cover bg-no-repeat"
+              data-te-ripple-init
+              data-te-ripple-color="light"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1549451371-64aa98a6f660?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80"
+                alt="event"
+                class="w-full rounded-t-lg"
+              />
+              <a href="#!">
+                <div
+                  class="absolute top-0 right-0 bottom-0 left-0 h-full w-full bg-fixed opacity-0 transition duration-300 ease-in-out hover:opacity-100 bg-[hsla(0,0%,98.4%,0.2)]"
+                ></div>
+              </a>
+              <svg
+                class="absolute left-0 bottom-0 text-white dark:text-neutral-700"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 1440 320"
+              >
+                <path
+                  fill="currentColor"
+                  d="M0,96L48,128C96,160,192,224,288,240C384,256,480,224,576,213.3C672,203,768,213,864,202.7C960,192,1056,160,1152,128C1248,96,1344,64,1392,48L1440,32L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+                ></path>
+              </svg>
+            </div>
+            <div class="p-6">
+              <h5 class="mb-4 text-lg font-bold">Winter wildlife</h5>
+              <p class="mb-6">
+                Suspendisse in volutpat massa. Nulla facilisi. Sed aliquet diam
+                orci, nec ornare metus semper sed. Integer volutpat ornare erat
+                sit amet rutrum.
+              </p>
+            </div>
           </div>
 
-          <div class="bg-white rounded-lg shadow">
-            <img
-              src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80"
-              alt="Event Image"
-              class="w-full mb-4"
-            />
-            <h2 class="text-2xl font-bold text-gray-800 mb-2 px-4">Event Title</h2>
-            <p class="text-gray-600 px-4 pb-8">
-              Event description goes here. Lorem ipsum dolor sit amet,
-              consectetur adipiscing elit.
-            </p>
+          <div
+            class="block rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700"
+          >
+            <div
+              class="relative overflow-hidden bg-cover bg-no-repeat"
+              data-te-ripple-init
+              data-te-ripple-color="light"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80"
+                class="w-full rounded-t-lg"
+                alt="event"
+              />
+              <a href="#!">
+                <div
+                  class="absolute top-0 right-0 bottom-0 left-0 h-full w-full bg-fixed opacity-0 transition duration-300 ease-in-out hover:opacity-100 bg-[hsla(0,0%,98.4%,0.2)]"
+                ></div>
+              </a>
+              <svg
+                class="absolute left-0 bottom-0 text-white dark:text-neutral-700"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 1440 320"
+              >
+                <path
+                  fill="currentColor"
+                  d="M0,288L48,256C96,224,192,160,288,160C384,160,480,224,576,213.3C672,203,768,117,864,85.3C960,53,1056,75,1152,69.3C1248,64,1344,32,1392,16L1440,0L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+                ></path>
+              </svg>
+            </div>
+            <div class="p-6">
+              <h5 class="mb-4 text-lg font-bold">Camping travel</h5>
+              <p class="mb-6">
+                Curabitur tristique, mi a mollis sagittis, metus felis mattis
+                arcu, non vehicula nisl dui quis diam. Mauris ut risus eget
+                massa volutpat feugiat.
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -306,7 +374,9 @@
               <h3 class="text-xl font-bold text-gray-800">Events Management</h3>
               <p class="mt-4 text-gray-600">123 Main Street, Cityville, USA</p>
               <p class="mt-2 text-gray-600">Phone: 123-456-7890</p>
-              <p class="mt-2 text-gray-600">Email: eventsmanagement@gmail.com</p>
+              <p class="mt-2 text-gray-600">
+                Email: eventsmanagement@gmail.com
+              </p>
 
               <div class="flex justify-left space-x-8 py-5">
                 <a href="#" class="text-4xl text-gray-600 hover:text-gray-800">
