@@ -186,40 +186,40 @@
     <section class="bg-gray-200 py-32">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div class="bg-white rounded-lg shadow p-6">
+          <div class="bg-white rounded-lg shadow">
             <img
               src="https://cdn-ajggd.nitrocdn.com/kMoOFpDlsOVtlYJLrnSRNCQXaUFHZPTY/assets/images/optimized/rev-814242f/wp-content/uploads/bb-plugin/cache/event-photography-feat-landscape-b5ebb4965b6271ddb206a62fffa41bde-zybravgx2q47.jpg"
               alt="Event Image"
               class="w-full mb-4"
             />
-            <h2 class="text-2xl font-bold text-gray-800 mb-2">Event Title</h2>
-            <p class="text-gray-600">
+            <h2 class="text-2xl font-bold text-gray-800 mb-2 px-4">Event Title</h2>
+            <p class="text-gray-600 px-4 pb-8">
               Event description goes here. Lorem ipsum dolor sit amet,
               consectetur adipiscing elit.
             </p>
           </div>
 
-          <div class="bg-white rounded-lg shadow p-6">
+          <div class="bg-white rounded-lg shadow">
             <img
               src="https://images.unsplash.com/photo-1549451371-64aa98a6f660?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80"
               alt="Event Image"
               class="w-full mb-4"
             />
-            <h2 class="text-2xl font-bold text-gray-800 mb-2">Event Title</h2>
-            <p class="text-gray-600">
+            <h2 class="text-2xl font-bold text-gray-800 mb-2 px-4">Event Title</h2>
+            <p class="text-gray-600 px-4 pb-8">
               Event description goes here. Lorem ipsum dolor sit amet,
               consectetur adipiscing elit.
             </p>
           </div>
 
-          <div class="bg-white rounded-lg shadow p-6">
+          <div class="bg-white rounded-lg shadow">
             <img
               src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80"
               alt="Event Image"
               class="w-full mb-4"
             />
-            <h2 class="text-2xl font-bold text-gray-800 mb-2">Event Title</h2>
-            <p class="text-gray-600">
+            <h2 class="text-2xl font-bold text-gray-800 mb-2 px-4">Event Title</h2>
+            <p class="text-gray-600 px-4 pb-8">
               Event description goes here. Lorem ipsum dolor sit amet,
               consectetur adipiscing elit.
             </p>
