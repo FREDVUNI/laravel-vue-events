@@ -144,6 +144,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           <div class="bg-white rounded-lg shadow p-6">
             <h2 class="text-2xl font-bold text-gray-800 mb-4">
+              <i class="fas fa-calendar-alt mr-2"></i>
               Event Management
             </h2>
             <p class="text-gray-600">
@@ -154,6 +155,7 @@
 
           <div class="bg-white rounded-lg shadow p-6">
             <h2 class="text-2xl font-bold text-gray-800 mb-4">
+              <i class="fas fa-map mr-2"></i>
               Discover Events
             </h2>
             <p class="text-gray-600">
@@ -164,6 +166,7 @@
 
           <div class="bg-white rounded-lg shadow p-6">
             <h2 class="text-2xl font-bold text-gray-800 mb-4">
+              <i class="fas fa-user mr-2"></i>
               Attendee Management
             </h2>
             <p class="text-gray-600">
