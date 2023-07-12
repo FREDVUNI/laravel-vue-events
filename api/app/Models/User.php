@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
@@ -43,6 +44,20 @@ class User extends Authenticatable
              'role' => $data['role'],
          ]);
      }
+     public static function userLogin($data)
+    {
+        $user = self::where('email', $data['email'])->first();
+
+        // dd($user);
+
+        if (!$user || !Hash::check($data['password'], $user->password)) {
+            throw ValidationException::withMessages([
+                'email' => ['Wrong email password combination.'],
+            ]);
+        }
+
+        return $user;
+    }
     protected $hidden = [
         'password',
         'remem
