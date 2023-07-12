@@ -83,6 +83,8 @@ npm run dev
 
 The landing page will be accessible at `http://localhost:8000`.
 
+### Screenshot
+
 ### Dashboard
 
 The dashboard is also built with Vue.js and Tailwind CSS. It allows for event management and attendee registration using the Laravel API.
