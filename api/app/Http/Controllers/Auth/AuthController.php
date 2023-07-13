@@ -42,9 +42,10 @@ class AuthController extends Controller
     public function logout(){
         try {
             $user = request()->user();
+            dd($user);
             if ($user) {
                 $user->currentAccessToken()->delete();
-                return response()->json(['message' => 'You\'ve been logged out'], 200);
+                return response()->json(['message' => 'Logged out successfully'], 200);
             } else {
                 return response()->json(['message' => 'User not authenticated'], 401);
             }
