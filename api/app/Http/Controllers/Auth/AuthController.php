@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -41,10 +42,10 @@ class AuthController extends Controller
     }
     public function logout(){
         try {
-            $user = request()->user();
+            $user = auth()->user()->tokens();
             dd($user);
             if ($user) {
-                $user->currentAccessToken()->delete();
+                // $user->delete();
                 return response()->json(['message' => 'Logged out successfully'], 200);
             } else {
                 return response()->json(['message' => 'User not authenticated'], 401);
