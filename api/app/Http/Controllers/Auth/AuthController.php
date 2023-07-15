@@ -26,9 +26,9 @@ class AuthController extends Controller
             return response()->json(['errors' => $e->errors()], 422);
         }
     }
-    public function signin(){
+    public function signin(Request $request){
         try {
-            $data = request()->validate([
+            $data = $request->validate([
                 'email' => 'required|email',
                 'password' => 'required',
             ]);
@@ -39,9 +39,11 @@ class AuthController extends Controller
             return response()->json(['errors' => $e->errors()], 401);
         }
     }
-    public function logout(){
+    public function logout(Request $request){
         try {
-            $user = request()->user();
+            $user = $request->user()->currentAccessToken();
+
+            dd($user);
             if ($user) {
                 $user->currentAccessToken()->delete();
                 return response()->json(['message' => 'You\'ve been logged out'], 200);
