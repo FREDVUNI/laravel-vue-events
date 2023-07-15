@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
@@ -39,19 +40,20 @@ class AuthController extends Controller
             return response()->json(['errors' => $e->errors()], 401);
         }
     }
-    public function logout(Request $request){
-        try {
-            $user = $request->user()->currentAccessToken();
+    public function logout()
+{
+    try {
+        $user = request()->user();
 
-            dd($user);
-            if ($user) {
-                $user->currentAccessToken()->delete();
-                return response()->json(['message' => 'You\'ve been logged out'], 200);
-            } else {
-                return response()->json(['message' => 'User not authenticated'], 401);
-            }
-        } catch (\Exception $e) {
-            return response()->json(['message' => 'Error occurred during logout'], 500);
+        if ($user) {
+            $user->tokens()->delete();
+            return response()->json(['message' => 'You have successfully logged out and the token was successfully deleted'], 200);
+        } else {
+            return response()->json(['message' => 'User not authenticated'], 401);
         }
+    } catch (\Exception $e) {
+        return response()->json(['message' => 'Error occurred during logout'], 500);
     }
+}
+
 }
