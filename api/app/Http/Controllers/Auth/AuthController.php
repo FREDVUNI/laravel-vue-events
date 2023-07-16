@@ -27,12 +27,8 @@ class AuthController extends Controller
             return response()->json(['errors' => $e->errors()], 422);
         }
     }
-<<<<<<< HEAD
-    public function signin(Request $request){
-=======
     public function signin(Request $request)
     {
->>>>>>> 677d2f0e8addbdf8f9651577eef3a43195afbb17
         try {
             $data = $request->validate([
                 'email' => 'required|email',
