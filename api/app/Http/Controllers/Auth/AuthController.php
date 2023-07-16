@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use Illuminate\Support\Str;
+// use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -54,7 +54,6 @@ class AuthController extends Controller
                 $user->tokens()->delete();
                 return response()->json(['message' => 'You have logged out.'], 200);
             } else {
-                dd($user);
                 return response()->json(['message' => 'User not authenticated'], 401);
             }
         } catch (\Exception $e) {
