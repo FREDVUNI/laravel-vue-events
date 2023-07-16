@@ -34,16 +34,16 @@ class User extends Authenticatable
      */
 
 
-     public static function createUser(array $data)
-     {
-         return self::create([
-             'name' => $data['name'],
-             'email' => $data['email'],
-             'password' => Hash::make($data['password']),
-             'role' => $data['role'],
-         ]);
-     }
-     public static function userLogin($data)
+    public static function createUser(array $data)
+    {
+        return self::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+            'role' => $data['role'],
+        ]);
+    }
+    public static function userLogin($data)
     {
         $user = self::where('email', $data['email'])->first();
         if (!$user || !Hash::check($data['password'], $user->password)) {
