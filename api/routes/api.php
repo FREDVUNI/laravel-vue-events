@@ -16,15 +16,14 @@ use App\Http\Controllers\Auth\AuthController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
-Route::group(["prefix" => "auth"], function(){
+Route::group(["prefix" => "auth"], function () {
     Route::post('signup', [AuthController::class, 'signup']);
     Route::post('signin', [AuthController::class, 'signin']);
 
-    Route::group(["middleware" => ["auth:sanctum"]],function(){
+    Route::group(["middleware" => ["auth:sanctum"]], function () {
+        Route::get('user', function (Request $request) {
+            return $request->user();
+        });
         Route::post('logout', [AuthController::class, 'logout']);
     });
 });
