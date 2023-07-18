@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\EventController;
 
 
 /*
@@ -25,5 +26,18 @@ Route::group(["prefix" => "auth"], function () {
             return $request->user();
         });
         Route::post('logout', [AuthController::class, 'logout']);
+    });
+});
+
+//events
+Route::group(["prefix" => "events"], function(){
+    Route::get("/",[EventController::class,'events']);
+
+    Route::group(["middleware" => ["auth:sanctum"]], function () {
+        Route::post('/', [EventController::class, 'store']);
+        Route::get('show/{slug}', [EventController::class, 'show']);
+        Route::get('edit/{slug}', [EventController::class, 'edit']);
+        Route::patch('update/{slug}', [EventController::class, 'update']);
+        Route::delete('delete/{slug}', [EventController::class, 'delete']);
     });
 });
