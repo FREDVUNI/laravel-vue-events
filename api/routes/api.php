@@ -32,11 +32,11 @@ Route::group(["prefix" => "auth"], function () {
 //events
 Route::group(["prefix" => "events"], function(){
     Route::get("/",[EventController::class,'events']);
+    Route::post('/', [EventController::class, 'store']);
 
     Route::group(["middleware" => ["auth:sanctum"]], function () {
         Route::get('show/{slug}', [EventController::class, 'show']);
         Route::get('edit/{slug}', [EventController::class, 'edit']);
-        Route::post('/', [EventController::class, 'store']);
         Route::patch('update/{slug}', [EventController::class, 'update']);
         Route::delete('delete/{slug}', [EventController::class, 'delete']);
     });
