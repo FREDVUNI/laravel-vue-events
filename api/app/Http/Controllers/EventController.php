@@ -36,4 +36,52 @@ class EventController extends Controller
             return response()->json(['message' => 'Something went wrong.'], 500);
         }
     }
+    public function show($slug)
+    {
+        try {
+            $event = Event::getEvent($slug);
+            return response()->json(['event' => $event], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Something went wrong.'], 500);
+        }
+    }
+    public function edit($slug)
+    {
+        try {
+            $event = Event::editEvent($slug);
+            return response()->json(['event' => $event], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Something went wrong.'], 500);
+        }
+    }
+    public function update(Request $request, $slug)
+    {
+        try {
+            $data = $request->validate([
+                "title" => "required|min:4|max:20",
+                "description" => "required|min:4|max:200",
+                "slug" => "required",
+                "start_date" => "required|date_format:Y-m-d H:i:s|after:now",
+                "end_date" => "required|date_format:Y-m-d H:i:s|after:now",
+            ]);
+
+            $event = Event::updateEvent($data);
+            return response()->json(['event' => $event], 200);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return response()->json(['errors' => $e->errors()], 400);
+            $event = Event::updateEvent($slug);
+            return response()->json(['events' => $event], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Something went wrong.'], 500);
+        }
+    }
+    public function delete($slug)
+    {
+        try {
+            $event = Event::deleteEvent($slug);
+            return response()->json(['message' => 'The event has been deleted.'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Something went wrong.'], 500);
+        }
+    }
 }
