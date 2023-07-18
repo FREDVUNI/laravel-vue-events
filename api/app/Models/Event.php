@@ -26,24 +26,30 @@ class Event extends Model
             'end_date' => $data['end_date'],
         ]);
     }
-    public static function getEvent($slug){
-        return self::FindOrFail($slug);
+    public static function getEvent($slug)
+    {
+        return self::findOrFail($slug);
     }
-    public static function editEvent($slug){
-        return self::FindOrFail($slug);
+    public static function editEvent($slug)
+    {
+        return self::findOrFail($slug);
     }
-    public static function updateEvent($slug, array $data){
-        $event = self::FindOrFail($slug);
+    public static function updateEvent($slug, array $data)
+    {
+        $event = self::findOrFail($slug);
 
-        return self::update([
+        $event->update([
             'title' => $data['title'],
             'description' => $data['description'],
             'slug' => Str::slug($data['title']),
             'start_date' => $data['start_date'],
             'end_date' => $data['end_date'],
         ]);
+
+        return $event;
     }
-    public static function deleteEvent($slug){
-        $event = self::delete($slug);
+    public static function deleteEvent($slug)
+    {
+        self::where('slug', $slug)->delete();
     }
 }
