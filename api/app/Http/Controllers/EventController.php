@@ -40,6 +40,11 @@ class EventController extends Controller
     {
         try {
             $event = Event::getEvent($slug);
+
+            if (!$event) {
+                return response()->json(['message' => 'Event not found'], 404);
+            }
+
             return response()->json(['event' => $event], 200);
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
             return response()->json(['message' => 'Event not found.'], 404);
