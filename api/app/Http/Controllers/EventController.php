@@ -40,11 +40,6 @@ class EventController extends Controller
     {
         try {
             $event = Event::getEvent($slug);
-
-            if (!$event) {
-                return response()->json(['message' => 'Event not found'], 404);
-            }
-
             return response()->json(['event' => $event], 200);
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
             return response()->json(['message' => 'Event not found.'], 404);
@@ -57,10 +52,9 @@ class EventController extends Controller
     {
         try {
             $event = Event::editEvent($slug);
-            if (!$event) {
-                return response()->json(['message' => 'Event not found'], 404);
-            }
             return response()->json(['event' => $event], 200);
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            return response()->json(['message' => 'Event not found.'], 404);
         } catch (\Exception $e) {
             return response()->json(['message' => 'Something went wrong.'], 500);
         }
@@ -88,13 +82,10 @@ class EventController extends Controller
     public function delete($slug)
     {
         try {
-            $event = Event::findOrFail($slug);
-            if ($event) :
-                Event::deleteEvent($slug);
-            else :
-                return response()->json(['errors' => "The event was not found."], 400);
-            endif;
+            Event::deleteEvent($slug);
             return response()->json(['message' => 'The event has been deleted.'], 200);
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            return response()->json(['message' => 'Event not found.'], 404);
         } catch (\Exception $e) {
             return response()->json(['message' => 'Something went wrong.'], 500);
         }
