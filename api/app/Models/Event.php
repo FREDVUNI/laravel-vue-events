@@ -28,16 +28,19 @@ class Event extends Model
     }
     public static function getEvent($slug)
     {
-        return self::findOrFail($slug);
+        return self::where('slug', $slug)->firstOrFail();
     }
     public static function editEvent($slug)
     {
-        return self::findOrFail($slug);
+        return self::where('slug', $slug)->firstOrFail();
     }
     public static function updateEvent($slug, array $data)
     {
-        $event = self::findOrFail($slug);
+        $event = self::where('slug', $slug)->first();
 
+        if (!$event) {
+            return response()->json(['message' => 'Event not found'], 404);
+        }
         $event->update([
             'title' => $data['title'],
             'description' => $data['description'],
