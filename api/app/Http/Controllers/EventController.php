@@ -57,6 +57,11 @@ class EventController extends Controller
     {
         try {
             $event = Event::editEvent($slug);
+            $event = Event::getEvent($slug);
+
+            if (!$event) {
+                return response()->json(['message' => 'Event not found'], 404);
+            }
             return response()->json(['event' => $event], 200);
         } catch (\Exception $e) {
             return response()->json(['message' => 'Something went wrong.'], 500);
