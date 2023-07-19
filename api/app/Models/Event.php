@@ -53,6 +53,11 @@ class Event extends Model
     }
     public static function deleteEvent($slug)
     {
+        $event = self::where('slug', $slug)->first();
+
+        if (!$event) {
+            return response()->json(['message' => 'Event not found'], 404);
+        }
         self::where('slug', $slug)->delete();
     }
 }
