@@ -77,7 +77,12 @@ class EventController extends Controller
     public function delete($slug)
     {
         try {
-            Event::deleteEvent($slug);
+            $event = Event::findOrFail($slug);
+            if($event):
+                Event::deleteEvent($slug);
+            else:
+                return response()->json(['errors' => "The event was not found."], 400);
+            endif;
             return response()->json(['message' => 'The event has been deleted.'], 200);
         } catch (\Exception $e) {
             return response()->json(['message' => 'Something went wrong.'], 500);
