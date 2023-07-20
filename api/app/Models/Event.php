@@ -36,10 +36,10 @@ class Event extends Model
     }
     public static function updateEvent($slug, array $data)
     {
-        $event = self::where('slug', $slug)->first();
+        $event = self::where('slug', $slug)->firstOrFail();
 
         if (!$event) {
-            return response()->json(['message' => 'Event not found'], 404);
+            return $event;
         }
         $event->update([
             'title' => $data['title'],

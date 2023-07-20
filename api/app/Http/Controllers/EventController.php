@@ -73,6 +73,8 @@ class EventController extends Controller
 
             $event = Event::updateEvent($slug, $data);
             return response()->json(['event' => $event], 204);
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            return response()->json(['message' => 'Event not found.'], 404);
         } catch (\Illuminate\Validation\ValidationException $e) {
             return response()->json(['errors' => $e->errors()], 400);
         } catch (\Exception $e) {
