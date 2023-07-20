@@ -1,5 +1,5 @@
 <?php
-// app/Helpers/upload-image.php
+// app/Helpers/upload-image.php - add path to composer.json
 
 if (!function_exists('uploadImage')) {
     function uploadImage($file, $folder)
