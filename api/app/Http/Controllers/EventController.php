@@ -110,6 +110,12 @@ class EventController extends Controller
     public function delete($slug)
     {
         try {
+            $event = Event::getEvent($slug);
+
+            if ($event->image && file_exists(public_path('uploads/events/' . $event->image))) {
+                unlink(public_path('uploads/events/' . $event->image));
+            }
+            
             Event::deleteEvent($slug);
             return response()->json(['message' => 'The event has been deleted.'], 200);
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
