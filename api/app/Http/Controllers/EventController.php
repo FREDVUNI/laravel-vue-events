@@ -1,6 +1,9 @@
 <?php
+
 use App\Helpers\UploadImage;
+
 namespace App\Http\Controllers;
+
 use App\Models\Event;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
@@ -70,6 +73,7 @@ class EventController extends Controller
     public function update(Request $request, $slug)
     {
         try {
+            dd($request->all());
             $data = $request->validate([
                 "title" => "required|min:4|max:20",
                 "description" => "required|min:4|max:200",
@@ -78,6 +82,20 @@ class EventController extends Controller
                 "start_date" => "required|date_format:Y-m-d H:i:s|after:now",
                 "end_date" => "required|date_format:Y-m-d H:i:s|after:now",
             ]);
+            $event = Event::getEvent($slug);
+
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+
+                if ($event->image && file_exists(public_path('uploads/events/' . $event->image))) {
+                    unlink(public_path('uploads/events/' . $event->image));
+                }
+
+                $imageName = UploadImage($image, 'events');
+                $data['image'] = $imageName;
+            }else{
+                $data['image'] = $event->image;
+            }
 
             $event = Event::updateEvent($slug, $data);
             return response()->json(['event' => $event], 200);
