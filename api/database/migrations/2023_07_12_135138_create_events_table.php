@@ -18,6 +18,7 @@ class CreateEventsTable extends Migration
             $table->string('title')->unique();
             $table->text('description');
             $table->string('slug');
+            $table->string('image');
             $table->datetime('start_date');
             $table->datetime('end_date');
             $table->timestamps();
