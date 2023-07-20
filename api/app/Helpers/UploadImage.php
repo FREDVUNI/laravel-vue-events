@@ -1,8 +1,9 @@
 <?php
-// app/Helpers/upload-image.php - add path to composer.json
 
-if (!function_exists('uploadImage')) {
-    function uploadImage($file, $folder)
+namespace App\Helpers;
+// app/Helpers/upload-image.php - add path to composer.json
+if (!function_exists('UploadImage')) {
+    function UploadImage($file, $folder)
     {
         // Generate a unique name for the image
         $imageName = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();

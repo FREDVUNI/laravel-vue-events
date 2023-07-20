@@ -21,6 +21,7 @@ class Event extends Model
         return self::create([
             'title' => $data['title'],
             'description' => $data['description'],
+            'image' => $data['image'],
             'slug' => Str::slug($data['title']),
             'start_date' => $data['start_date'],
             'end_date' => $data['end_date'],
@@ -44,6 +45,7 @@ class Event extends Model
         $event->update([
             'title' => $data['title'],
             'description' => $data['description'],
+            'image' => $data['image'],
             'slug' => Str::slug($data['title']),
             'start_date' => $data['start_date'],
             'end_date' => $data['end_date'],

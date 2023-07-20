@@ -1,10 +1,11 @@
 <?php
-
+use App\Helpers\UploadImage;
 namespace App\Http\Controllers;
-
 use App\Models\Event;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
+
+use function App\Helpers\UploadImage;
 
 class EventController extends Controller
 {
@@ -24,10 +25,16 @@ class EventController extends Controller
                 "title" => "required|unique:events|min:4|max:20",
                 "description" => "required|min:4|max:200",
                 "slug" => "required",
+                "image" => "required|image|max:2048|mimes:jpeg,jpg,png,gif",
                 "start_date" => "required|date_format:Y-m-d H:i:s|after:now",
                 "end_date" => "required|date_format:Y-m-d H:i:s|after:now",
             ]);
 
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $imageName = UploadImage($image, 'events');
+                $data['image'] = $imageName;
+            }
             $event = Event::createEvent($data);
             return response()->json(['events' => $event], 201);
         } catch (\Illuminate\Validation\ValidationException $e) {
@@ -67,6 +74,7 @@ class EventController extends Controller
                 "title" => "required|min:4|max:20",
                 "description" => "required|min:4|max:200",
                 "slug" => "required",
+                "image" => "required|image|max:2048|mime:jpg,gif,png",
                 "start_date" => "required|date_format:Y-m-d H:i:s|after:now",
                 "end_date" => "required|date_format:Y-m-d H:i:s|after:now",
             ]);
