@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models;
-
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -21,7 +21,7 @@ class Attendee extends Model
             'name' => $data['name'],
             'email' => $data['email'],
             'phone' => $data['phone'],
-            'slug' => $data['slug'],
+            'slug' => Str::slug($data['slug']),
         ]);
     }
     public static function getAttendee($slug)
@@ -46,7 +46,7 @@ class Attendee extends Model
             'name' => $data['name'],
             'email' => $data['email'],
             'phone' => $data['phone'],
-            'slug' => $data['slug'],
+            'slug' => Str::slug($data['slug']),
         ]);
         return $attendee;
     }
