@@ -28,7 +28,7 @@ class EventController extends Controller
                 "title" => "required|unique:events|min:4|max:20",
                 "description" => "required|min:4|max:200",
                 "slug" => "required",
-                "image" => "required|image|max:2048|mimes:jpeg,jpg,png,gif",
+                "image" => "required|image|max:2048|ss:jpeg,jpg,png,gif",
                 "start_date" => "required|date_format:Y-m-d H:i:s|after:now",
                 "end_date" => "required|date_format:Y-m-d H:i:s|after:now",
             ]);
@@ -73,12 +73,12 @@ class EventController extends Controller
     public function update(Request $request, $slug)
     {
         try {
-            dd($request->all());
+            // dd($request->all());
             $data = $request->validate([
                 "title" => "required|min:4|max:20",
                 "description" => "required|min:4|max:200",
                 "slug" => "required",
-                "image" => "required|image|max:2048|mime:jpg,gif,png",
+                "image" => "required|image|max:2048|mimes:jpg,gif,png",
                 "start_date" => "required|date_format:Y-m-d H:i:s|after:now",
                 "end_date" => "required|date_format:Y-m-d H:i:s|after:now",
             ]);
@@ -97,8 +97,8 @@ class EventController extends Controller
                 $data['image'] = $event->image;
             }
 
-            $event = Event::updateEvent($slug, $data);
-            return response()->json(['event' => $event], 200);
+            $events = Event::updateEvent($slug, $data);
+            return response()->json(['event' => $events], 200);
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
             return response()->json(['message' => 'Event not found.'], 404);
         } catch (\Illuminate\Validation\ValidationException $e) {
