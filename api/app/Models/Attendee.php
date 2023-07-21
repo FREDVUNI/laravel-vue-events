@@ -21,6 +21,7 @@ class Attendee extends Model
             'name' => $data['name'],
             'email' => $data['email'],
             'phone' => $data['phone'],
+            'slug' => $data['slug'],
         ]);
     }
     public static function getAttendee($slug)
@@ -45,6 +46,7 @@ class Attendee extends Model
             'name' => $data['name'],
             'email' => $data['email'],
             'phone' => $data['phone'],
+            'slug' => $data['slug'],
         ]);
         return $attendee;
     }
