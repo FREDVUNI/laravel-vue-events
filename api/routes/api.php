@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\EventController;
-
+use App\Http\Controllers\AttendeeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,5 +39,17 @@ Route::group(["prefix" => "events"], function(){
         Route::get('edit/{slug}', [EventController::class, 'edit']);
         Route::patch('update/{slug}', [EventController::class, 'update']);
         Route::delete('delete/{slug}', [EventController::class, 'delete']);
+    });
+});
+
+//attendees
+Route::group(["prefix" => "attendees"], function(){
+    Route::group(["middleware" => ["auth:sanctum"]], function () {
+        Route::get("/",[AttendeeController::class,'attendees']);
+        Route::post('/', [AttendeeController::class, 'store']);
+        Route::get('show/{slug}', [AttendeeController::class, 'show']);
+        Route::get('edit/{slug}', [AttendeeController::class, 'edit']);
+        Route::patch('update/{slug}', [AttendeeController::class, 'update']);
+        Route::delete('delete/{slug}', [AttendeeController::class, 'delete']);
     });
 });
