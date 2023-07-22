@@ -1,13 +1,9 @@
 <?php
 
-use App\Helpers\UploadImage;
-
 namespace App\Http\Controllers;
 
 use App\Models\Event;
 use Illuminate\Http\Request;
-use Illuminate\Validation\ValidationException;
-
 use function App\Helpers\UploadImage;
 
 class EventController extends Controller
@@ -28,7 +24,7 @@ class EventController extends Controller
                 "title" => "required|unique:events|min:4|max:20",
                 "description" => "required|min:4|max:200",
                 "slug" => "required",
-                "image" => "required|image|max:2048|ss:jpeg,jpg,png,gif",
+                "image" => "required|image|max:2048|mimes:jpeg,jpg,png,gif",
                 "start_date" => "required|date_format:Y-m-d H:i:s|after:now",
                 "end_date" => "required|date_format:Y-m-d H:i:s|after:now",
             ]);
@@ -43,7 +39,7 @@ class EventController extends Controller
         } catch (\Illuminate\Validation\ValidationException $e) {
             return response()->json(['errors' => $e->errors()], 400);
         } catch (\Exception $e) {
-            return response()->json(['message' => 'Something went wrong.'], 500);
+            return response()->json(['message' => 'Something went wrong.'.$e], 500);
         }
     }
     public function show($slug)
@@ -93,7 +89,7 @@ class EventController extends Controller
 
                 $imageName = UploadImage($image, 'events');
                 $data['image'] = $imageName;
-            }else{
+            } else {
                 $data['image'] = $event->image;
             }
 
@@ -115,7 +111,7 @@ class EventController extends Controller
             if ($event->image && file_exists(public_path('uploads/events/' . $event->image))) {
                 unlink(public_path('uploads/events/' . $event->image));
             }
-            
+
             Event::deleteEvent($slug);
             return response()->json(['message' => 'The event has been deleted.'], 200);
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
