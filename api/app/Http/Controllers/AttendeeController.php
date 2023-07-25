@@ -11,7 +11,7 @@ class AttendeeController extends Controller
     {
         try {
             $attendees = Attendee::fetchAttendees();
-            return response()->json(['attendees' => $attendees, 200]);
+            return response()->json(['attendees' => $attendees],200);
         } catch (\Exception $e) {
             return response()->json(['message' => 'Something went wrong.'], 500);
         }
