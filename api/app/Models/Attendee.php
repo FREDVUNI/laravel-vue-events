@@ -40,7 +40,7 @@ class Attendee extends Model
         $attendee = self::where('slug', $slug)->firstorFail();
         return $attendee;
     }
-    public static function updateAttendee($slug, array $data)
+    public static function updateAttendee(array $data,$slug)
     {
         $attendee = self::where('slug', $slug)->firstorFail();
         $attendee->update([

@@ -59,7 +59,7 @@ class AttendeeController extends Controller
     {
         try {
             $data = $request->validate([
-                'name' => 'required|min:5|alphanumeric',
+                'name' => 'required|min:5',
                 'phone' => 'required|min:10|max:14',
                 'email' => 'required|email',
                 'slug' => 'required'
