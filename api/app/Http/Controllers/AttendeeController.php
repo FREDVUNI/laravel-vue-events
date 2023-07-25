@@ -16,28 +16,28 @@ class AttendeeController extends Controller
             return response()->json(['message' => 'Something went wrong.'], 500);
         }
     }
-    public function store(Request $request, $data)
+    public function store(Request $request)
     {
         try {
             $data = $request->validate([
-                'name' => 'required|min:5|alphanumeric',
+                'name' => 'required|min:3|string',
                 'phone' => 'required|min:10|max:14|unique:attendees',
                 'email' => 'required|email|unique:attendees',
                 'slug' => 'required'
             ]);
             $attendee = Attendee::createAttendee($data);
-            return response()->json(['attendees' => $attendee, 201]);
+            return response()->json(['attendees' => $attendee], 201);
         } catch (\Illuminate\Validation\ValidationException $e) {
             return response()->json(['errors' => $e->errors()], 400);
         } catch (\Exception $e) {
-            return response()->json(['message' => 'Something went wrong.'], 500);
+            return response()->json(['message' => 'Something went wrong.'.$e], 500);
         }
     }
     public function show($slug)
     {
         try {
             $attendee = Attendee::getAttendee($slug);
-            return response()->json(['attendee' => $attendee, 200]);
+            return response()->json(['attendee' => $attendee], 200);
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
             return response()->json(['message' => 'Event not found.'], 404);
         } catch (\Exception $e) {
@@ -48,7 +48,7 @@ class AttendeeController extends Controller
     {
         try {
             $attendee = Attendee::editAttendee($slug);
-            return response()->json(['attendee' => $attendee, 200]);
+            return response()->json(['attendee' => $attendee], 200);
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
             return response()->json(['message' => 'Event not found.'], 404);
         } catch (\Exception $e) {
