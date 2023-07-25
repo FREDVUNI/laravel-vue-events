@@ -22,7 +22,7 @@ class Attendee extends Model
             'name' => $data['name'],
             'email' => $data['email'],
             'phone' => $data['phone'],
-            'slug' => Str::slug($data['name']."".$data['email']),
+            'slug' => Str::slug($data['name']." ".$data['email']),
         ]);
     }
     public static function getAttendee($slug)
@@ -47,7 +47,7 @@ class Attendee extends Model
             'name' => $data['name'],
             'email' => $data['email'],
             'phone' => $data['phone'],
-            'slug' => Str::slug($data['name']."".$data['email']),
+            'slug' => Str::slug($data['name']." ".$data['email']),
         ]);
         return $attendee;
     }
