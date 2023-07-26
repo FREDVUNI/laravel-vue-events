@@ -1,9 +1,9 @@
 <script setup>
-import Home from "../components/Home.vue";
+import Register from "../components/Register.vue";
 </script>
 
 <template>
   <main>
-    <Home />
+    <Register />
   </main>
 </template>
