@@ -21,6 +21,7 @@ const router = createRouter({
       name: "register",
       component: RegisterView,
     },
+    // { path: "/:pathMatch(.*)*", name: "NotFound", component: NotFound },
   ],
 });
 
