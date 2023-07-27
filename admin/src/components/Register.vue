@@ -61,23 +61,17 @@
             {{ errors.password }}
           </p>
         </div>
-        <router-link
-          to="/forget-password"
-          class="text-sm font-semibold text-primary"
-        >
-          Forgot password?
-        </router-link>
         <button
           type="submit"
           :disabled="!isValid || isLoading"
           class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold text-lg py-4 px-8 w-full rounded-lg my-6 disabled:opacity-70 disabled:cursor-not-allowed"
         >
-          Sign In
+          Sign Up
         </button>
         <p class="text-sm font-semibold text-[#5a7184]">
-          Do not have an account?
-          <router-link to="/register" class="text-primary ml-5">
-            Register now
+          Already have an account?
+          <router-link to="/login" class="text-primary ml-5">
+            sign in
           </router-link>
         </p>
       </form>
