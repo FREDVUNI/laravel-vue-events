@@ -1,11 +1,10 @@
 <script setup>
+import { RouterView } from "vue-router";
 </script>
 
 <template>
   <div>
-    <!-- <router-link to="/login">Login</router-link>
-    <router-link to="/register">Register</router-link> -->
-    <router-view></router-view>
+    <RouterView />
   </div>
 </template>
 
