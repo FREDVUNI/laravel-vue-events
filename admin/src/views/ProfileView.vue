@@ -1,9 +1,9 @@
 <script setup>
-import Dashboard from "../components/Dashboard.vue";
+import Profile from "../components/Profile.vue";
 </script>
 
 <template>
   <main>
-    <Dashboard />
+    <Profile />
   </main>
 </template>
