@@ -1,14 +1,14 @@
 <template>
   <header class="bg-white shadow-md">
     <div class="flex items-center justify-end px-5 py-2">
-      <div class="flex items-center">
+      <div class="flex items-center hover:cursor-pointer" @click="toggleDropdown">
         <img
           src="https://www.f6s.com/content-resource/profiles/3610847_th2.jpg"
           alt="Profile"
           class="h-8 w-8 rounded-full"
         />
         <span class="ml-2 text-gray-800">Fred</span>
-        <div class="relative ml-2" @click="toggleDropdown">
+        <div class="relative ml-2">
           <button class="focus:outline-none">
             <svg
               xmlns="http://www.w3.org/2000/svg"
