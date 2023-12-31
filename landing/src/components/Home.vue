@@ -56,13 +56,17 @@
             <a href="#" class="text-gray-600 hover:text-gray-800">Home</a>
           </li>
           <li>
-            <a href="#" class="text-gray-600 hover:text-gray-800">About</a>
+            <a href="#about" class="text-gray-600 hover:text-gray-800">About</a>
           </li>
           <li>
-            <a href="#" class="text-gray-600 hover:text-gray-800">Events</a>
+            <a href="#events" class="text-gray-600 hover:text-gray-800"
+              >Events</a
+            >
           </li>
           <li>
-            <a href="#" class="text-gray-600 hover:text-gray-800">Contact</a>
+            <a href="#contact" class="text-gray-600 hover:text-gray-800"
+              >Contact</a
+            >
           </li>
         </ul>
       </div>
@@ -80,21 +84,21 @@
           </li>
           <li>
             <a
-              href="#"
+              href="#about"
               class="block px-4 py-2 text-gray-600 hover:text-gray-800"
               >About</a
             >
           </li>
           <li>
             <a
-              href="#"
+              href="#events"
               class="block px-4 py-2 text-gray-600 hover:text-gray-800"
               >Events</a
             >
           </li>
           <li>
             <a
-              href="#"
+              href="#contact"
               class="block px-4 py-2 text-gray-600 hover:text-gray-800"
               >Contact</a
             >
@@ -115,7 +119,7 @@
       >
     </section>
 
-    <section class="bg-white py-32">
+    <section class="bg-white py-32" id="about">
       <div
         class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center"
       >
@@ -129,12 +133,24 @@
         <div class="w-full lg:w-1/2 md:ml-5">
           <h2 class="text-3xl font-bold text-gray-800 mb-4 mt-5">About Us</h2>
           <p class="text-gray-600">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-            fringilla enim ac nulla bibendum, id ullamcorper lorem cursus.
-            Phasellus scelerisque aliquet nisl, at pellentesque tellus mattis
-            et. Sed sollicitudin justo sed risus feugiat, in eleifend eros
-            dignissim. Mauris auctor ante vitae purus mollis pulvinar. In hac
-            habitasse platea dictumst.
+            We envision a world where every event, from intimate gatherings to
+            large-scale conferences, is effortlessly organized, engaging, and
+            successful. We aim to be the cornerstone of innovation in the events
+            industry, redefining how events are planned, executed, and
+            experienced.
+          </p>
+          <p class="text-gray-600">
+            Benefits for You For Organizers: Simplify event planning, increase
+            efficiency, and amplify audience engagement with our intuitive
+            dashboard and customizable features. For Attendees: Enjoy a seamless
+            registration process, personalized event recommendations, and
+            interactive event experiences that keep you engaged and informed.
+          </p>
+          <p class="text-gray-600">
+            Whether you're planning a corporate summit, a community festival, or
+            a virtual meetup, we're here to support your vision. Let's
+            collaborate to create memorable experiences that leave a lasting
+            impact.
           </p>
         </div>
       </div>
@@ -178,7 +194,7 @@
       </div>
     </section>
 
-    <section class="bg-gray-200 py-32">
+    <section class="bg-gray-200 py-32" id="events">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid gap-x-6 lg:grid-cols-3 lg:gap-x-12">
           <div
@@ -368,7 +384,7 @@
       </div>
     </section>
 
-    <section class="bg-white py-32">
+    <section class="bg-white py-32" id="contact">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 class="text-3xl font-bold text-gray-800 mb-8">Contact Us</h2>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -400,7 +416,7 @@
                 <input
                   type="text"
                   id="name"
-                  class="border border-gray-300 rounded-lg py-2 px-4 mt-2"
+                  class="border border-gray-300 rounded-lg py-2 px-4 mt-2 focus:border-gray-500 focus:outline-none"
                   placeholder="Enter name"
                   required
                 />
@@ -410,7 +426,7 @@
                 <input
                   type="email"
                   id="email"
-                  class="border border-gray-300 rounded-lg py-2 px-4 mt-2"
+                  class="border border-gray-300 rounded-lg py-2 px-4 mt-2 focus:border-gray-500 focus:outline-none"
                   placeholder="Enter email address"
                   required
                 />
@@ -420,7 +436,7 @@
                 <textarea
                   id="message"
                   rows="4"
-                  class="border border-gray-300 rounded-lg py-2 px-4 mt-2"
+                  class="border border-gray-300 rounded-lg py-2 px-4 mt-2 focus:border-gray-500 focus:outline-none"
                   placeholder="Enter message"
                   required
                 ></textarea>
