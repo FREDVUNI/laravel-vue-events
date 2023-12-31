@@ -1,7 +1,7 @@
 <template>
   <section class="container mx-auto px-5 py-10">
     <div class="w-full max-w-sm mx-auto">
-      <h1 class="text-2xl font-bold text-center text-dark-hard mb-8">Login</h1>
+      <h1 class="text-4xl font-bold text-center text-dark-hard mb-8">Login</h1>
       <form @submit="submitHandler">
         <div class="flex flex-col mb-6 w-full">
           <label for="email" class="text-[#5a7184] font-semibold block">
