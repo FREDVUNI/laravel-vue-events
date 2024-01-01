@@ -30,9 +30,9 @@ Route::group(["prefix" => "auth"], function () {
 });
 
 //events
-Route::group(["prefix" => "events"], function(){
-    Route::get("/",[EventController::class,'events']);
-    
+Route::group(["prefix" => "events"], function () {
+    Route::get("/", [EventController::class, 'events']);
+
     Route::group(["middleware" => ["auth:sanctum"]], function () {
         Route::post('/', [EventController::class, 'store']);
         Route::get('show/{slug}', [EventController::class, 'show']);
@@ -42,10 +42,10 @@ Route::group(["prefix" => "events"], function(){
     });
 });
 
-//attendees
-Route::group(["prefix" => "attendees"], function(){
+//attendees 
+Route::group(["prefix" => "attendees"], function () {
     Route::group(["middleware" => ["auth:sanctum"]], function () {
-        Route::get("/",[AttendeeController::class,'attendees']);
+        Route::get("/", [AttendeeController::class, 'attendees']);
         Route::post('/', [AttendeeController::class, 'store']);
         Route::get('show/{slug}', [AttendeeController::class, 'show']);
         Route::get('edit/{slug}', [AttendeeController::class, 'edit']);
