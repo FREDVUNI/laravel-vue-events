@@ -46,9 +46,9 @@
       <ul>
         <li>
           <router-link
-            to="/dashboard"
+            to="/"
             class="block py-2 px-4 hover:bg-gray-700 rounded transition duration-300"
-            :class="{ 'bg-gray-700': $route.path === '/dashboard' }"
+            :class="{ 'bg-gray-700': $route.path === '/' }"
           >
             Dashboard
           </router-link>
