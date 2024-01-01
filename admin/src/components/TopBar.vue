@@ -1,5 +1,5 @@
 <template>
-  <header class="bg-white shadow-md">
+  <header class="bg-white shadow-sm">
     <div class="flex items-center justify-end px-5 py-2">
       <div class="flex items-center hover:cursor-pointer" @click="toggleDropdown">
         <img
