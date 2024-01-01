@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import DashboardView from "../views/DashboardView.vue";
 import ProfileView from "../views/ProfileView.vue";
 import LoginView from "../views/LoginView.vue";
+import RegisterView from "../views/RegisterView.vue";
 import NotFoundView from "../views/NotFoundView.vue";
 
 const router = createRouter({
@@ -23,8 +24,13 @@ const router = createRouter({
       component: ProfileView,
     },
     {
+      path: "/settings",
+      name: "settings",
+      component: RegisterView,
+    },
+    {
       path: "/:catchAll(.*)",
-      name:"not-found",
+      name: "not-found",
       component: NotFoundView,
     },
   ],
