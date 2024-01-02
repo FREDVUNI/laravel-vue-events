@@ -2,7 +2,11 @@
   <section class="container mx-auto px-5 py-10">
     <div class="flex justify-between items-center mb-4">
       <h1 class="text-2xl font-semibold mb-4">Events</h1>
-      <button class="bg-blue-500 text-white px-3 py-1 rounded">Add</button>
+      <router-link
+        to="/event-management/create"
+        class="bg-blue-500 text-white px-3 py-1 rounded"
+        >Add</router-link
+      >
     </div>
     <div class="max-w-full overflow-x-auto">
       <table

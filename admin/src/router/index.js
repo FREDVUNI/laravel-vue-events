@@ -4,7 +4,11 @@ import ProfileView from "../views/ProfileView.vue";
 import LoginView from "../views/LoginView.vue";
 import RegisterView from "../views/RegisterView.vue";
 import EventView from "../views/events/EventView.vue";
+import AddEventView from "../views/events/AddEventView.vue";
+import EditEventView from "../views/events/EditEventView.vue";
 import AttendeeView from "../views/attendees/AttendeeView.vue";
+import AddAttendeeView from "../views/attendees/AddAttendeeView.vue";
+import EditAttendeeView from "../views/attendees/EditAttendeeView.vue";
 import NotFoundView from "../views/NotFoundView.vue";
 
 const router = createRouter({
@@ -36,9 +40,29 @@ const router = createRouter({
       component: AttendeeView,
     },
     {
+      path: "/attendee-management/create",
+      name: "create-attendee",
+      component: AddAttendeeView,
+    },
+    {
+      path: "/attendee-management/create",
+      name: "edit-attendee",
+      component: EditAttendeeView,
+    },
+    {
       path: "/event-management",
       name: "events",
       component: EventView,
+    },
+    {
+      path: "/event-management/create",
+      name: "create-event",
+      component: AddEventView,
+    },
+    {
+      path: "/event-management/create",
+      name: "edit-event",
+      component: EditEventView,
     },
     {
       path: "/:catchAll(.*)",
