@@ -3,8 +3,8 @@ import DashboardView from "../views/DashboardView.vue";
 import ProfileView from "../views/ProfileView.vue";
 import LoginView from "../views/LoginView.vue";
 import RegisterView from "../views/RegisterView.vue";
-import EventView from "../views/EventView.vue";
-import AttendeeView from "../views/AttendeeView.vue";
+import EventView from "../views/events/EventView.vue";
+import AttendeeView from "../views/attendees/AttendeeView.vue";
 import NotFoundView from "../views/NotFoundView.vue";
 
 const router = createRouter({
