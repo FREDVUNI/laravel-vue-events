@@ -1,7 +1,7 @@
 <template>
   <div class="flex">
     <aside
-      class="bg-gray-800 text-gray-100 w-64 py-4 px-6 h-screen"
+      class="bg-gray-800 text-gray-100 w-64 py-4 px-6 h-screen overflow-hidden fixed"
       :class="{ hidden: !showSidebar, block: showSidebar }"
     >
       <div class="flex items-center justify-between mb-5 mt-5">
@@ -93,7 +93,10 @@
     </aside>
 
     <!-- Main Content -->
-    <div class="flex-1">
+    <div
+      :class="{ 'ml-64': showSidebar, 'ml-0': !showSidebar }"
+      class="flex-1 transition-all"
+    >
       <!-- Your main content -->
     </div>
   </div>
@@ -118,6 +121,9 @@ export default {
 @media (max-width: 768px) {
   .bg-gray-800 {
     display: none;
+  }
+  .ml-64 {
+    margin-left: 0 !important;
   }
 }
 </style>
