@@ -7,7 +7,7 @@
       >
         <thead class="uppercase tracking-wider border-b">
           <tr>
-            <th scope="col" class="px-6 py-4">Event Name</th>
+            <th scope="col" class="px-6 py-4">Event</th>
             <th scope="col" class="px-6 py-4">Date</th>
             <th scope="col" class="px-6 py-4">Location</th>
             <th scope="col" class="px-6 py-4">Status</th>
