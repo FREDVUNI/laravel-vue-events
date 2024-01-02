@@ -1,7 +1,10 @@
 <template>
   <section class="container mx-auto px-5 py-10">
-    <h1 class="text-2xl font-semibold mb-4">Attendees</h1>
-    <div class="max-w-full">
+    <div class="flex justify-between items-center mb-4">
+      <h1 class="text-2xl font-semibold mb-4">Attendees</h1>
+      <button class="bg-blue-500 text-white px-3 py-1 rounded">Add</button>
+    </div>
+    <div class="max-w-full overflow-x-auto">
       <table
         class="w-full sm:max-w-sm md:max-w-3xl lg:max-w-4xl xl:max-w-5xl text-left text-sm whitespace-nowrap"
       >
