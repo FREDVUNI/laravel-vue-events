@@ -1,5 +1,5 @@
 <template>
-  <section class="container mx-auto px-5 py-10">
+  <section class="container mx-auto px-5 py-10 ">
     <div class="w-full max-w-sm mx-auto">
       <h1 class="text-4xl font-bold text-center text-dark-hard mb-8">Login</h1>
       <form @submit="submitHandler">
@@ -74,12 +74,6 @@
         >
           Sign In
         </button>
-        <p class="text-sm font-semibold text-[#5a7184]">
-          Do not have an account?
-          <router-link to="/register" class="text-primary ml-5">
-            Register now
-          </router-link>
-        </p>
       </form>
     </div>
   </section>
