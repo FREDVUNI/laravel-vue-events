@@ -3,6 +3,7 @@ import DashboardView from "../views/DashboardView.vue";
 import ProfileView from "../views/ProfileView.vue";
 import LoginView from "../views/LoginView.vue";
 import RegisterView from "../views/RegisterView.vue";
+import EventsView from "../views/EventsView.vue";
 import NotFoundView from "../views/NotFoundView.vue";
 
 const router = createRouter({
@@ -27,6 +28,11 @@ const router = createRouter({
       path: "/settings",
       name: "settings",
       component: RegisterView,
+    },
+    {
+      path: "/event-management",
+      name: "events",
+      component: EventsView,
     },
     {
       path: "/:catchAll(.*)",
