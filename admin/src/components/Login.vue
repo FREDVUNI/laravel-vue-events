@@ -1,5 +1,5 @@
 <template>
-  <section class="container mx-auto px-5 py-10 ">
+  <section class="container mx-auto px-5 py-10">
     <div class="w-full max-w-sm mx-auto">
       <h1 class="text-4xl font-bold text-center text-dark-hard mb-8">Login</h1>
       <form @submit="submitHandler">
@@ -91,7 +91,7 @@ export default {
 
     const errors = reactive({});
 
-    const isLoading = false; // Replace this with your loading state logic
+    const isLoading = false;
 
     const clearError = (field) => {
       if (errors[field]) {
@@ -100,13 +100,20 @@ export default {
     };
 
     const isValid = () => {
-      // Replace this with your validation logic
-      return true;
+      return formData.email.trim() !== "" && formData.password.trim() !== "";
     };
 
     const submitHandler = (event) => {
       event.preventDefault();
-      // Handle form submission logic here
+      if (!isValid()) {
+        if (formData.email.trim() === "") {
+          errors.email = "Email is required";
+        }
+        if (formData.password.trim() === "") {
+          errors.password = "Password is required";
+        }
+        return;
+      }
     };
 
     return {
