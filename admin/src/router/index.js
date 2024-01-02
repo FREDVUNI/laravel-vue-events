@@ -3,7 +3,8 @@ import DashboardView from "../views/DashboardView.vue";
 import ProfileView from "../views/ProfileView.vue";
 import LoginView from "../views/LoginView.vue";
 import RegisterView from "../views/RegisterView.vue";
-import EventsView from "../views/EventsView.vue";
+import EventView from "../views/EventView.vue";
+import AttendeeView from "../views/AttendeeView.vue";
 import NotFoundView from "../views/NotFoundView.vue";
 
 const router = createRouter({
@@ -30,9 +31,14 @@ const router = createRouter({
       component: RegisterView,
     },
     {
+      path: "/attendee-management",
+      name: "attendees",
+      component: AttendeeView,
+    },
+    {
       path: "/event-management",
       name: "events",
-      component: EventsView,
+      component: EventView,
     },
     {
       path: "/:catchAll(.*)",
