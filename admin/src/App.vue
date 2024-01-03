@@ -24,8 +24,8 @@
 
 <script setup>
 import { RouterView } from "vue-router";
-import SideBar from "./components/SideBar.vue";
-import TopBar from "./components/TopBar.vue";
+import SideBar from "./components/layout/SideBar.vue";
+import TopBar from "./components/layout/TopBar.vue";
 </script>
 
 <style scoped>
