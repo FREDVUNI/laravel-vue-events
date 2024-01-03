@@ -1,6 +1,6 @@
 <template>
-  <section class="container mx-auto px-5 py-10">
-    <div class="w-full max-w-lg mx-auto">
+  <section class="container mx-auto py-8">
+    <div class="max-w-4xl mx-auto">
       <h1 class="text-2xl font-semibold mb-4">Add Attendee</h1>
       <form @submit="submitHandler">
         <div class="flex flex-col mb-6 w-full">
@@ -90,13 +90,15 @@
             {{ errors.phone }}
           </p>
         </div>
-        <button
-          type="submit"
-          :disabled="!isValid || isLoading"
-          class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold text-lg py-4 px-8 w-full rounded-lg my-6 disabled:opacity-70 disabled:cursor-not-allowed"
-        >
-          Register
-        </button>
+        <div class="w-full md:w-1/2">
+          <button
+            type="submit"
+            :disabled="!isValid || isLoading"
+            class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold text-lg py-4 px-8 rounded-lg my-6 disabled:opacity-70 disabled:cursor-not-allowed"
+          >
+            Register
+          </button>
+        </div>
       </form>
     </div>
   </section>
