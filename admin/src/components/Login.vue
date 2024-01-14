@@ -81,7 +81,7 @@
 
 <script>
 import { reactive } from "vue";
-import axios from "axios";
+import axios from "axios"; 
 
 export default {
   setup() {
@@ -117,13 +117,10 @@ export default {
       }
 
       try {
-        const response = await axios.post(
-          "http://127.0.0.1:8000/api/auth/signin",
-          {
-            email: formData.email,
-            password: formData.password,
-          }
-        );
+        const response = await axios.post(`${import.meta.env.VITE_API_URL}auth/signin`, {
+          email: formData.email,
+          password: formData.password,
+        });
 
         // console.log(response.data);
       } catch (error) {
