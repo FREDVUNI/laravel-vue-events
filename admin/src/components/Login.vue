@@ -62,7 +62,7 @@
           </p>
         </div>
         <router-link
-          to="/forget-password"
+          to="/forgot-password"
           class="text-sm font-semibold text-primary"
         >
           Forgot password?
