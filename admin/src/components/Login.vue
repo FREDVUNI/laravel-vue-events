@@ -81,6 +81,7 @@
 
 <script>
 import { reactive } from "vue";
+import axios from "axios";
 
 export default {
   setup() {
@@ -103,7 +104,7 @@ export default {
       return formData.email.trim() !== "" && formData.password.trim() !== "";
     };
 
-    const submitHandler = (event) => {
+    const submitHandler = async (event) => {
       event.preventDefault();
       if (!isValid()) {
         if (formData.email.trim() === "") {
@@ -113,6 +114,23 @@ export default {
           errors.password = "Password is required";
         }
         return;
+      }
+
+      try {
+        const response = await axios.post(
+          "http://127.0.0.1:8000/api/auth/signin",
+          {
+            email: formData.email,
+            password: formData.password,
+          }
+        );
+
+        console.log(response.data);
+      } catch (error) {
+        console.error(error.response.data);
+        console.error(error.response.data);
+        errors.email = error.response.data.errors.email[0];
+        errors.password = error.response.data.errors.password[0];
       }
     };
 
