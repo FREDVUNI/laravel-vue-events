@@ -207,6 +207,18 @@ export default {
         console.error(error.response.data);
       }
     };
+    const fetchUserData = async () => {
+      try {
+        const response = await axios.get("/api/user");
+
+        // Update user data with the response
+        user.id = response.data.id;
+        user.name = response.data.name;
+        user.email = response.data.email;
+      } catch (error) {
+        console.error(error.response.data);
+      }
+    };
 
     return {
       formData,
@@ -216,6 +228,7 @@ export default {
       isValid,
       submitHandler,
       handleDeleteImage,
+      fetchUserData
     };
   },
 };
