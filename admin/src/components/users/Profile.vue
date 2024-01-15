@@ -131,18 +131,19 @@
 
 <script>
 import { reactive } from "vue";
-// Import any other necessary modules/components
+import axios from "axios";
 
 export default {
   setup() {
     const formData = reactive({
+      name: "",
       email: "",
       password: "",
     });
 
     const errors = reactive({});
 
-    const isLoading = false; // Replace this with your loading state logic
+    const isLoading = false;
 
     const clearError = (field) => {
       if (errors[field]) {
@@ -151,24 +152,61 @@ export default {
     };
 
     const isValid = () => {
-      // Replace this with your validation logic
-      return true;
+      return (
+        formData.name.trim() !== "" &&
+        formData.email.trim() !== "" &&
+        formData.password.trim() !== ""
+      );
     };
 
-    const submitHandler = (event) => {
+    const submitHandler = async (event) => {
       event.preventDefault();
-      // Handle form submission logic here
+
+      if (!isValid()) {
+        if (formData.name.trim() === "") {
+          errors.name = "Name is required";
+        }
+        if (formData.email.trim() === "") {
+          errors.email = "Email is required";
+        }
+        if (formData.password.trim() === "") {
+          errors.password = "Password is required";
+        }
+        return;
+      }
+
+      // Make API call to update profile
+      try {
+        const response = await axios.patch(`${import.meta.env.VITE_API_URL}/profile/update`, {
+          name: formData.name,
+          email: formData.email,
+          password: formData.password,
+        });
+
+        // Handle successful response
+        console.log(response.data);
+      } catch (error) {
+        // Handle error
+        console.error(error.response.data);
+        // Set errors based on API response
+        errors.name = error.response.data.errors.name;
+        errors.email = error.response.data.errors.email;
+        errors.password = error.response.data.errors.password;
+      }
     };
 
-    const handleFileChange = (e) => {
-      // Implement the file change logic here (equivalent to handleFileChange in React component)
-    };
+    const handleDeleteImage = async () => {
+      // Make API call to delete image
+      try {
+        const response = await axios.delete("/api/profile/delete-image");
 
-    const handleDeleteImage = () => {
-      // Implement the delete image logic here (equivalent to handleDeleteImage in React component)
+        // Handle successful response
+        console.log(response.data);
+      } catch (error) {
+        // Handle error
+        console.error(error.response.data);
+      }
     };
-
-    // Replace the necessary logic for avatar and any other dependencies from React in the Vue setup
 
     return {
       formData,
@@ -176,7 +214,7 @@ export default {
       isLoading,
       clearError,
       isValid,
-      handleFileChange,
+      submitHandler,
       handleDeleteImage,
     };
   },
