@@ -1,7 +1,7 @@
 <template>
-  <section class="container mx-auto px-5 py-10">
-    <div class="max-w-lg mx-auto bg-white rounded-lg overflow-hidden p-8 shadow-lg">
-      <h1 class="text-4xl font-bold text-center text-dark-hard mb-8">Login</h1>
+  <section class="container mx-auto px-5 py-12">
+    <div class="max-w-sm mx-auto bg-white rounded-lg overflow-hidden p-8 shadow-lg">
+      <h1 class="text-2xl font-bold text-center mb-8">Sign in</h1>
       <form @submit="submitHandler">
         <div class="flex flex-col mb-6 w-full">
           <label for="email" class="text-[#5a7184] font-semibold block">
@@ -12,19 +12,10 @@
             id="email"
             v-model="formData.email"
             @input="clearError('email')"
+            class="w-full px-4 py-2 rounded-lg border placeholder-[#959ead] text-dark-hard"
             :class="{
-              'placeholder:text-[#959ead]': true,
-              'text-dark-hard': true,
-              'mt-3': true,
-              'rounded-lg': true,
-              'px-5': true,
-              'py-4': true,
-              'font-semibold': true,
-              block: true,
-              'outline-none': true,
-              border: true,
-              'border-red-500': errors.email,
-              'border-[#c3cad9]': !errors.email,
+              'border-red-500': errors.event,
+              'border-[#c3cad9]': !errors.event,
             }"
             placeholder="Enter email"
           />
@@ -41,19 +32,10 @@
             id="password"
             v-model="formData.password"
             @input="clearError('password')"
+            class="w-full px-4 py-2 rounded-lg border placeholder-[#959ead] text-dark-hard"
             :class="{
-              'placeholder:text-[#959ead]': true,
-              'text-dark-hard': true,
-              'mt-3': true,
-              'rounded-lg': true,
-              'px-5': true,
-              'py-4': true,
-              'font-semibold': true,
-              block: true,
-              'outline-none': true,
-              border: true,
-              'border-red-500': errors.password,
-              'border-[#c3cad9]': !errors.password,
+              'border-red-500': errors.event,
+              'border-[#c3cad9]': !errors.event,
             }"
             placeholder="Enter password"
           />
@@ -63,16 +45,16 @@
         </div>
         <router-link
           to="/forgot-password"
-          class="text-sm font-semibold text-primary"
+          class="text-sm text-primary"
         >
           Forgot password?
         </router-link>
         <button
           type="submit"
           :disabled="!isValid || isLoading"
-          class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold text-lg py-4 px-8 w-full rounded-lg my-6 disabled:opacity-70 disabled:cursor-not-allowed"
+          class="w-full bg-indigo-500 hover:bg-indigo-600 mt-5 text-white font-bold text-lg py-2 px-4 rounded-lg disabled:opacity-70 disabled:cursor-not-allowed"
         >
-          Sign In
+        Sign In
         </button>
       </form>
     </div>
