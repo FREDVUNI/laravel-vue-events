@@ -81,14 +81,11 @@ cd landing
 npm run dev
 ```
 
-The landing page will be accessible at `http://localhost:8000`.
+The landing page will be accessible at `http://localhost:5173`.
 
 ### Screenshot
 
 ![image](https://github.com/FREDVUNI/laravel-vue-events/assets/41730664/13e9294c-362a-46d5-8897-b5ebfd1f27ae)
-
-![image](https://github.com/FREDVUNI/laravel-vue-events/assets/41730664/a75770db-1057-415f-b731-c1b783de7f95)
-
 
 ### Dashboard
 
@@ -101,7 +98,12 @@ cd dashboard
 npm run dev
 ```
 
-The dashboard will be accessible at `http://localhost:8000/dashboard`.
+The dashboard will be accessible at `http://localhost:5179/dashboard`.
+
+### Screenshot
+
+![image](https://github.com/FREDVUNI/laravel-vue-events/assets/41730664/a75770db-1057-415f-b731-c1b783de7f95)
+
 
 ## API Endpoints
 
