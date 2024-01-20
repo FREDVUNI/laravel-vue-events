@@ -106,6 +106,7 @@
 
 <script>
 import { reactive } from "vue";
+import axios from "axios";
 
 export default {
   setup() {
@@ -130,8 +131,43 @@ export default {
       return true;
     };
 
-    const submitHandler = (event) => {
+    const submitHandler = async(event) => {
       event.preventDefault();
+      if (!isValid()) {
+        if (formData.name.trim() === "") {
+          errors.name = "Name is required";
+        }
+        if (formData.email.trim() === "") {
+          errors.email = "Email is required";
+        }
+        if (formData.role.trim() === "") {
+          errors.role = "Role is required";
+        }
+        if (formData.password.trim() === "") {
+          errors.password = "Password is required";
+        }
+        return;
+      }
+
+      try {
+        const response = await axios.post(
+          `${import.meta.env.VITE_API_URL}auth/signup`,
+          {
+            name: formData.name,
+            email: formData.email,
+            password: formData.password,
+            role: formData.role,
+          }
+        );
+
+        router.push("/users");
+      } catch (error) {
+        // console.error(error.response.data);
+        errors.name = error.response.data.errors.name[0];
+        errors.email = error.response.data.errors.email[0];
+        errors.password = error.response.data.errors.password[0];
+        errors.role = error.response.data.errors.role[0];
+      }
     };
 
     return {
