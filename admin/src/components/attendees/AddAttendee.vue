@@ -1,28 +1,20 @@
 <template>
-  <section class="container mx-auto py-8">
-    <div class="max-w-4xl mx-auto">
+  <div class="container max-w-md mx-auto py-8 h-full">
+    <div class="max-w-xl mx-auto bg-white rounded-lg overflow-hidden p-8">
       <h1 class="text-2xl font-semibold mb-4">Add Attendee</h1>
-      <form @submit="submitHandler">
-        <div class="flex flex-col mb-6 w-full">
-          <label for="name" class="text-[#5a7184] font-semibold block">
-            Name
-          </label>
+      <form @submit.prevent="submitHandler">
+        <!-- Name Field -->
+        <div class="mb-4">
+          <label for="name" class="block text-[#5a7184] font-semibold mb-2"
+            >Name</label
+          >
           <input
-            type="text"
+            type="name"
             id="name"
             v-model="formData.name"
             @input="clearError('name')"
+            class="w-full px-4 py-2 rounded-lg border placeholder-[#959ead] text-dark-hard"
             :class="{
-              'placeholder:text-[#959ead]': true,
-              'text-dark-hard': true,
-              'mt-3': true,
-              'rounded-lg': true,
-              'px-5': true,
-              'py-4': true,
-              'font-semibold': true,
-              block: true,
-              'outline-none': true,
-              border: true,
               'border-red-500': errors.name,
               'border-[#c3cad9]': !errors.name,
             }"
@@ -32,26 +24,19 @@
             {{ errors.name }}
           </p>
         </div>
-        <div class="flex flex-col mb-6 w-full">
-          <label for="email" class="text-[#5a7184] font-semibold block">
-            Email
-          </label>
+
+        <!-- Email Field -->
+        <div class="mb-4">
+          <label for="email" class="block text-[#5a7184] font-semibold mb-2"
+            >Email</label
+          >
           <input
             type="email"
             id="email"
             v-model="formData.email"
             @input="clearError('email')"
+            class="w-full px-4 py-2 rounded-lg border placeholder-[#959ead] text-dark-hard"
             :class="{
-              'placeholder:text-[#959ead]': true,
-              'text-dark-hard': true,
-              'mt-3': true,
-              'rounded-lg': true,
-              'px-5': true,
-              'py-4': true,
-              'font-semibold': true,
-              block: true,
-              'outline-none': true,
-              border: true,
               'border-red-500': errors.email,
               'border-[#c3cad9]': !errors.email,
             }"
@@ -61,26 +46,19 @@
             {{ errors.email }}
           </p>
         </div>
-        <div class="flex flex-col mb-6 w-full">
-          <label for="phone" class="text-[#5a7184] font-semibold block">
-            Phone
-          </label>
+
+        <!-- Phone Field -->
+        <div class="mb-4">
+          <label for="phone" class="block text-[#5a7184] font-semibold mb-2"
+            >Phone</label
+          >
           <input
             type="tel"
             id="phone"
             v-model="formData.phone"
             @input="clearError('phone')"
+            class="w-full px-4 py-2 rounded-lg border placeholder-[#959ead] text-dark-hard"
             :class="{
-              'placeholder:text-[#959ead]': true,
-              'text-dark-hard': true,
-              'mt-3': true,
-              'rounded-lg': true,
-              'px-5': true,
-              'py-4': true,
-              'font-semibold': true,
-              block: true,
-              'outline-none': true,
-              border: true,
               'border-red-500': errors.phone,
               'border-[#c3cad9]': !errors.phone,
             }"
@@ -90,29 +68,29 @@
             {{ errors.phone }}
           </p>
         </div>
-        <div class="w-full md:w-1/2">
-          <button
-            type="submit"
-            :disabled="!isValid || isLoading"
-            class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold text-lg py-4 px-8 rounded-lg my-6 disabled:opacity-70 disabled:cursor-not-allowed"
-          >
-            Register
-          </button>
-        </div>
+
+        <button
+          type="submit"
+          :disabled="!isValid || isLoading"
+          class="w-full bg-indigo-500 hover:bg-indigo-600 text-white font-bold text-lg py-2 px-4 rounded-lg disabled:opacity-70 disabled:cursor-not-allowed"
+        >
+          Add attendee
+        </button>
       </form>
     </div>
-  </section>
+  </div>
 </template>
 
 <script>
 import { reactive } from "vue";
+import axios from "axios";
 
 export default {
   setup() {
     const formData = reactive({
       name: "",
-      phone: "",
       email: "",
+      phone: "",
     });
 
     const errors = reactive({});
@@ -126,11 +104,50 @@ export default {
     };
 
     const isValid = () => {
-      return true;
+      return (
+        formData.name.trim() !== "" &&
+        formData.email.trim() !== "" &&
+        formData.phone.trim() !== ""
+      );
     };
 
-    const submitHandler = (event) => {
+    const submitHandler = async (event) => {
       event.preventDefault();
+
+      if (!isValid()) {
+        if (formData.name.trim() === "") {
+          errors.name = "Name is required";
+        }
+        if (formData.email.trim() === "") {
+          errors.email = "Email is required";
+        }
+        if (formData.phone.trim() === "") {
+          errors.phone = "Phone is required";
+        }
+        return;
+      }
+
+      // Make API call to update profile
+      try {
+        const response = await axios.patch(
+          `${import.meta.env.VITE_API_URL}/profile/update`,
+          {
+            name: formData.name,
+            email: formData.email,
+            phone: formData.phone,
+          }
+        );
+
+        // Handle successful response
+        console.log(response.data);
+      } catch (error) {
+        // Handle error
+        console.error(error.response.data);
+        // Set errors based on API response
+        errors.name = error.response.data.errors.name;
+        errors.email = error.response.data.errors.email;
+        errors.phone = error.response.data.errors.phone;
+      }
     };
 
     return {
