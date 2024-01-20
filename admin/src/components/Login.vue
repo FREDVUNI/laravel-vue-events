@@ -1,6 +1,6 @@
 <template>
   <section class="container mx-auto px-5 py-10">
-    <div class="w-full max-w-sm mx-auto">
+    <div class="max-w-lg mx-auto bg-white rounded-lg overflow-hidden p-8 shadow-lg">
       <h1 class="text-4xl font-bold text-center text-dark-hard mb-8">Login</h1>
       <form @submit="submitHandler">
         <div class="flex flex-col mb-6 w-full">
