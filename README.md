@@ -87,6 +87,9 @@ The landing page will be accessible at `http://localhost:8000`.
 
 ![image](https://github.com/FREDVUNI/laravel-vue-events/assets/41730664/13e9294c-362a-46d5-8897-b5ebfd1f27ae)
 
+![image](https://github.com/FREDVUNI/laravel-vue-events/assets/41730664/a75770db-1057-415f-b731-c1b783de7f95)
+
+
 ### Dashboard
 
 The dashboard is also built with Vue.js and Tailwind CSS. It allows for event management and attendee registration using the Laravel API.
