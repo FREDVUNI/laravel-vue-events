@@ -48,7 +48,7 @@ class User extends Authenticatable
         $user = self::where('email', $data['email'])->first();
         if (!$user || !Hash::check($data['password'], $user->password)) {
             throw ValidationException::withMessages([
-                'email' => ['Wrong email password combination.'],
+                'email' => 'Wrong email password combination.',
             ]);
         }
 
