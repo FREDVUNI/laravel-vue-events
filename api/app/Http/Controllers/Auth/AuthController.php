@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -58,6 +59,19 @@ class AuthController extends Controller
             }
         } catch (\Exception $e) {
             return response()->json(['message' => 'Error occurred during logout'], 500);
+        }
+    }
+    public function user(Request $request)
+    {
+        try{
+            return response()->json([
+                'id' => Auth::id(),
+                'name' => Auth::user()->name,
+                'email' => Auth::user()->email,
+            ]);
+        }
+        catch (\Exception $e) {
+            return response()->json(['message' => 'Error occurred.'], 500);
         }
     }
 }

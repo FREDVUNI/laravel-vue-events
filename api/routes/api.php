@@ -26,6 +26,7 @@ Route::group(["prefix" => "auth"], function () {
             return $request->user();
         });
         Route::post('logout', [AuthController::class, 'logout']);
+        Route::get('/user', [AuthController::class, 'user']);
     });
 });
 

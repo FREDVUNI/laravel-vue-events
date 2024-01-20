@@ -1,28 +1,20 @@
 <template>
-  <section class="container mx-auto px-5 py-10">
-    <div class="w-full max-w-lg mx-auto">
-      <h1 class="text-2xl font-semibold mb-4">Add Event</h1>
-      <form @submit="submitHandler">
-        <div class="flex flex-col mb-6 w-full">
-          <label for="event" class="text-[#5a7184] font-semibold block">
-            Event
-          </label>
+  <div class="container max-w-md mx-auto py-8 h-full">
+    <div class="max-w-xl mx-auto bg-white rounded-lg overflow-hidden p-8">
+      <h1 class="text-2xl font-semibold mb-4">Edit Event</h1>
+      <form @submit.prevent="submitHandler">
+        <!-- Event Field -->
+        <div class="mb-4">
+          <label for="event" class="block text-[#5a7184] font-semibold mb-2"
+            >Event</label
+          >
           <input
             type="text"
             id="event"
             v-model="formData.event"
             @input="clearError('event')"
+            class="w-full px-4 py-2 rounded-lg border placeholder-[#959ead] text-dark-hard"
             :class="{
-              'placeholder:text-[#959ead]': true,
-              'text-dark-hard': true,
-              'mt-3': true,
-              'rounded-lg': true,
-              'px-5': true,
-              'py-4': true,
-              'font-semibold': true,
-              block: true,
-              'outline-none': true,
-              border: true,
               'border-red-500': errors.event,
               'border-[#c3cad9]': !errors.event,
             }"
@@ -32,26 +24,19 @@
             {{ errors.event }}
           </p>
         </div>
-        <div class="flex flex-col mb-6 w-full">
-          <label for="location" class="text-[#5a7184] font-semibold block">
-            Location
-          </label>
+
+        <!-- Location Field -->
+        <div class="mb-4">
+          <label for="loaction" class="block text-[#5a7184] font-semibold mb-2"
+            >Location</label
+          >
           <input
             type="text"
             id="location"
             v-model="formData.location"
             @input="clearError('location')"
+            class="w-full px-4 py-2 rounded-lg border placeholder-[#959ead] text-dark-hard"
             :class="{
-              'placeholder:text-[#959ead]': true,
-              'text-dark-hard': true,
-              'mt-3': true,
-              'rounded-lg': true,
-              'px-5': true,
-              'py-4': true,
-              'font-semibold': true,
-              block: true,
-              'outline-none': true,
-              border: true,
               'border-red-500': errors.location,
               'border-[#c3cad9]': !errors.location,
             }"
@@ -61,16 +46,17 @@
             {{ errors.location }}
           </p>
         </div>
+
         <button
           type="submit"
           :disabled="!isValid || isLoading"
-          class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold text-lg py-4 px-8 w-full rounded-lg my-6 disabled:opacity-70 disabled:cursor-not-allowed"
+          class="w-full bg-indigo-500 hover:bg-indigo-600 text-white font-bold text-lg py-2 px-4 rounded-lg disabled:opacity-70 disabled:cursor-not-allowed"
         >
-          Register
+          create event
         </button>
       </form>
     </div>
-  </section>
+  </div>
 </template>
 
 <script>
