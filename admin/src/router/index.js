@@ -4,6 +4,7 @@ import ProfileView from "../views/users/ProfileView.vue";
 import LoginView from "../views/LoginView.vue";
 import RegisterView from "../views/users/RegisterView.vue";
 import EventView from "../views/events/EventView.vue";
+import UserView from "../views/users/UserView.vue";
 import AddEventView from "../views/events/AddEventView.vue";
 import EditEventView from "../views/events/EditEventView.vue";
 import AttendeeView from "../views/attendees/AttendeeView.vue";
@@ -72,6 +73,12 @@ const router = createRouter({
       path: "/event-management/edit/:id",
       name: "edit-event",
       component: EditEventView,
+      meta: { requiresAuth: true },
+    },
+    {
+      path: "/users",
+      name: "users",
+      component: UserView,
       meta: { requiresAuth: true },
     },
     {
