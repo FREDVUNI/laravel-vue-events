@@ -73,6 +73,15 @@
         </li>
         <li>
           <router-link
+            to="/users"
+            class="block py-2 px-4 hover:bg-gray-700 rounded transition duration-300"
+            :class="{ 'bg-gray-700': $route.path === '/users' }"
+          >
+            users
+          </router-link>
+        </li>
+        <li>
+          <router-link
             to="/profile"
             class="block py-2 px-4 hover:bg-gray-700 rounded transition duration-300"
             :class="{ 'bg-gray-700': $route.path === '/profile' }"
