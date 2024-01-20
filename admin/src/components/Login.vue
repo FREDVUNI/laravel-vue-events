@@ -1,6 +1,8 @@
 <template>
   <section class="container mx-auto px-5 py-12">
-    <div class="max-w-sm mx-auto bg-white rounded-lg overflow-hidden p-8 shadow-lg">
+    <div
+      class="max-w-sm mx-auto bg-white rounded-lg overflow-hidden p-8 shadow-lg"
+    >
       <h1 class="text-2xl font-bold text-center mb-8">Sign in</h1>
       <form @submit="submitHandler">
         <div class="flex flex-col mb-6 w-full">
@@ -43,10 +45,7 @@
             {{ errors.password }}
           </p>
         </div>
-        <router-link
-          to="/forgot-password"
-          class="text-sm text-primary"
-        >
+        <router-link to="/forgot-password" class="text-sm text-primary">
           Forgot password?
         </router-link>
         <button
@@ -54,7 +53,7 @@
           :disabled="!isValid || isLoading"
           class="w-full bg-indigo-500 hover:bg-indigo-600 mt-5 text-white font-bold text-lg py-2 px-4 rounded-lg disabled:opacity-70 disabled:cursor-not-allowed"
         >
-        Sign In
+          Sign In
         </button>
       </form>
     </div>
@@ -63,10 +62,15 @@
 
 <script>
 import { reactive } from "vue";
-import axios from "axios"; 
+import axios from "axios";
+import { useRouter } from "vue-router";
+import { useAuthStore } from "../stores/authStore";
 
 export default {
   setup() {
+    const router = useRouter();
+    const authStore = useAuthStore();
+
     const formData = reactive({
       email: "",
       password: "",
@@ -99,12 +103,17 @@ export default {
       }
 
       try {
-        const response = await axios.post(`${import.meta.env.VITE_API_URL}auth/signin`, {
-          email: formData.email,
-          password: formData.password,
-        });
+        const response = await axios.post(
+          `${import.meta.env.VITE_API_URL}auth/signin`,
+          {
+            email: formData.email,
+            password: formData.password,
+          }
+        );
 
         // console.log(response.data);
+        authStore.setAuthenticated(true);
+        router.push("/");
       } catch (error) {
         console.error(error.response.data);
         console.error(error.response.data);
