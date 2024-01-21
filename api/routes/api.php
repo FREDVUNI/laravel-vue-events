@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\AttendeeController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +28,17 @@ Route::group(["prefix" => "auth"], function () {
         });
         Route::post('logout', [AuthController::class, 'logout']);
         Route::get('/user', [AuthController::class, 'user']);
+    });
+});
+
+//users
+Route::group(["prefix" => "users"], function () {
+    Route::group(["middleware" => ["auth:sanctum"]], function () {
+        Route::get("/", [UserController::class, 'users']);
+        Route::get('show/{id}', [UserController::class, 'show']);
+        Route::get('edit/{id}', [UserController::class, 'edit']);
+        Route::patch('update/{id}', [UserController::class, 'update']);
+        Route::delete('delete/{id}', [UserController::class, 'delete']);
     });
 });
 
