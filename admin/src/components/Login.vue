@@ -110,12 +110,10 @@ export default {
             password: formData.password,
           }
         );
-
-        // console.log(response.data);
         authStore.setAuthenticated(true);
+        authStore.setToken(response.data.token);
         router.push("/");
       } catch (error) {
-        // console.error(error.response.data);
         errors.email = error.response.data.errors.email[0];
         errors.password = error.response.data.errors.password[0];
       }
