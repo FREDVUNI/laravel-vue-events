@@ -64,6 +64,36 @@
           </p>
         </div>
 
+        <!-- Role Field -->
+        <div class="mb-4">
+          <label
+            for="currentRole"
+            class="block text-[#5a7184] font-semibold mb-2"
+            >Current Role</label
+          >
+          <p>{{ formData.role }}</p>
+        </div>
+        <div class="mb-4">
+          <label for="role" class="block text-[#5a7184] font-semibold mb-2"
+            >Role</label
+          >
+          <select
+            id="role"
+            class="w-full px-4 py-2 rounded-lg border placeholder-[#959ead] text-dark-hard"
+            :class="{
+              'border-red-500': errors.role,
+              'border-[#c3cad9]': !errors.role,
+            }"
+          >
+            <option value>Change role</option>
+            <option value="admin">Admin</option>
+            <option value="user">User</option>
+          </select>
+          <p v-if="errors.role" class="text-red-500 text-xs mt-1">
+            {{ errors.role }}
+          </p>
+        </div>
+
         <!-- Password Field -->
         <div class="mb-4">
           <label for="password" class="block text-[#5a7184] font-semibold mb-2"
@@ -105,9 +135,13 @@ import { useAuthStore } from "../../stores/authStore";
 
 export default {
   setup() {
+    const token = useAuthStore().token;
+
     const formData = reactive({
+      id: "",
       name: "",
       email: "",
+      role: "",
       password: "",
     });
 
@@ -124,7 +158,8 @@ export default {
       return (
         formData.name.trim() !== "" &&
         formData.email.trim() !== "" &&
-        formData.password.trim() !== ""
+        formData.password.trim() !== "" &&
+        formData.role.trim() !== ""
       );
     };
 
@@ -138,50 +173,69 @@ export default {
         if (formData.email.trim() === "") {
           errors.email = "Email is required";
         }
+        if (formData.role.trim() === "") {
+          errors.role = "Role is required";
+        }
         if (formData.password.trim() === "") {
           errors.password = "Password is required";
         }
         return;
       }
-
-      // Make API call to update profile
       try {
+        const id = formData.id;
         const response = await axios.patch(
-          `${import.meta.env.VITE_API_URL}/profile/update`,
+          `${import.meta.env.VITE_API_URL}users/update/${id}`,
           {
             name: formData.name,
             email: formData.email,
             password: formData.password,
+            role: formData.role,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
           }
         );
-
-        // Handle successful response
-        console.log(response.data);
       } catch (error) {
-        // Handle error
-        console.error(error.response.data);
-        // Set errors based on API response
-        errors.name = error.response.data.errors.name;
-        errors.email = error.response.data.errors.email;
-        errors.password = error.response.data.errors.password;
+        if (
+          error.response &&
+          error.response.data &&
+          error.response.data.errors
+        ) {
+          errors.name = error.response.data.errors.name
+            ? error.response.data.errors.name[0]
+            : "";
+          errors.email = error.response.data.errors.email
+            ? error.response.data.errors.email[0]
+            : "";
+          errors.role = error.response.data.errors.role
+            ? error.response.data.errors.role[0]
+            : "";
+          errors.password = error.response.data.errors.password
+            ? error.response.data.errors.password[0]
+            : "";
+        }
       }
     };
 
     const handleDeleteImage = async () => {
-      // Make API call to delete image
       try {
-        const response = await axios.delete("/api/profile/delete-image");
-
-        // Handle successful response
+        const response = await axios.delete(
+          `${import.meta.env.VITE_API_URL}auth/profile/delete-image`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
         console.log(response.data);
       } catch (error) {
-        // Handle error
         console.error(error.response.data);
       }
     };
 
     const fetchUserData = async () => {
-      const token = useAuthStore().token;
       try {
         const response = await axios.get(
           `${import.meta.env.VITE_API_URL}auth/user`,
@@ -191,9 +245,10 @@ export default {
             },
           }
         );
-        console.log(response);
+        formData.id = response.data.id;
         formData.name = response.data.name;
         formData.email = response.data.email;
+        formData.role = response.data.role;
         formData.password = "";
       } catch (error) {
         console.error(error.response.data);
@@ -217,4 +272,3 @@ export default {
   },
 };
 </script>
-
