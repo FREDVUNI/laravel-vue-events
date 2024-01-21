@@ -63,14 +63,14 @@ class AuthController extends Controller
     }
     public function user(Request $request)
     {
-        try{
+        try {
             return response()->json([
                 'id' => Auth::id(),
                 'name' => Auth::user()->name,
                 'email' => Auth::user()->email,
+                'role' => Auth::user()->role,
             ]);
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             return response()->json(['message' => 'Error occurred.'], 500);
         }
     }
