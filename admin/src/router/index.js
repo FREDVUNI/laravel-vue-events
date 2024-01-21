@@ -17,15 +17,24 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
+      path: "/login",
+      name: "signin",
+      component: LoginView,
+      beforeEnter: (to, from, next) => {
+        const authStore = useAuthStore();
+        const isAuthenticated = authStore.isAuthenticated;
+        if (isAuthenticated) {
+          next({ name: "home" });
+        } else {
+          next();
+        }
+      },
+    },
+    {
       path: "/",
       name: "home",
       component: DashboardView,
       meta: { requiresAuth: true },
-    },
-    {
-      path: "/login",
-      name: "signin",
-      component: LoginView,
     },
     {
       path: "/profile",
@@ -90,10 +99,15 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  const isAuthenticated = useAuthStore().isAuthenticated;
-  console.log("isAuthenticated:", isAuthenticated);
-  console.log("to:", to);
-  if (to.matched.some((record) => record.meta.requiresAuth) && !isAuthenticated) {
+  const authStore = useAuthStore();
+  const isAuthenticated = authStore.isAuthenticated || localStorage.getItem("token");
+  if (to.name === "signin" && isAuthenticated) {
+    next({ name: "home" });
+  } else if (
+    to.name !== "signin" &&
+    to.matched.some((record) => record.meta.requiresAuth) &&
+    !isAuthenticated
+  ) {
     next({ name: "signin" });
   } else {
     next();
