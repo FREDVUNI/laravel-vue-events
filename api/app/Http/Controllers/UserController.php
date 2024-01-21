@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use \App\Models\User;
+use Illuminate\Validation\ValidationException;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -43,13 +44,15 @@ class UserController extends Controller
         try {
             $data = $request->validate([
                 'name' => 'required|min:4',
-                'email' => 'required|email|unique:users',
+                'email' => 'required|email|unique:users,email,' . $id,
                 'password' => 'required|min:6',
                 'role' => 'required'
             ]);
             $user = User::getUser($id);
             $update = User::updateUser($id, $data);
             return response()->json(['user' => $update], 200);
+        } catch (ValidationException $e) {
+            return response()->json(['errors' => $e->errors()], 400);
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
             return response()->json(['message' => 'user not found.'], 404);
         } catch (\Exception $e) {
