@@ -39,7 +39,7 @@ class AttendeeController extends Controller
             $attendee = Attendee::getAttendee($slug);
             return response()->json(['attendee' => $attendee], 200);
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-            return response()->json(['message' => 'Event not found.'], 404);
+            return response()->json(['message' => 'Attendee not found.'], 404);
         } catch (\Exception $e) {
             return response()->json(['message' => 'Something went wrong.'], 500);
         }
@@ -50,7 +50,7 @@ class AttendeeController extends Controller
             $attendee = Attendee::editAttendee($slug);
             return response()->json(['attendee' => $attendee], 200);
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-            return response()->json(['message' => 'Event not found.'], 404);
+            return response()->json(['message' => 'Attendee not found.'], 404);
         } catch (\Exception $e) {
             return response()->json(['message' => 'Something went wrong.'], 500);
         }
@@ -68,7 +68,7 @@ class AttendeeController extends Controller
             $update = Attendee::updateAttendee($data, $slug);
             return response()->json(['attendee' => $update], 200);
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-            return response()->json(['message' => 'Event not found.'], 404);
+            return response()->json(['message' => 'Attendee not found.'], 404);
         } catch (\Exception $e) {
             return response()->json(['message' => 'Something went wrong.'], 500);
         }
@@ -79,7 +79,7 @@ class AttendeeController extends Controller
             Attendee::deleteAttendee($slug);
             return response()->json(["message" => "Attendee has been deleted."]);
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-            return response()->json(['message' => 'Event not found.'], 404);
+            return response()->json(['message' => 'Attendee not found.'], 404);
         } catch (\Exception $e) {
             return response()->json(['message' => 'Something went wrong.'], 500);
         }
