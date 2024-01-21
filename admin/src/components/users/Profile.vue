@@ -99,8 +99,9 @@
 </template>
 
 <script>
-import { reactive } from "vue";
+import { reactive, onMounted } from "vue";
 import axios from "axios";
+import { useAuthStore } from "../../stores/authStore";
 
 export default {
   setup() {
@@ -111,7 +112,6 @@ export default {
     });
 
     const errors = reactive({});
-
     const isLoading = false;
 
     const clearError = (field) => {
@@ -179,18 +179,30 @@ export default {
         console.error(error.response.data);
       }
     };
-    const fetchUserData = async () => {
-      try {
-        const response = await axios.get("/api/user");
 
-        // Update user data with the response
-        user.id = response.data.id;
-        user.name = response.data.name;
-        user.email = response.data.email;
+    const fetchUserData = async () => {
+      const token = useAuthStore().token;
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_API_URL}auth/user`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        console.log(response);
+        formData.name = response.data.name;
+        formData.email = response.data.email;
+        formData.password = "";
       } catch (error) {
         console.error(error.response.data);
       }
     };
+
+    onMounted(() => {
+      fetchUserData();
+    });
 
     return {
       formData,
@@ -205,3 +217,4 @@ export default {
   },
 };
 </script>
+
