@@ -33,7 +33,10 @@ class User extends Authenticatable
      * @var array<int, string>
      */
 
-
+    public static function FetchUsers()
+    {
+        return self::all();
+    }
     public static function createUser(array $data)
     {
         return self::create([
@@ -54,6 +57,37 @@ class User extends Authenticatable
 
         return $user;
     }
+
+    public static function getUser($id)
+    {
+        return self::where('id', $id)->firstOrFail();
+    }
+    public static function editUser($id)
+    {
+        return self::where('id', $id)->firstOrFail();
+    }
+    public static function updateUser($id, array $data)
+    {
+        $user = self::where('id', $id)->firstOrFail();
+
+        if (!$user) {
+            return $user;
+        }
+        $user->update([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+            'role' => $data['role'],
+        ]);
+
+        return $user;
+    }
+    public static function deleteUser($id)
+    {
+        $user = self::where('id', $id)->firstOrFail();
+        $user->delete();
+    }
+
     protected $hidden = [
         'password',
         'remem
