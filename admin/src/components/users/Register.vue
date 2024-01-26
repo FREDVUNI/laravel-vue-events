@@ -107,9 +107,13 @@
 <script>
 import { reactive } from "vue";
 import axios from "axios";
+import { toast } from "vue3-toastify";
+import { useRouter } from "vue-router";
+import { url } from "../api";
 
 export default {
   setup() {
+    const router = useRouter();
     const formData = reactive({
       name: "",
       email: "",
@@ -131,7 +135,7 @@ export default {
       return true;
     };
 
-    const submitHandler = async(event) => {
+    const submitHandler = async (event) => {
       event.preventDefault();
       if (!isValid()) {
         if (formData.name.trim() === "") {
@@ -150,23 +154,38 @@ export default {
       }
 
       try {
-        const response = await axios.post(
-          `${import.meta.env.VITE_API_URL}auth/signup`,
-          {
-            name: formData.name,
-            email: formData.email,
-            password: formData.password,
-            role: formData.role,
-          }
-        );
+        const response = await axios.post(`${url}auth/signup`, {
+          name: formData.name,
+          email: formData.email,
+          password: formData.password,
+          role: formData.role,
+        });
 
-        router.push("/users");
+        await router.push("/users");
+        toast.success("user has been created.", {
+          position: "top-right",
+          timeout: 3000,
+        });
       } catch (error) {
         // console.error(error.response.data);
-        errors.name = error.response.data.errors.name[0];
-        errors.email = error.response.data.errors.email[0];
-        errors.password = error.response.data.errors.password[0];
-        errors.role = error.response.data.errors.role[0];
+        if (
+          error.response &&
+          error.response.data &&
+          error.response.data.errors
+        ) {
+          errors.name = error.response.data.errors.name
+            ? error.response.data.errors.name[0]
+            : "";
+          errors.email = error.response.data.errors.email
+            ? error.response.data.errors.email[0]
+            : "";
+          errors.password = error.response.data.errors.password
+            ? error.response.data.errors.password[0]
+            : "";
+          errors.role = error.response.data.errors.role
+            ? error.response.data.errors.role[0]
+            : "";
+        }
       }
     };
 
