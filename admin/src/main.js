@@ -1,5 +1,6 @@
 import "./assets/main.css";
 import "./index.css";
+import "vue3-toastify/dist/index.css";
 
 import { createApp } from "vue";
 import { createPinia } from "pinia";
@@ -12,8 +13,7 @@ const pinia = createPinia();
 const app = createApp(App);
 
 app.use(pinia);
-app.component("useAuthStore", useAuthStore);
 app.use(router);
 
+app.component("useAuthStore", useAuthStore);
 app.mount("#app");
-
