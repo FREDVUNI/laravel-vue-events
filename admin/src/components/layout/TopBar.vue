@@ -1,7 +1,10 @@
 <template>
   <header class="bg-white shadow-sm">
     <div class="flex items-center justify-end px-5 py-2">
-      <div class="flex items-center hover:cursor-pointer" @click="toggleDropdown">
+      <div
+        class="flex items-center hover:cursor-pointer"
+        @click="toggleDropdown"
+      >
         <img
           src="https://www.f6s.com/content-resource/profiles/3610847_th2.jpg"
           alt="Profile"
@@ -32,8 +35,10 @@
             v-if="isDropdownOpen"
             class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1"
           >
-            <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
-              >Settings</a
+            <router-link
+              to="/settings"
+              class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+              >Settings</router-link
             >
             <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
               >Logout</a
