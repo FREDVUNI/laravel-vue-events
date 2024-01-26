@@ -65,6 +65,7 @@ import { reactive } from "vue";
 import axios from "axios";
 import { useRouter } from "vue-router";
 import { useAuthStore } from "../stores/authStore";
+import { url } from "./api";
 
 export default {
   setup() {
@@ -103,13 +104,10 @@ export default {
       }
 
       try {
-        const response = await axios.post(
-          `${import.meta.env.VITE_API_URL}auth/signin`,
-          {
-            email: formData.email,
-            password: formData.password,
-          }
-        );
+        const response = await axios.post(`${url}auth/signin`, {
+          email: formData.email,
+          password: formData.password,
+        });
         authStore.setAuthenticated(true);
         authStore.setToken(response.data.token);
         router.push("/");
