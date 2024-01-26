@@ -131,13 +131,12 @@
 <script>
 import { reactive, onMounted } from "vue";
 import axios from "axios";
-import { useAuthStore } from "../../stores/authStore";
 import { useRouter } from "vue-router";
 import { toast } from "vue3-toastify";
+import { url, setHeaders } from "../api";
 
 export default {
   setup() {
-    const token = useAuthStore().token;
     const router = useRouter();
     const formData = reactive({
       id: "",
@@ -186,18 +185,14 @@ export default {
       try {
         const id = formData.id;
         const response = await axios.patch(
-          `${import.meta.env.VITE_API_URL}users/update/${id}`,
+          `${url}users/update/${id}`,
           {
             name: formData.name,
             email: formData.email,
             password: formData.password,
             role: formData.role,
           },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
+          setHeaders()
         );
         await router.push("/users");
         toast.success("profile has been updated.", {
@@ -229,12 +224,8 @@ export default {
     const handleDeleteImage = async () => {
       try {
         const response = await axios.delete(
-          `${import.meta.env.VITE_API_URL}auth/profile/delete-image`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
+          `${url}auth/profile/delete-image`,
+          setHeaders()
         );
         console.log(response.data);
       } catch (error) {
@@ -244,14 +235,7 @@ export default {
 
     const fetchUserData = async () => {
       try {
-        const response = await axios.get(
-          `${import.meta.env.VITE_API_URL}auth/user`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const response = await axios.get(`${url}auth/user`, setHeaders());
         formData.id = response.data.id;
         formData.name = response.data.name;
         formData.email = response.data.email;
