@@ -36,9 +36,34 @@
             class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1"
           >
             <router-link
+              to="/"
+              class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+              >Dashboard</router-link
+            >
+            <router-link
+              to="/users"
+              class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+              >Users</router-link
+            >
+            <router-link
+              to="/attendee-management"
+              class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+              >Attendees</router-link
+            >
+            <router-link
+              to="/event-management"
+              class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+              >Events</router-link
+            >
+            <router-link
               to="/settings"
               class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
               >Settings</router-link
+            >
+            <router-link
+              to="/profile"
+              class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+              >Profile</router-link
             >
             <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200"
               >Logout</a
