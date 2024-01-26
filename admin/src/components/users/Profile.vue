@@ -132,11 +132,13 @@
 import { reactive, onMounted } from "vue";
 import axios from "axios";
 import { useAuthStore } from "../../stores/authStore";
+import { useRouter } from "vue-router";
+import { toast } from "vue3-toastify";
 
 export default {
   setup() {
     const token = useAuthStore().token;
-
+    const router = useRouter();
     const formData = reactive({
       id: "",
       name: "",
@@ -197,6 +199,11 @@ export default {
             },
           }
         );
+        await router.push("/users");
+        toast.success("profile has been updated.", {
+          position: "top-right",
+          timeout: 3000,
+        });
       } catch (error) {
         if (
           error.response &&
