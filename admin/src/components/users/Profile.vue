@@ -185,7 +185,7 @@ export default {
       try {
         const id = formData.id;
         const response = await axios.patch(
-          `${url}users/update/${id}`,
+          `${url}/users/update/${id}`,
           {
             name: formData.name,
             email: formData.email,
@@ -224,7 +224,7 @@ export default {
     const handleDeleteImage = async () => {
       try {
         const response = await axios.delete(
-          `${url}auth/profile/delete-image`,
+          `${url}/auth/profile/delete-image`,
           setHeaders()
         );
         console.log(response.data);
@@ -235,7 +235,7 @@ export default {
 
     const fetchUserData = async () => {
       try {
-        const response = await axios.get(`${url}auth/user`, setHeaders());
+        const response = await axios.get(`${url}/auth/user`, setHeaders());
         formData.id = response.data.id;
         formData.name = response.data.name;
         formData.email = response.data.email;

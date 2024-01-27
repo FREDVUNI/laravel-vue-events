@@ -154,7 +154,7 @@ export default {
       }
 
       try {
-        const response = await axios.post(`${url}auth/signup`, {
+        const response = await axios.post(`${url}/auth/signup`, {
           name: formData.name,
           email: formData.email,
           password: formData.password,
