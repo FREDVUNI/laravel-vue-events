@@ -36,16 +36,17 @@
             >
               <template v-slot:headers="{ headers }">
                 <tr>
-                  <th v-for="header in headers" :key="header.value">
-                    <template>
-                      {{ header.text }}
-                    </template>
-                  </th>
+                  <th v-if="!isSmallScreen">#</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th v-if="!isSmallScreen">Role</th>
+                  <th></th>
                 </tr>
               </template>
-              <template v-slot:item="{ item }">
+
+              <template v-slot:item="{ item, index }">
                 <tr>
-                  <td v-if="!isSmallScreen">{{ item.id }}</td>
+                  <td v-if="!isSmallScreen">{{ index + 1 }}</td>
                   <td>{{ item.name }}</td>
                   <td>{{ item.email }}</td>
                   <td v-if="!isSmallScreen">{{ item.role }}</td>
