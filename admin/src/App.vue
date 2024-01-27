@@ -28,6 +28,6 @@ import SideBar from "./components/layout/SideBar.vue";
 import TopBar from "./components/layout/TopBar.vue";
 </script>
 
-<style scoped>
-/* Add any additional scoped styles if needed */
+<style>
+@import "vuetify/dist/vuetify.css";
 </style>
