@@ -1,76 +1,142 @@
 <template>
   <section class="container mx-auto px-5 py-10">
-    <div class="flex justify-between items-center mb-4">
-      <h1 class="text-2xl font-semibold mb-4">Events</h1>
-      <router-link
-        to="/event-management/create"
-        class="bg-blue-500 text-white px-3 py-1 rounded"
-        >Add</router-link
-      >
-    </div>
-    <div class="max-w-full overflow-x-auto">
-      <table
-        class="w-full sm:max-w-sm md:max-w-3xl lg:max-w-4xl xl:max-w-5xl text-left text-sm whitespace-nowrap"
-      >
-        <thead class="uppercase tracking-wider border-b">
-          <tr>
-            <th scope="col" class="px-6 py-4">Event</th>
-            <th scope="col" class="px-6 py-4">Date</th>
-            <th scope="col" class="px-6 py-4">Location</th>
-            <th scope="col" class="px-6 py-4">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr
-            class="border-b dark:border-neutral-600 hover:bg-neutral-100 dark:hover:bg-neutral-600"
-            v-for="(event, index) in eventsData"
-            :key="index"
-          >
-            <td class="px-6 py-4">{{ event.name }}</td>
-            <td class="px-6 py-4">{{ event.date }}</td>
-            <td class="px-6 py-4">{{ event.location }}</td>
-            <td class="px-6 py-4">
-              <a class="text-green-500 hover:text-green-700" href="#"> Edit </a>
-              <a class="text-red-500 hover:text-red-700" href="#"> Delete </a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <v-container>
+      <v-row>
+        <v-col>
+          <div class="flex justify-between items-center mb-4">
+            <h1 class="text-2xl font-semibold mb-4">Events</h1>
+            <router-link
+              to="/event-management/create"
+              class="bg-blue-500 text-white px-3 py-1 rounded"
+              >Add</router-link
+            >
+          </div>
+          <v-card flat>
+            <v-card-title class="d-flex align-center">
+              <div>
+                <v-text-field
+                  v-model="search"
+                  prepend-inner-icon="mdi-magnify"
+                  density="compact"
+                  label="Search"
+                  single-line
+                  flat
+                  hide-details
+                  variant="solo-filled"
+                  class="search-input"
+                ></v-text-field>
+              </div>
+            </v-card-title>
+            <v-divider></v-divider>
+
+            <v-data-table
+              v-model:search="search"
+              :items="eventsData"
+              :items-per-page="5"
+            >
+              <template v-slot:headers="{ headers }">
+                <tr>
+                  <th v-if="!isSmallScreen">#</th>
+                  <th>Title</th>
+                  <th>Description</th>
+                  <th v-if="!isSmallScreen">Start Date</th>
+                  <th v-if="!isSmallScreen">End Date</th>
+                  <th></th>
+                </tr>
+              </template>
+
+              <template v-slot:item="{ item, index }">
+                <tr>
+                  <td v-if="!isSmallScreen">{{ index + 1 }}</td>
+                  <td>{{ item.title }}</td>
+                  <td>{{ shortenDetails(item.description, 10) }}</td>
+                  <td v-if="!isSmallScreen">
+                    {{ formatDateTime(item.start_date) }}
+                  </td>
+                  <td v-if="!isSmallScreen">
+                    {{ formatDateTime(item.end_date) }}
+                  </td>
+                  <td>
+                    <v-icon @click="editEvent(item)" class="mx-2"
+                      >mdi-pencil</v-icon
+                    >
+                    <v-icon @click="deleteEvent(item.id)" class="mx-2"
+                      >mdi-delete</v-icon
+                    >
+                  </td>
+                </tr>
+              </template>
+            </v-data-table>
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-container>
   </section>
 </template>
+
 <script>
+import { ref, onMounted } from "vue";
+import axios from "axios";
+import { url, setHeaders } from "../api";
+import { shortenDetails, formatDateTime } from "../../utils";
+
 export default {
-  data() {
+  setup() {
+    const eventsData = ref([]);
+    const search = ref("");
+    const isSmallScreen = ref(false);
+
+    const headers = [
+      { text: "#", value: "id" },
+      { text: "Event", value: "event" },
+      { text: "Date", value: "date" },
+      { text: "Description", value: "description" },
+      { text: "Actions", value: "actions" },
+    ];
+
+    const fetchEventsData = async () => {
+      try {
+        const response = await axios.get(`${url}/events`, setHeaders());
+        eventsData.value = response.data.events;
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    const editEvent = (event) => {
+      console.log("Edit event:", event);
+    };
+
+    const deleteEvent = (eventId) => {
+      console.log("Delete event with ID:", eventId);
+    };
+
+    const checkScreenSize = () => {
+      isSmallScreen.value = window.innerWidth < 600;
+    };
+
+    onMounted(() => {
+      fetchEventsData();
+      checkScreenSize();
+      window.addEventListener("resize", checkScreenSize);
+    });
+
     return {
-      eventsData: [
-        {
-          name: "Event A",
-          date: "2023-01-01",
-          location: "Venue X",
-        },
-        {
-          name: "Event B",
-          date: "2023-02-02",
-          location: "Venue Y",
-        },
-        {
-          name: "Event C",
-          date: "2023-03-03",
-          location: "Venue Z",
-        },
-        {
-          name: "Event D",
-          date: "2023-04-04",
-          location: "Venue W",
-        },
-        {
-          name: "Event E",
-          date: "2023-05-05",
-          location: "Venue P",
-        },
-      ],
+      eventsData,
+      search,
+      headers,
+      editEvent,
+      deleteEvent,
+      isSmallScreen,
+      shortenDetails,
+      formatDateTime,
     };
   },
 };
 </script>
+
+<style>
+.search-input {
+  width: 300px;
+}
+</style>
