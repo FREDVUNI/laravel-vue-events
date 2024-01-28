@@ -127,7 +127,8 @@ import VueDatePicker from "@vuepic/vue-datepicker";
 import axios from "axios";
 import { setHeaders, url } from "../api";
 import { useRouter } from "vue-router";
-import { formatDate, slugify } from "../../utils";
+import { formatDate } from "../../utils";
+import { toast } from "vue3-toastify";
 
 export default {
   setup() {
@@ -199,7 +200,7 @@ export default {
         data.append("image", formData.image);
         data.append("start_date", formData.start_date);
         data.append("end_date", formData.end_date);
-        data.append("slug", slugify(formData.title));
+        data.append("slug", formData.title);
 
         const response = await axios.post(`${url}/events`, data, setHeaders());
         await router.push("/event-management");
