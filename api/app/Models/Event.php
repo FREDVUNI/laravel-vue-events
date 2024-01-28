@@ -58,4 +58,8 @@ class Event extends Model
         $event = self::where('slug', $slug)->firstOrFail();
         $event->delete();
     }
+    public function attendees()
+    {
+        return $this->belongsToMany(Attendee::class);
+    }
 }
