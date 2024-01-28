@@ -4,23 +4,23 @@
       <h1 class="text-2xl font-semibold mb-4">Add Event</h1>
       <form @submit.prevent="submitHandler">
         <div class="mb-4">
-          <label for="event" class="block text-[#5a7184] font-semibold mb-2"
+          <label for="title" class="block text-[#5a7184] font-semibold mb-2"
             >Event</label
           >
           <input
             type="text"
-            id="event"
+            id="title"
             v-model="formData.title"
-            @input="clearError('event')"
+            @input="clearError('title')"
             class="w-full px-4 py-2 rounded-lg border placeholder-[#959ead] text-dark-hard"
             :class="{
-              'border-red-500': errors.event,
-              'border-[#c3cad9]': !errors.event,
+              'border-red-500': errors.title,
+              'border-[#c3cad9]': !errors.title,
             }"
             placeholder="Enter event title"
           />
-          <p v-if="errors.event" class="text-red-500 text-xs mt-1">
-            {{ errors.event }}
+          <p v-if="errors.title" class="text-red-500 text-xs mt-1">
+            {{ errors.title }}
           </p>
         </div>
 
@@ -56,6 +56,7 @@
             ref="imageInput"
             @change="handleImageUpload"
             class="hidden"
+            accept="image/*"
           />
           <div class="flex items-center">
             <label for="image" class="cursor-pointer text-[#5a7184] py-2">
@@ -63,6 +64,12 @@
             </label>
             <span class="ml-2">{{ formData.image.name }}</span>
           </div>
+          <img
+            v-if="imagePreview"
+            :src="imagePreview"
+            alt="Image Preview"
+            class="mt-2 rounded-md"
+          />
           <p v-if="errors.image" class="text-red-500 text-xs mt-1">
             {{ errors.image }}
           </p>
@@ -77,6 +84,7 @@
           >
           <VueDatePicker
             v-model="formData.start_date"
+            :config="{ format: 'YYYY-MM-DD H:i:s', enableTime: true }"
             @input="clearError('start_date')"
             class="w-full px-4 py-2 rounded-lg border placeholder-[#959ead] text-dark-hard"
           />
@@ -92,6 +100,7 @@
           >
           <VueDatePicker
             v-model="formData.end_date"
+            :config="{ format: 'YYYY-MM-DD H:i:s', enableTime: true }"
             @input="clearError('end_date')"
             class="w-full px-4 py-2 rounded-lg border placeholder-[#959ead] text-dark-hard"
           />
@@ -113,17 +122,22 @@
 </template>
 
 <script>
-import { reactive } from "vue";
+import { reactive, computed } from "vue";
 import VueDatePicker from "@vuepic/vue-datepicker";
+import axios from "axios";
+import { setHeaders, url } from "../api";
+import { useRouter } from "vue-router";
+import { formatDate, slugify } from "../../utils";
 
 export default {
   setup() {
+    const router = useRouter();
     const formData = reactive({
       title: "",
       description: "",
       image: "",
-      start_date: null,
-      end_date: null,
+      start_date: formatDate(new Date()),
+      end_date: formatDate(new Date()),
     });
 
     const errors = reactive({});
@@ -140,15 +154,109 @@ export default {
       return true;
     };
 
-    const submitHandler = (event) => {
+    const submitHandler = async (event) => {
       event.preventDefault();
+
+      if (!isValid()) {
+        if (formData.title.trim() === "") {
+          errors.title = "Event title is required";
+        }
+        if (formData.description.trim() === "") {
+          errors.description = "Description is required";
+        }
+        if (formData.image.trim() === "") {
+          errors.image = "Image / Flier is required";
+        }
+        const currentDateTime = new Date();
+
+        if (formData.start_date.trim() === "") {
+          errors.start_date = "Start date / time is required";
+        } else {
+          const startDate = new Date(formData.start_date);
+
+          if (startDate <= currentDateTime) {
+            errors.start_date = "Start date / time must be in the future";
+          }
+        }
+
+        if (formData.end_date.trim() === "") {
+          errors.end_date = "End date / time is required";
+        } else {
+          const endDate = new Date(formData.end_date);
+
+          if (endDate <= currentDateTime) {
+            errors.end_date = "End date / time must be in the future";
+          }
+        }
+
+        return;
+      }
+
+      try {
+        const data = new FormData();
+        data.append("title", formData.title);
+        data.append("description", formData.description);
+        data.append("image", formData.image);
+        data.append("start_date", formData.start_date);
+        data.append("end_date", formData.end_date);
+        data.append("slug", slugify(formData.title));
+
+        const response = await axios.post(`${url}/events`, data, setHeaders());
+        await router.push("/event-management");
+        toast.success("Event has been created.", {
+          position: "top-right",
+          timeout: 3000,
+        });
+      } catch (error) {
+        if (
+          error.response &&
+          error.response.data &&
+          error.response.data.errors
+        ) {
+          errors.title = error.response.data.errors.title
+            ? error.response.data.errors.title[0]
+            : "";
+          errors.description = error.response.data.errors.description
+            ? error.response.data.errors.description[0]
+            : "";
+          errors.image = error.response.data.errors.image
+            ? error.response.data.errors.image[0]
+            : "";
+          errors.start_date = error.response.data.errors.start_date
+            ? error.response.data.errors.start_date[0]
+            : "";
+          errors.end_date = error.response.data.errors.end_date
+            ? error.response.data.errors.end_date[0]
+            : "";
+        }
+      }
     };
 
     const handleImageUpload = (event) => {
       const file = event.target.files[0];
+
+      if (!file) {
+        formData.image = null;
+        formData.imagePreview = null;
+        return;
+      }
+
+      if (!file.type.startsWith("image/")) {
+        clearError("image");
+        errors.image = "Only image files (gifs, png, jpg, jpeg) are allowed.";
+        return;
+      }
+
       formData.image = file;
       clearError("image");
     };
+
+    const imagePreview = computed(() => {
+      if (formData.image instanceof File) {
+        return URL.createObjectURL(formData.image);
+      }
+      return null;
+    });
 
     return {
       formData,
@@ -159,6 +267,7 @@ export default {
       submitHandler,
       VueDatePicker,
       handleImageUpload,
+      imagePreview,
     };
   },
 };
