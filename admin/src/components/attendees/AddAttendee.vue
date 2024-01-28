@@ -69,6 +69,36 @@
           </p>
         </div>
 
+        <!-- Event Field -->
+        <div class="mb-4">
+          <label for="event" class="block text-[#5a7184] font-semibold mb-2"
+            >Event</label
+          >
+          <select
+            id="event"
+            v-model="formData.event"
+            @input="clearError('event')"
+            class="w-full px-4 py-2 rounded-lg border placeholder-[#959ead] text-dark-hard"
+            :class="{
+              'border-red-500': errors.event,
+              'border-[#c3cad9]': !errors.event,
+            }"
+            placeholder="Choose event"
+          >
+            <option disabled value="">Choose event</option>
+            <option
+              v-for="event in formData.event"
+              :key="event.id"
+              :value="event.id"
+            >
+              {{ event.title }}
+            </option>
+          </select>
+          <p v-if="errors.event" class="text-red-500 text-xs mt-1">
+            {{ errors.event }}
+          </p>
+        </div>
+
         <button
           type="submit"
           :disabled="!isValid || isLoading"
@@ -82,15 +112,20 @@
 </template>
 
 <script>
-import { reactive } from "vue";
+import { reactive, ref, onMounted } from "vue";
 import axios from "axios";
+import { setHeaders, url } from "../api";
+import { useRouter } from "vue-router";
+import { toast } from "vue3-toastify";
 
 export default {
   setup() {
+    const router = useRouter();
     const formData = reactive({
       name: "",
       email: "",
       phone: "",
+      event: "",
     });
 
     const errors = reactive({});
@@ -107,7 +142,8 @@ export default {
       return (
         formData.name.trim() !== "" &&
         formData.email.trim() !== "" &&
-        formData.phone.trim() !== ""
+        formData.phone.trim() !== "" &&
+        formData.event.trim() != ""
       );
     };
 
@@ -124,31 +160,62 @@ export default {
         if (formData.phone.trim() === "") {
           errors.phone = "Phone is required";
         }
+        if (formData.event.trim() === "") {
+          errors.event = "Event is required";
+        }
         return;
       }
 
-      // Make API call to update profile
       try {
-        const response = await axios.patch(
-          `${import.meta.env.VITE_API_URL}/profile/update`,
+        const response = await axios.post(
+          `${url}/attendees`,
           {
             name: formData.name,
             email: formData.email,
             phone: formData.phone,
-          }
+            event_id: formData.event,
+          },
+          setHeaders()
         );
-
-        // Handle successful response
-        console.log(response.data);
+        await router.push("/attendee-management");
+        toast.success("Event has been created.", {
+          position: "top-right",
+          timeout: 3000,
+        });
       } catch (error) {
-        // Handle error
-        console.error(error.response.data);
-        // Set errors based on API response
-        errors.name = error.response.data.errors.name;
-        errors.email = error.response.data.errors.email;
-        errors.phone = error.response.data.errors.phone;
+        if (
+          error.response &&
+          error.response.data &&
+          error.response.data.errors
+        ) {
+          errors.name = error.response.data.errors.name
+            ? error.response.data.errors.name[0]
+            : "";
+          errors.phone = error.response.data.errors.phone
+            ? error.response.data.errors.phone[0]
+            : "";
+          errors.email = error.response.data.errors.email
+            ? error.response.data.errors.email[0]
+            : "";
+          errors.event = error.response.data.errors.event
+            ? error.response.data.errors.event[0]
+            : "";
+        }
       }
     };
+
+    const fetchEventsData = async () => {
+      try {
+        const response = await axios.get(`${url}/events`, setHeaders());
+        formData.event = response.data.events;
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    onMounted(() => {
+      fetchEventsData();
+    });
 
     return {
       formData,
