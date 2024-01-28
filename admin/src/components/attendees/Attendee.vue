@@ -81,7 +81,7 @@ export default {
 
     const headers = [
       { text: "#", value: "id" },
-      { text: "attendee", value: "attendee" },
+      { text: "Attendee", value: "attendee" },
       { text: "Date", value: "date" },
       { text: "Location", value: "location" },
       { text: "Actions", value: "actions" },
@@ -111,7 +111,7 @@ export default {
     onMounted(() => {
       fetchattendeesData();
       checkScreenSize();
-      window.addattendeeListener("resize", checkScreenSize);
+      window.addEventListener("resize", checkScreenSize);
     });
 
     return {
