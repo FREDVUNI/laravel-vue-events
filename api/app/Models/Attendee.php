@@ -50,6 +50,7 @@ class Attendee extends Model
             'phone' => $data['phone'],
             'email_id' => $data['email_id'],
             'slug' => Str::slug($data['name'] . " " . $data['email']),
+            'event_id' => $data['event_id'],
         ]);
         return $attendee;
     }
