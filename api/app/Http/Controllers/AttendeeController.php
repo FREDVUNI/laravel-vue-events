@@ -25,10 +25,10 @@ class AttendeeController extends Controller
                 'phone' => 'required|min:10|max:14|unique:attendees',
                 'email' => 'required|email|unique:attendees',
                 'slug' => 'required',
-                'eventId' => 'required|exists:events,id',
+                'event_id' => 'required|exists:events,id',
             ]);
             $attendee = Attendee::createAttendee($data);
-            $event = Event::findOrFail($data['eventId']);
+            $event = Event::findOrFail($data['event_id']);
             $event->attendees()->attach($attendee->id);
             return response()->json(['attendees' => $attendee], 201);
         } catch (\Illuminate\Validation\ValidationException $e) {
@@ -67,7 +67,7 @@ class AttendeeController extends Controller
                 'phone' => 'required|min:10|max:14',
                 'email' => 'required|email',
                 'slug' => 'required',
-                'eventId' => 'required|exists:events,id',
+                'event_id' => 'required|exists:events,id',
             ]);
             $attendee = Attendee::getAttendee($slug);
 
@@ -78,7 +78,7 @@ class AttendeeController extends Controller
 
             $update = Attendee::updateAttendee($data, $slug);
 
-            $newEvent = Event::findOrFail($data['eventId']);
+            $newEvent = Event::findOrFail($data['event_id']);
             $newEvent->attendees()->attach($attendee->id);
 
             return response()->json(['attendee' => $update], 200);
