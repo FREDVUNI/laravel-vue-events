@@ -71,17 +71,17 @@
 
         <!-- Event Field -->
         <div class="mb-4">
-          <label for="event" class="block text-[#5a7184] font-semibold mb-2"
+          <label for="event_id" class="block text-[#5a7184] font-semibold mb-2"
             >Event</label
           >
           <select
-            id="event"
-            v-model="formData.event"
+            id="event_id"
+            v-model="formData.event_id"
             @input="clearError('event')"
             class="w-full px-4 py-2 rounded-lg border placeholder-[#959ead] text-dark-hard"
             :class="{
-              'border-red-500': errors.event,
-              'border-[#c3cad9]': !errors.event,
+              'border-red-500': errors.event_id,
+              'border-[#c3cad9]': !errors.event_id,
             }"
             placeholder="Choose event"
           >
@@ -94,8 +94,8 @@
               {{ event.title }}
             </option>
           </select>
-          <p v-if="errors.event" class="text-red-500 text-xs mt-1">
-            {{ errors.event }}
+          <p v-if="errors.event_id" class="text-red-500 text-xs mt-1">
+            {{ errors.event_id }}
           </p>
         </div>
 
@@ -125,7 +125,9 @@ export default {
       name: "",
       email: "",
       phone: "",
+      event_id: null,
       event: "",
+      slug: "",
     });
 
     const errors = reactive({});
@@ -143,7 +145,8 @@ export default {
         formData.name.trim() !== "" &&
         formData.email.trim() !== "" &&
         formData.phone.trim() !== "" &&
-        formData.event.trim() != ""
+        formData.event_id !== null &&
+        formData.event_id !== ""
       );
     };
 
@@ -160,8 +163,8 @@ export default {
         if (formData.phone.trim() === "") {
           errors.phone = "Phone is required";
         }
-        if (formData.event.trim() === "") {
-          errors.event = "Event is required";
+        if (formData.event_id.trim() === "") {
+          errors.event_id = "Event is required";
         }
         return;
       }
@@ -173,7 +176,8 @@ export default {
             name: formData.name,
             email: formData.email,
             phone: formData.phone,
-            event_id: formData.event,
+            event_id: formData.event_id,
+            slug: formData.name + " " + formData.email,
           },
           setHeaders()
         );
@@ -197,8 +201,8 @@ export default {
           errors.email = error.response.data.errors.email
             ? error.response.data.errors.email[0]
             : "";
-          errors.event = error.response.data.errors.event
-            ? error.response.data.errors.event[0]
+          errors.event_id = error.response.data.errors.event_id
+            ? error.response.data.errors.event_id[0]
             : "";
         }
       }
