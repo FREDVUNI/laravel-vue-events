@@ -85,7 +85,7 @@
             }"
             placeholder="Choose event"
           >
-            <option disabled value="">Choose event</option>
+            <option disabled value="choose-event">Choose event</option>
             <option
               v-for="event in formData.event"
               :key="event.id"
@@ -125,7 +125,7 @@ export default {
       name: "",
       email: "",
       phone: "",
-      event_id: null,
+      event_id: 'choose-event',
       event: "",
       slug: "",
     });
