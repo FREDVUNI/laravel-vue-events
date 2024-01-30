@@ -125,7 +125,7 @@ export default {
       name: "",
       email: "",
       phone: "",
-      event_id: 'choose-event',
+      event_id: "choose-event",
       event: "",
       slug: "",
     });
@@ -145,8 +145,7 @@ export default {
         formData.name.trim() !== "" &&
         formData.email.trim() !== "" &&
         formData.phone.trim() !== "" &&
-        formData.event_id !== null &&
-        formData.event_id !== ""
+        formData.event_id === "choose-event"
       );
     };
 
@@ -163,7 +162,7 @@ export default {
         if (formData.phone.trim() === "") {
           errors.phone = "Phone is required";
         }
-        if (formData.event_id.trim() === "") {
+        if (formData.event_id.trim() === "choose-event") {
           errors.event_id = "Event is required";
         }
         return;
