@@ -51,9 +51,9 @@
                   <td>{{ item.email }}</td>
                   <td v-if="!isSmallScreen">{{ item.phone }}</td>
                   <td>
-                    <v-icon @click="editAttendee(item)" class="mx-2"
-                      >mdi-pencil</v-icon
-                    >
+                    <router-link :to="'/attendee-management/edit/' + item.slug" class="mx-2">
+                      <v-icon>mdi-pencil</v-icon>
+                    </router-link>
                     <v-icon @click="deleteAttendee(item.id)" class="mx-2"
                       >mdi-delete</v-icon
                     >
@@ -96,8 +96,13 @@ export default {
       }
     };
 
-    const editAttendee = (attendee) => {
-      console.log("Edit attendee:", attendee);
+    const editAttendee = async (attendee) => {
+      try {
+        const response = await axios.get(`${url}/attendees`, setHeaders());
+        attendeesData.value = response.data.attendees;
+      } catch (error) {
+        console.error(error);
+      }
     };
 
     const deleteAttendee = (attendeeId) => {
