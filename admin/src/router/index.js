@@ -61,7 +61,7 @@ const router = createRouter({
       meta: { requiresAuth: true },
     },
     {
-      path: "/attendee-management/edit/:id",
+      path: "/attendee-management/edit/:slug",
       name: "edit-attendee",
       component: EditAttendeeView,
       meta: { requiresAuth: true },
@@ -79,7 +79,7 @@ const router = createRouter({
       meta: { requiresAuth: true },
     },
     {
-      path: "/event-management/edit/:id",
+      path: "/event-management/edit/:slug",
       name: "edit-event",
       component: EditEventView,
       meta: { requiresAuth: true },
