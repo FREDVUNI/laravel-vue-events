@@ -5,15 +5,15 @@
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <div class="bg-blue-200 p-4 rounded-lg shadow-md">
           <h2 class="text-lg font-semibold mb-2">Total Events</h2>
-          <p class="text-gray-700">150</p>
+          <p class="text-gray-700">{{ events_count }}</p>
         </div>
         <div class="bg-green-200 p-4 rounded-lg shadow-md">
           <h2 class="text-lg font-semibold mb-2">Upcoming Events</h2>
-          <p class="text-gray-700">40</p>
+          <p class="text-gray-700">{{ upcoming_events_count }}</p>
         </div>
         <div class="bg-yellow-200 p-4 rounded-lg shadow-md">
           <h2 class="text-lg font-semibold mb-2">Registered Users</h2>
-          <p class="text-gray-700">1200</p>
+          <p class="text-gray-700">{{ users_count }}</p>
         </div>
         <div class="bg-red-200 p-4 rounded-lg shadow-md">
           <h2 class="text-lg font-semibold mb-2">Tickets Sold</h2>
@@ -25,7 +25,57 @@
 </template>
 
 <script>
-export default {};
+import axios from "axios";
+import { setHeaders, url } from "./api";
+export default {
+  data() {
+    return {
+      users_count: 0,
+      events_count: 0,
+      upcoming_events_count: 0,
+    };
+  },
+  methods: {
+    async get_users_count() {
+      try {
+        const response = await axios.get(
+          `${url}/users/users-count`,
+          setHeaders()
+        );
+        this.users_count = response.data.count;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async get_events_count() {
+      try {
+        const response = await axios.get(
+          `${url}/events/events-count`,
+          setHeaders()
+        );
+        this.events_count = response.data.count;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async get_upcoming_events_count() {
+      try {
+        const response = await axios.get(
+          `${url}/events/upcoming-events-count`,
+          setHeaders()
+        );
+        this.upcoming_events_count = response.data.count;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  },
+  mounted() {
+    this.get_users_count();
+    this.get_events_count();
+    this.get_upcoming_events_count();
+  },
+};
 </script>
 
 <style scoped>
