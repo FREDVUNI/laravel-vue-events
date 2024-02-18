@@ -1,7 +1,7 @@
 <template>
   <div class="container max-w-md mx-auto py-8 h-full">
     <div class="max-w-xl mx-auto bg-white rounded-lg overflow-hidden p-8">
-      <h1 class="text-2xl font-semibold mb-4">Add Attendee</h1>
+      <h1 class="text-2xl font-semibold mb-4">Edit Attendee</h1>
       <form @submit.prevent="submitHandler">
         <!-- Name Field -->
         <div class="mb-4">
@@ -46,7 +46,8 @@
             {{ errors.email }}
           </p>
         </div>
-
+        <!-- slug field -->
+        <input type="hidden" name="slug" id="slug" v-model="formData.slug" />
         <!-- Phone Field -->
         <div class="mb-4">
           <label for="phone" class="block text-[#5a7184] font-semibold mb-2"
@@ -74,7 +75,7 @@
           :disabled="!isValid || isLoading"
           class="w-full bg-indigo-500 hover:bg-indigo-600 text-white font-bold text-lg py-2 px-4 rounded-lg disabled:opacity-70 disabled:cursor-not-allowed"
         >
-          Add attendee
+          Update attendee
         </button>
       </form>
     </div>
@@ -82,19 +83,23 @@
 </template>
 
 <script>
-import { reactive } from "vue";
+import { reactive, onMounted } from "vue";
 import axios from "axios";
+import { setHeaders, url } from "../api";
+import { useRouter } from "vue-router";
+import { toast } from "vue3-toastify";
 
 export default {
   setup() {
+    const router = useRouter();
     const formData = reactive({
       name: "",
       email: "",
       phone: "",
+      slug: "",
     });
 
     const errors = reactive({});
-
     const isLoading = false;
 
     const clearError = (field) => {
@@ -107,7 +112,8 @@ export default {
       return (
         formData.name.trim() !== "" &&
         formData.email.trim() !== "" &&
-        formData.phone.trim() !== ""
+        formData.phone.trim() !== "" &&
+        formData.slug.trim() !== ""
       );
     };
 
@@ -124,31 +130,55 @@ export default {
         if (formData.phone.trim() === "") {
           errors.phone = "Phone is required";
         }
+        if (formData.slug.trim() === "") {
+          errors.slug = "Slug is required";
+        }
         return;
       }
 
-      // Make API call to update profile
       try {
+        const slugValue = router.currentRoute.value.params.slug;
         const response = await axios.patch(
-          `${import.meta.env.VITE_API_URL}/profile/update`,
+          `${url}/attendees/update/${slugValue}`,
           {
             name: formData.name,
             email: formData.email,
             phone: formData.phone,
-          }
+            slug: formData.slug,
+          },
+          setHeaders()
         );
-
-        // Handle successful response
-        console.log(response.data);
+        await router.push("/attendee-management");
+        toast.success("Attendee has been updated.", {
+          position: "top-right",
+          timeout: 3000,
+        });
       } catch (error) {
-        // Handle error
-        console.error(error.response.data);
-        // Set errors based on API response
-        errors.name = error.response.data.errors.name;
-        errors.email = error.response.data.errors.email;
-        errors.phone = error.response.data.errors.phone;
+        console.error(error);
       }
     };
+
+    const fetchAttendeeData = async () => {
+      try {
+        const slugValue = router.currentRoute.value.params.slug;
+        const response = await axios.get(
+          `${url}/attendees/edit/${slugValue}`,
+          setHeaders()
+        );
+        const { name, email, phone, slug } = response.data.attendee;
+        formData.name = name;
+        formData.email = email;
+        formData.phone = phone;
+        formData.slug = slugValue;
+        console.log(response);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    onMounted(() => {
+      fetchAttendeeData();
+    });
 
     return {
       formData,
