@@ -227,7 +227,7 @@ export default {
           `${url}/auth/profile/delete-image`,
           setHeaders()
         );
-        console.log(response.data);
+        // console.log(response.data);
       } catch (error) {
         console.error(error.response.data);
       }
