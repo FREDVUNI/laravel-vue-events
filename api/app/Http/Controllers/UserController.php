@@ -70,4 +70,14 @@ class UserController extends Controller
             return response()->json(['message' => 'Something went wrong.'], 500);
         }
     }
+    public function count()
+    {
+        try {
+            $users = User::fetchUsers();
+            $userCount = count($users);
+            return response()->json(['count' => $userCount], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Something went wrong.'], 500);
+        }
+    }
 }
