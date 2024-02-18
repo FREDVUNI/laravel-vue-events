@@ -125,7 +125,7 @@
       >
         <div class="w-full lg:w-1/2">
           <img
-            src="https://www.kindpng.com/picc/m/105-1053384_transparent-group-of-people-png-party-people-silhouette.png"
+            src="/images/dance.png"
             alt="About Image"
             class="w-full rounded-lg"
           />
