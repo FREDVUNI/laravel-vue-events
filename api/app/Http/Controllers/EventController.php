@@ -120,4 +120,29 @@ class EventController extends Controller
             return response()->json(['message' => 'Something went wrong.'], 500);
         }
     }
+    public function count()
+    {
+        try {
+            $events = Event::FetchEvents();
+            $eventCount = count($events);
+            return response()->json(['count' => $eventCount], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Something went wrong.'], 500);
+        }
+    }
+    public function countUpcomingEvents()
+    {
+        try {
+            $currentDate = now();
+            $threeMonthsFromNow = $currentDate->addMonths(3);
+            $events = Event::where('created_at', '>=', $currentDate)
+                ->where('created_at', '<=', $threeMonthsFromNow)
+                ->get();
+
+            $eventCount = $events->count();
+            return response()->json(['count' => $eventCount], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Something went wrong.'], 500);
+        }
+    }
 }
