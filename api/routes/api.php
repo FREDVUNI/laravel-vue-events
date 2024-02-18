@@ -35,6 +35,7 @@ Route::group(["prefix" => "auth"], function () {
 Route::group(["prefix" => "users"], function () {
     Route::group(["middleware" => ["auth:sanctum"]], function () {
         Route::get("/", [UserController::class, 'users']);
+        Route::get('/users-count', [UserController::class, 'count']);
         Route::get('show/{id}', [UserController::class, 'show']);
         Route::get('edit/{id}', [UserController::class, 'edit']);
         Route::patch('update/{id}', [UserController::class, 'update']);
@@ -48,6 +49,8 @@ Route::group(["prefix" => "events"], function () {
 
     Route::group(["middleware" => ["auth:sanctum"]], function () {
         Route::post('/', [EventController::class, 'store']);
+        Route::get('/events-count', [EventController::class, 'count']);
+        Route::get('/upcoming-events-count', [EventController::class, 'countUpcomingEvents']);
         Route::get('show/{slug}', [EventController::class, 'show']);
         Route::get('edit/{slug}', [EventController::class, 'edit']);
         Route::patch('update/{slug}', [EventController::class, 'update']);
