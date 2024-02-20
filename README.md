@@ -56,7 +56,7 @@ npm install
 7. Install frontend dependencies for the dashboard:
 
 ```shell
-cd dashboard
+cd admin
 npm install
 ```
 
