@@ -94,11 +94,11 @@ The dashboard is also built with Vue.js and Tailwind CSS. It allows for event ma
 To compile the frontend assets and run the dashboard, use the following command:
 
 ```shell
-cd dashboard
+cd admin
 npm run dev
 ```
 
-The dashboard will be accessible at `http://localhost:5179/dashboard`.
+The dashboard will be accessible at `http://localhost:5179`.
 
 ### Screenshot
 
