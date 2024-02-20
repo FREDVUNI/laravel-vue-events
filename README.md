@@ -98,7 +98,7 @@ cd admin
 npm run dev
 ```
 
-The dashboard will be accessible at `http://localhost:5179`.
+The dashboard will be accessible at `http://localhost:5179`
 
 ### Screenshot
 
