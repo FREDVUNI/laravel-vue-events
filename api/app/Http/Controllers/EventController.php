@@ -39,7 +39,7 @@ class EventController extends Controller
         } catch (\Illuminate\Validation\ValidationException $e) {
             return response()->json(['errors' => $e->errors()], 400);
         } catch (\Exception $e) {
-            return response()->json(['message' => 'Something went wrong.'.$e], 500);
+            return response()->json(['message' => 'Something went wrong.' . $e], 500);
         }
     }
     public function show($slug)
@@ -134,9 +134,7 @@ class EventController extends Controller
     {
         try {
             $currentDate = now();
-            $threeMonthsFromNow = $currentDate->addMonths(3);
-            $events = Event::where('created_at', '>=', $currentDate)
-                ->where('created_at', '<=', $threeMonthsFromNow)
+            $events = Event::where('start_date', '>=', $currentDate)
                 ->get();
 
             $eventCount = $events->count();
