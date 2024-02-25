@@ -88,6 +88,11 @@ class User extends Authenticatable
         $user->delete();
     }
 
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class);
+    }
+
     protected $hidden = [
         'password',
         'remem
