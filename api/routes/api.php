@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\AttendeeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\TicketController;
 
 /*
 |--------------------------------------------------------------------------
@@ -67,5 +68,18 @@ Route::group(["prefix" => "attendees"], function () {
         Route::get('edit/{slug}', [AttendeeController::class, 'edit']);
         Route::patch('update/{slug}', [AttendeeController::class, 'update']);
         Route::delete('delete/{slug}', [AttendeeController::class, 'delete']);
+    });
+});
+
+//tickets
+Route::group(["prefix" => "tickets"], function () {
+    Route::group(["middleware" => ["auth:sanctum"]], function () {
+        Route::post('/', [TicketController::class, 'store']);
+        Route::get("/", [TicketController::class, 'tickets']);
+        Route::get('/sold-tickets-count', [TicketController::class, 'countTicketsSold']);
+        Route::get('show/{slug}', [TicketController::class, 'show']);
+        Route::get('edit/{slug}', [TicketController::class, 'edit']);
+        Route::patch('update/{slug}', [TicketController::class, 'update']);
+        Route::delete('delete/{slug}', [TicketController::class, 'delete']);
     });
 });
