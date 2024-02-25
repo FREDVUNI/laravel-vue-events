@@ -62,4 +62,8 @@ class Event extends Model
     {
         return $this->belongsToMany(Attendee::class);
     }
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class);
+    }
 }
