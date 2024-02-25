@@ -7,6 +7,7 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\AttendeeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TicketController;
+use App\Http\Controllers\PaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -82,4 +83,10 @@ Route::group(["prefix" => "tickets"], function () {
         Route::patch('update/{slug}', [TicketController::class, 'update']);
         Route::delete('delete/{slug}', [TicketController::class, 'delete']);
     });
+
+    // Payments endpoints
+    Route::post('{slug}/payments', [PaymentController::class, 'makePayment']);
+    Route::get('{slug}/payments', [PaymentController::class, 'getPayment']);
+    Route::patch('{slug}/payments', [PaymentController::class, 'updatePayment']);
+    Route::delete('{slug}/payments', [PaymentController::class, 'cancelPayment']);
 });
