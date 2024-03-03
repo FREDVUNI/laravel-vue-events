@@ -19,7 +19,7 @@ class PaymentController extends Controller
         $payment = Payment::create([
             'ticket_id' => $ticket->id,
             'method' => $request->method,
-            'status' => 'pending',
+            'payment_status' => 'pending',
         ]);
 
         return response()->json($payment, 201);
@@ -51,7 +51,7 @@ class PaymentController extends Controller
 
         $payment = $ticket->payment;
 
-        $payment->update(['status' => 'canceled']);
+        $payment->update(['payment_status' => 'canceled']);
 
         return response()->json($payment);
     }
