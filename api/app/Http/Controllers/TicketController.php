@@ -20,6 +20,27 @@ class TicketController extends Controller
         return response()->json($ticket, 201);
     }
 
+    public function tickets()
+    {
+        try {
+            $tickets = Ticket::FetchTickets();
+            return response()->json(['tickets' => $tickets], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Something went wrong.'], 500);
+        }
+    }
+
+    public function count()
+    {
+        try {
+            $tickets = Ticket::FetchTickets();
+            $ticketCount = count($tickets);
+            return response()->json(['count' => $ticketCount], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Something went wrong.'], 500);
+        }
+    }
+
     public function update(Request $request, $slug)
     {
         $request->validate([
