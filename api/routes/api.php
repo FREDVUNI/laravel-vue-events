@@ -77,7 +77,7 @@ Route::group(["prefix" => "tickets"], function () {
     Route::group(["middleware" => ["auth:sanctum"]], function () {
         Route::post('/', [TicketController::class, 'store']);
         Route::get("/", [TicketController::class, 'tickets']);
-        Route::get('/sold-tickets-count', [TicketController::class, 'countTicketsSold']);
+        Route::get('/sold-tickets-count', [TicketController::class, 'count']);
         Route::get('show/{slug}', [TicketController::class, 'show']);
         Route::get('edit/{slug}', [TicketController::class, 'edit']);
         Route::patch('update/{slug}', [TicketController::class, 'update']);
