@@ -10,49 +10,65 @@ class PaymentController extends Controller
 {
     public function makePayment(Request $request, $ticketSlug)
     {
-        $request->validate([
-            'method' => 'required|string',
-        ]);
+        try{
+            $request->validate([
+                'payment_method' => 'required|string',
+            ]);
 
-        $ticket = Ticket::where('slug', $ticketSlug)->firstOrFail();
+            $ticket = Ticket::where('slug', $ticketSlug)->firstOrFail();
 
-        $payment = Payment::create([
-            'ticket_id' => $ticket->id,
-            'method' => $request->method,
-            'payment_status' => 'pending',
-        ]);
+            $payment = Payment::create([
+                'ticket_id' => $ticket->id,
+                'payment_method' => $request->method,
+                'payment_status' => 'pending',
+            ]);
 
-        return response()->json($payment, 201);
+            return response()->json($payment, 201);
+        }catch (\Exception $e) {
+            return response()->json(['message' => 'Something went wrong.'], 500);
+        }
     }
 
     public function getPayment($ticketSlug)
-    {
-        $ticket = Ticket::where('slug', $ticketSlug)->firstOrFail();
+    {   
+        try{
+            $ticket = Ticket::where('slug', $ticketSlug)->firstOrFail();
 
-        $payment = $ticket->payment;
+            $payment = $ticket->payment;
 
-        return response()->json($payment);
+            return response()->json($payment);
+        }catch (\Exception $e) {
+            return response()->json(['message' => 'Something went wrong.'], 500);
+        }
     }
 
     public function updatePayment(Request $request, $ticketSlug)
     {
-        $ticket = Ticket::where('slug', $ticketSlug)->firstOrFail();
+        try{
+            $ticket = Ticket::where('slug', $ticketSlug)->firstOrFail();
 
-        $payment = $ticket->payment;
+            $payment = $ticket->payment;
 
-        $payment->update($request->all());
+            $payment->update($request->all());
 
-        return response()->json($payment);
+            return response()->json($payment);
+        }catch (\Exception $e) {
+            return response()->json(['message' => 'Something went wrong.'], 500);
+        }
     }
 
     public function cancelPayment($ticketSlug)
     {
-        $ticket = Ticket::where('slug', $ticketSlug)->firstOrFail();
+        try{
+            $ticket = Ticket::where('slug', $ticketSlug)->firstOrFail();
 
-        $payment = $ticket->payment;
+            $payment = $ticket->payment;
 
-        $payment->update(['payment_status' => 'canceled']);
+            $payment->update(['payment_status' => 'canceled']);
 
-        return response()->json($payment);
+            return response()->json($payment);
+        }catch (\Exception $e) {
+            return response()->json(['message' => 'Something went wrong.'], 500);
+        }
     }
 }
