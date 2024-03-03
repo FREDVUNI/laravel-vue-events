@@ -13,6 +13,7 @@ class TicketController extends Controller
             'ticket_type' => 'required|string',
             'price' => 'required|numeric',
             'event_id' => 'required|exists:events,id',
+            'payment_id' => 'required|exists:payments,id',
         ]);
 
         $ticket = Ticket::createTicket($request->all());
