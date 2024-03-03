@@ -9,16 +9,20 @@ class TicketController extends Controller
 {
     public function store(Request $request)
     {
-        $request->validate([
-            'ticket_type' => 'required|string',
-            'price' => 'required|numeric',
-            'event_id' => 'required|exists:events,id',
-            'payment_id' => 'required|exists:payments,id',
-        ]);
+        try {
+            $request->validate([
+                'ticket_type' => 'required|string',
+                'price' => 'required|numeric',
+                'event_id' => 'required|exists:events,id',
+                'payment_id' => 'required|exists:payments,id',
+            ]);
 
-        $ticket = Ticket::createTicket($request->all());
+            $ticket = Ticket::createTicket($request->all());
 
-        return response()->json($ticket, 201);
+            return response()->json($ticket, 201);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Something went wrong.'], 500);
+        }
     }
 
     public function tickets()
@@ -44,46 +48,66 @@ class TicketController extends Controller
 
     public function update(Request $request, $slug)
     {
-        $request->validate([
-            'ticket_type' => 'required|string',
-            'price' => 'required|numeric',
-            'start_date' => 'required|date',
-            'end_date' => 'required|date|after:start_date',
-        ]);
+        try {
+            $request->validate([
+                'ticket_type' => 'required|string',
+                'price' => 'required|numeric',
+                'start_date' => 'required|date',
+                'end_date' => 'required|date|after:start_date',
+            ]);
 
-        $ticket = Ticket::updateTicket($slug, $request->all());
+            $ticket = Ticket::updateTicket($slug, $request->all());
 
-        return response()->json($ticket, 200);
+            return response()->json($ticket, 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Something went wrong.'], 500);
+        }
     }
 
     public function delete($slug)
     {
-        Ticket::deleteTicket($slug);
+        try {
+            Ticket::deleteTicket($slug);
 
-        return response()->json(['message' => 'Ticket deleted successfully'], 200);
+            return response()->json(['message' => 'Ticket deleted successfully'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Something went wrong.'], 500);
+        }
     }
 
     public function cancel($slug)
     {
-        $ticket = Ticket::getTicket($slug);
-        $ticket->cancel();
+        try {
+            $ticket = Ticket::getTicket($slug);
+            $ticket->cancel();
 
-        return response()->json($ticket, 200);
+            return response()->json($ticket, 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Something went wrong.'], 500);
+        }
     }
 
     public function markAsPaid($slug)
     {
-        $ticket = Ticket::getTicket($slug);
-        $ticket->markAsPaid();
+        try {
+            $ticket = Ticket::getTicket($slug);
+            $ticket->markAsPaid();
 
-        return response()->json($ticket, 200);
+            return response()->json($ticket, 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Something went wrong.'], 500);
+        }
     }
 
     public function markAsUnpaid($slug)
     {
-        $ticket = Ticket::getTicket($slug);
-        $ticket->markAsUnpaid();
+        try {
+            $ticket = Ticket::getTicket($slug);
+            $ticket->markAsUnpaid();
 
-        return response()->json($ticket, 200);
+            return response()->json($ticket, 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Something went wrong.'], 500);
+        }
     }
 }
