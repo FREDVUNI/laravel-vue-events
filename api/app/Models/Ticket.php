@@ -12,9 +12,9 @@ class Ticket extends Model
 
     protected $guarded = [];
 
-    public static function fetchTickets()
+    public static function FetchTickets()
     {
-        return self::all();
+        return self::where('payment_status', 'paid')->get();
     }
 
     public static function createTicket(array $data)
