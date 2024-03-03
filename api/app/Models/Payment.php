@@ -12,7 +12,7 @@ class Payment extends Model
     protected $fillable = [
         'ticket_id',
         'payment_status',
-        'method',
+        'payment_method',
     ];
 
     public function ticket()
