@@ -20,19 +20,15 @@ class Ticket extends Model
     public static function createTicket(array $data)
     {
         $event = Event::findOrFail($data['event_id']);
+        $user_id = auth()->id();
+
         $ticket = self::create([
             'ticket_type' => $data['ticket_type'],
             'price' => $data['price'],
             'slug' => Str::slug($event->title),
-            'payment_id' => $data['payment_id'],
-            'user_id' => $data['user_id'],
+            'user_id' => $user_id,
+            'event_id' => $data['event_id']
         ]);
-
-        $ticket->events()->attach($event, [
-            'start_date' => $event->start_date,
-            'end_date' => $event->end_date,
-        ]);
-
         return $ticket;
     }
 
