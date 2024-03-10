@@ -23,6 +23,7 @@ class TicketController extends Controller
         } catch (\Illuminate\Validation\ValidationException $e) {
             return response()->json(['errors' => $e->errors()], 400);
         } catch (\Exception $e) {
+            dd($e);
             return response()->json(['message' => 'Something went wrong.'], 500);
         }
     }
