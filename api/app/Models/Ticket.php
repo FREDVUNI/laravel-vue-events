@@ -25,7 +25,7 @@ class Ticket extends Model
         $ticket = self::create([
             'ticket_type' => $data['ticket_type'],
             'price' => $data['price'],
-            'slug' => Str::slug($event->title),
+            'slug' => Str::slug($event->title.' '.$data['ticket_type']),
             'user_id' => $user_id,
             'event_id' => $data['event_id']
         ]);
