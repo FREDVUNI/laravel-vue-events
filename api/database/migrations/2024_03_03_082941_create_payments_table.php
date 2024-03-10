@@ -15,10 +15,10 @@ class CreatePaymentsTable extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
-            $table->foreignId('ticket_id');
+            $table->foreignId('ticket_id')->constrained()->onDelete('cascade');
             $table->string('payment_method');
-            $table->string('payment_status');
+            $table->enum('payment_status', ['pending', 'completed', 'canceled'])->default('pending');
+            $table->timestamps();
         });
     }
 
