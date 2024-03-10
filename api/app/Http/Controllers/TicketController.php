@@ -10,16 +10,18 @@ class TicketController extends Controller
     public function store(Request $request)
     {
         try {
-            $request->validate([
+            $data = $request->validate([
                 'ticket_type' => 'required|string',
                 'price' => 'required|numeric',
+                'slug' => 'required',
                 'event_id' => 'required|exists:events,id',
-                'payment_id' => 'required|exists:payments,id',
+                'user_id' => 'required|exists:users,id',
             ]);
 
-            $ticket = Ticket::createTicket($request->all());
-
-            return response()->json($ticket, 201);
+            $ticket = Ticket::createTicket($data);
+            return response()->json(['tickets' => $ticket], 201);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return response()->json(['errors' => $e->errors()], 400);
         } catch (\Exception $e) {
             return response()->json(['message' => 'Something went wrong.'], 500);
         }
