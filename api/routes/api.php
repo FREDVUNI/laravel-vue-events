@@ -83,10 +83,15 @@ Route::group(["prefix" => "tickets"], function () {
         Route::patch('update/{slug}', [TicketController::class, 'update']);
         Route::delete('delete/{slug}', [TicketController::class, 'delete']);
     });
+});
 
-    // Payments endpoints
-    Route::post('{slug}/payments', [PaymentController::class, 'makePayment']);
-    Route::get('{slug}/payments', [PaymentController::class, 'getPayment']);
-    Route::patch('{slug}/payments', [PaymentController::class, 'updatePayment']);
-    Route::delete('{slug}/payments', [PaymentController::class, 'cancelPayment']);
+// Payments 
+Route::group(["prefix" => "payments"],  function () {
+    Route::group(["middleware" => ["auth:sanctum"]], function () {
+        Route::post('/', [PaymentController::class, 'store']);
+        Route::get('/', [PaymentController::class, 'index']);
+        Route::get('/{slug}', [PaymentController::class, 'show']);
+        Route::patch('/{slug}', [PaymentController::class, 'update']);
+        Route::delete('/{slug}', [PaymentController::class, 'cancel']);
+    });
 });
