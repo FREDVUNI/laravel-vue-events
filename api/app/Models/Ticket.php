@@ -25,7 +25,7 @@ class Ticket extends Model
             'price' => $data['price'],
             'slug' => Str::slug($event->title),
             'payment_id' => $data['payment_id'],
-            'user_id' => $data['user_id'], 
+            'user_id' => $data['user_id'],
         ]);
 
         $ticket->events()->attach($event, [
@@ -54,7 +54,6 @@ class Ticket extends Model
             'ticket_type' => $data['ticket_type'],
             'price' => $data['price'],
             'slug' => Str::slug($data['ticket_type']),
-            'payment_id' => $data['payment_id'],
             'user_id' => $data['user_id'],
         ]);
 
@@ -81,5 +80,9 @@ class Ticket extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+    public function payment()
+    {
+        return $this->hasOne(Payment::class);
     }
 }
