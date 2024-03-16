@@ -109,7 +109,7 @@
 
     <section id="hero" class="text-center py-80">
       <h1 class="text-4xl font-bold text-gray-800">
-        Welcome to our Events Management
+        Welcome to Events & Events Management
       </h1>
       <p class="mt-4 text-gray-600">We organize amazing events for you!</p>
       <a
