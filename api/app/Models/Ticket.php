@@ -14,7 +14,13 @@ class Ticket extends Model
 
     public static function FetchTickets()
     {
-        return self::where('payment_status', 'paid')->get();
+        $paidPayments = Payment::where('payment_status', 'paid')->get();
+        $tickets = collect();
+        foreach ($paidPayments as $payment) {
+            $tickets = $tickets->merge($payment->tickets);
+        }
+
+        return $tickets;
     }
 
     public static function createTicket(array $data)
@@ -25,7 +31,7 @@ class Ticket extends Model
         $ticket = self::create([
             'ticket_type' => $data['ticket_type'],
             'price' => $data['price'],
-            'slug' => Str::slug($event->title.' '.$data['ticket_type']),
+            'slug' => Str::slug($event->title . ' ' . $data['ticket_type']),
             'user_id' => $user_id,
             'event_id' => $data['event_id']
         ]);
