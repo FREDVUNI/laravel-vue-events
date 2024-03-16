@@ -34,7 +34,7 @@ class TicketController extends Controller
             $tickets = Ticket::FetchTickets();
             return response()->json(['tickets' => $tickets], 200);
         } catch (\Exception $e) {
-            return response()->json(['message' => 'Something went wrong.'], 500);
+            return response()->json(['message' => $e], 500);
         }
     }
 
