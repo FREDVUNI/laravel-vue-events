@@ -84,8 +84,8 @@ npm run dev
 The landing page will be accessible at `http://localhost:5173`.
 
 ### Screenshot
+![image](https://github.com/FREDVUNI/laravel-vue-events/assets/41730664/f6da752b-d6d9-4016-a284-256ab84e0ed1)
 
-![image](https://github.com/FREDVUNI/laravel-vue-events/assets/41730664/13e9294c-362a-46d5-8897-b5ebfd1f27ae)
 
 ### Dashboard
 
