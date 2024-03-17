@@ -70,6 +70,17 @@ export default {
         console.log(error);
       }
     },
+    async get_tickets_sold_count() {
+      try {
+        const response = await axios.get(
+          `${url}/tickets/sold-tickets-count`,
+          setHeaders()
+        );
+        this.sold_tickets_count = response.data.count;
+      } catch (error) {
+        console.log(error);
+      }
+    },
   },
   mounted() {
     this.get_users_count();
