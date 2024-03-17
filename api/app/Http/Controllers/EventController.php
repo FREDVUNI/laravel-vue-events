@@ -25,7 +25,7 @@ class EventController extends Controller
                 "description" => "required|min:4|max:200",
                 "slug" => "required",
                 "image" => "required|image|max:2048|mimes:jpeg,jpg,png,gif",
-                "start_date" => "required|date_format:m d Y H:i:s|after:now",
+                "start_date" => "required|date_format:m/d/Y, H:i",
                 "end_date" => "required|date_format:m d Y H:i:s|after:now|after_or_equal:start_date",
             ]);
 
