@@ -86,6 +86,7 @@ export default {
     this.get_users_count();
     this.get_events_count();
     this.get_upcoming_events_count();
+    this.get_tickets_sold_count();
   },
 };
 </script>
