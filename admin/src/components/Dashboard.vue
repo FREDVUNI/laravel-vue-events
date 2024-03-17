@@ -33,6 +33,7 @@ export default {
       users_count: 0,
       events_count: 0,
       upcoming_events_count: 0,
+      sold_tickets_count: 0,
     };
   },
   methods: {
