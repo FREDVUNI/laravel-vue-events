@@ -17,7 +17,7 @@
         </div>
         <div class="bg-red-200 p-4 rounded-lg shadow-md">
           <h2 class="text-lg font-semibold mb-2">Tickets Sold</h2>
-          <p class="text-gray-700">3000</p>
+          <p class="text-gray-700">{{ sold_tickets_count }}</p>
         </div>
       </div>
     </div>
