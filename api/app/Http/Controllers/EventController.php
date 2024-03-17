@@ -26,7 +26,7 @@ class EventController extends Controller
                 "slug" => "required",
                 "image" => "required|image|max:2048|mimes:jpeg,jpg,png,gif",
                 "start_date" => "required|date_format:m d Y H:i:s|after:now",
-                "end_date" => "required|date_format:Y-m-d H:i:s|after:now",
+                "end_date" => "required|date_format:m d Y H:i:s|after:now|after_or_equal:start_date",
             ]);
 
             if ($request->hasFile('image')) {
