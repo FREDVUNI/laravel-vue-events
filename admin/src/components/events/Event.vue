@@ -57,10 +57,14 @@
                     {{ formatDateTime(item.end_date) }}
                   </td>
                   <td>
-                    <v-icon @click="editEvent(item)" class="mx-2"
+                    <v-icon
+                      @click="() => editEvent(item.slug)"
+                      class="mx-2 cursor-pointer"
                       >mdi-pencil</v-icon
                     >
-                    <v-icon @click="deleteEvent(item.id)" class="mx-2"
+                    <v-icon
+                      @click="() => deleteEvent(item.id)"
+                      class="mx-2 cursor-pointer"
                       >mdi-delete</v-icon
                     >
                   </td>
@@ -79,9 +83,11 @@ import { ref, onMounted } from "vue";
 import axios from "axios";
 import { url, setHeaders } from "../api";
 import { shortenDetails, formatDateTime } from "../../utils";
+import { useRouter } from "vue-router";
 
 export default {
   setup() {
+    const router = useRouter();
     const eventsData = ref([]);
     const search = ref("");
     const isSmallScreen = ref(false);
@@ -103,12 +109,12 @@ export default {
       }
     };
 
-    const editEvent = (event) => {
-      console.log("Edit event:", event);
+    const editEvent = (slug) => {
+      router.push(`/event-management/edit/${slug}`);
     };
 
-    const deleteEvent = (eventId) => {
-      console.log("Delete event with ID:", eventId);
+    const deleteEvent = (slug) => {
+      console.log("Delete event with ID:", slug);
     };
 
     const checkScreenSize = () => {
