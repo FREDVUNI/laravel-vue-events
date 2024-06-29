@@ -84,8 +84,8 @@ npm run dev
 The landing page will be accessible at `http://localhost:5173`.
 
 ### Screenshot
-![image](https://github.com/FREDVUNI/laravel-vue-events/assets/41730664/f6da752b-d6d9-4016-a284-256ab84e0ed1)
 
+![image](https://github.com/FREDVUNI/laravel-vue-events/assets/41730664/f6da752b-d6d9-4016-a284-256ab84e0ed1)
 
 ### Dashboard
 
@@ -103,7 +103,6 @@ The dashboard will be accessible at `http://localhost:5179`
 ### Screenshot
 
 ![image](https://github.com/FREDVUNI/laravel-vue-events/assets/41730664/a75770db-1057-415f-b731-c1b783de7f95)
-
 
 ## API Endpoints
 
