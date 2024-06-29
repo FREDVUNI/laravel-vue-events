@@ -136,7 +136,7 @@
 
         <button
           type="submit"
-          :disabled="!isValid || isLoading" 
+          :disabled="!isValid || isLoading"
           class="w-full bg-indigo-500 hover:bg-indigo-600 text-white font-bold text-lg py-2 px-4 rounded-lg disabled:opacity-70 disabled:cursor-not-allowed"
         >
           Edit Event
@@ -317,7 +317,7 @@ export default {
       if (formData.image instanceof File) {
         return URL.createObjectURL(formData.image);
       }
-      return formData.image; // If the image is a URL, use it directly
+      return formData.image;
     });
 
     return {
