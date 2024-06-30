@@ -19,6 +19,7 @@ class Payment extends Model
         return $this->belongsTo(Ticket::class);
     }
 
+    
     public static function createPayment(array $data)
     {
         $ticket = Ticket::findOrFail($data['ticket_id']);
