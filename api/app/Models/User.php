@@ -37,6 +37,7 @@ class User extends Authenticatable
     {
         return self::all();
     }
+
     public static function createUser(array $data)
     {
         return self::create([
@@ -46,6 +47,7 @@ class User extends Authenticatable
             'role' => $data['role'],
         ]);
     }
+
     public static function userLogin($data)
     {
         $user = self::where('email', $data['email'])->first();
@@ -62,10 +64,18 @@ class User extends Authenticatable
     {
         return self::where('id', $id)->firstOrFail();
     }
+
+    /**
+     * Undocumented function
+     *
+     * @param [type] $id
+     * @return void
+     */
     public static function editUser($id)
     {
         return self::where('id', $id)->firstOrFail();
     }
+
     public static function updateUser($id, array $data)
     {
         $user = self::where('id', $id)->firstOrFail();
@@ -82,6 +92,7 @@ class User extends Authenticatable
 
         return $user;
     }
+    
     public static function deleteUser($id)
     {
         $user = self::where('id', $id)->firstOrFail();
