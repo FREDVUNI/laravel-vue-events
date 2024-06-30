@@ -16,6 +16,7 @@ class Event extends Model
     {
         return self::all();
     }
+
     public static function createEvent(array $data)
     {
         return self::create([
@@ -27,14 +28,17 @@ class Event extends Model
             'end_date' => $data['end_date'],
         ]);
     }
+
     public static function getEvent($slug)
     {
         return self::where('slug', $slug)->firstOrFail();
     }
+
     public static function editEvent($slug)
     {
         return self::where('slug', $slug)->firstOrFail();
     }
+
     public static function updateEvent($slug, array $data)
     {
         $event = self::where('slug', $slug)->firstOrFail();
@@ -53,15 +57,18 @@ class Event extends Model
 
         return $event;
     }
+
     public static function deleteEvent($slug)
     {
         $event = self::where('slug', $slug)->firstOrFail();
         $event->delete();
     }
+
     public function attendees()
     {
         return $this->belongsToMany(Attendee::class);
     }
+    
     public function tickets()
     {
         return $this->hasMany(Ticket::class);
