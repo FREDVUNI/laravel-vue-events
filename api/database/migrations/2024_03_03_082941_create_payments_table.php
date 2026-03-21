@@ -17,7 +17,7 @@ class CreatePaymentsTable extends Migration
             $table->id();
             $table->foreignId('ticket_id')->constrained()->onDelete('cascade');
             $table->string('payment_method');
-            $table->enum('payment_status', ['pending', 'completed', 'canceled'])->default('pending');
+            $table->enum('payment_status', ['pending', 'paid', 'completed', 'canceled'])->default('pending');
             $table->timestamps();
         });
     }
