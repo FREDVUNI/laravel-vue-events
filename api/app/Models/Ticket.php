@@ -14,13 +14,11 @@ class Ticket extends Model
 
     public static function FetchTickets()
     {
-        $paidPayments = Payment::where('payment_status', 'paid')->get();
-        $tickets = collect();
-        foreach ($paidPayments as $payment) {
-            $tickets = $tickets->merge($payment->tickets);
-        }
-
-        return $tickets;
+        // Use Eager Loading to avoid the "N+1" query problem
+        return Payment::where('payment_status', 'paid')
+            ->with('ticket')
+            ->get()
+            ->pluck('ticket');
     }
 
     public static function createTicket(array $data)
@@ -83,7 +81,7 @@ class Ticket extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
-    
+
     public function payment()
     {
         return $this->hasOne(Payment::class);

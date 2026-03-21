@@ -9,17 +9,14 @@ class Payment extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'payment_method',
-        'payment_status',
-    ];
+    protected $guarded = [];
 
     public function ticket()
     {
         return $this->belongsTo(Ticket::class);
     }
 
-    
+
     public static function createPayment(array $data)
     {
         $ticket = Ticket::findOrFail($data['ticket_id']);
