@@ -4,15 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Payment extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'payment_method',
-        'payment_status',
-    ];
+    protected $guarded = [];
 
     public function ticket()
     {
@@ -26,6 +24,8 @@ class Payment extends Model
         return $ticket->payment()->create([
             'payment_method' => $data['payment_method'],
             'payment_status' => $data['payment_status'] ?? 'pending',
+            'transaction_id' => $data['transaction_id'] ?? 'TRX-' . Str::random(10),
+            'amount'         => $data['amount'] ?? $ticket->price,
         ]);
     }
 }

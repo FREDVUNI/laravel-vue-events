@@ -16,6 +16,7 @@ class Attendee extends Model
     {
         return self::all();
     }
+
     public static function createAttendee(array $data)
     {
         return self::create([
@@ -26,21 +27,25 @@ class Attendee extends Model
             'event_id' => $data['event_id'],
         ]);
     }
+
     public static function getAttendee($slug)
     {
         $attendee = self::where('slug', $slug)->firstorFail();
         return $attendee;
     }
+
     public static function showAttendee($slug)
     {
         $attendee = self::where('slug', $slug)->firstorFail();
         return $attendee;
     }
+
     public static function editAttendee($slug)
     {
         $attendee = self::where('slug', $slug)->firstorFail();
         return $attendee;
     }
+
     public static function updateAttendee(array $data, $slug)
     {
         $attendee = self::where('slug', $slug)->firstorFail();
@@ -54,12 +59,14 @@ class Attendee extends Model
         ]);
         return $attendee;
     }
+
     public static function deleteAttendee($slug)
     {
         $attendee = self::where('slug', $slug)->firstorFail();
         $attendee->delete();
         return $attendee;
     }
+    
     public function events()
     {
         return $this->belongsToMany(Event::class);

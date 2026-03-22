@@ -17,7 +17,7 @@
         </div>
         <div class="bg-red-200 p-4 rounded-lg shadow-md">
           <h2 class="text-lg font-semibold mb-2">Tickets Sold</h2>
-          <p class="text-gray-700">3000</p>
+          <p class="text-gray-700">{{ sold_tickets_count }}</p>
         </div>
       </div>
     </div>
@@ -33,6 +33,7 @@ export default {
       users_count: 0,
       events_count: 0,
       upcoming_events_count: 0,
+      sold_tickets_count: 0,
     };
   },
   methods: {
@@ -69,11 +70,23 @@ export default {
         console.log(error);
       }
     },
+    async get_tickets_sold_count() {
+      try {
+        const response = await axios.get(
+          `${url}/tickets/sold-tickets-count`,
+          setHeaders()
+        );
+        this.sold_tickets_count = response.data.count;
+      } catch (error) {
+        console.log(error);
+      }
+    },
   },
   mounted() {
     this.get_users_count();
     this.get_events_count();
     this.get_upcoming_events_count();
+    this.get_tickets_sold_count();
   },
 };
 </script>

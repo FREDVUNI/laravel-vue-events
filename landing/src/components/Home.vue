@@ -109,7 +109,7 @@
 
     <section id="hero" class="text-center py-80">
       <h1 class="text-4xl font-bold text-gray-800">
-        Welcome to our Events Management
+        Welcome to Events & Events Management
       </h1>
       <p class="mt-4 text-gray-600">We organize amazing events for you!</p>
       <a
@@ -520,10 +520,8 @@ export default {
   background-color: rgba(255, 255, 255, 0.1);
 }
 #hero {
-  background-image: linear-gradient(
-      rgba(27, 32, 51, 0.6),
-      rgba(27, 32, 51, 0.6)
-    ),
+  background-image:
+    linear-gradient(rgba(27, 32, 51, 0.6), rgba(27, 32, 51, 0.6)),
     url("https://images.unsplash.com/photo-1603228254119-e6a4d095dc59?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80");
   background-position: center;
   background-repeat: no-repeat;

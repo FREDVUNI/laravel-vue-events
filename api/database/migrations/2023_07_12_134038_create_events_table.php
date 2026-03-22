@@ -17,6 +17,7 @@ class CreateEventsTable extends Migration
             $table->id();
             $table->string('title')->unique();
             $table->text('description');
+            $table->string('location');
             $table->string('slug');
             $table->string('image');
             $table->datetime('start_date');

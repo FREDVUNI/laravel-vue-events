@@ -40,11 +40,46 @@ Edit the `.env` file and provide the necessary configuration for your database c
 php artisan key:generate
 ```
 
-5. Run the database migrations:
+5. Database Setup & Seeding:
 
-```shell
-php artisan migrate
-```
+To get the application running with high-quality sample data, follow these steps:
+
+1.  **Configure Admin:** Open `database/seeders/DatabaseSeeder.php`. Update the `$myEmail` and `$myPassword` variables with your preferred login details.
+2.  **Verify Migration Order:** Ensure the `create_events_table.php` has an older timestamp (e.g., `2020_01_01...`) than the `attendees` and `tickets` migrations.
+3.  **Run Migrations & Seed:**
+    ```shell
+    php artisan migrate:fresh --seed
+    ```
+4.  **Cleanup:** Once the command finishes, you can remove your personal details from the `DatabaseSeeder.php` file.
+
+### Project Changelog
+
+#### **v1.2.0 (Current) — Logic & Relational Integrity**
+
+- **Admin Seeder:** Implemented `updateOrCreate` for the Admin user to allow for repeatable seeding without "Duplicate Email" crashes.
+- **ID Mapping:** Fixed nested loops to correctly pass `$event->id` and `$ticket->id` down the chain (Events ➔ Attendees ➔ Tickets ➔ Payments).
+
+#### **v1.1.0 — Mock Data Engine**
+
+- **Dynamic Imagery:** Integrated **LoremFlickr** API to generate high-resolution party and concert photography instead of grey placeholders.
+- **Data Consistency:** Added `->unique()` modifiers to Faker attributes (slugs, emails, phones) to ensure stable database population.
+
+#### **v1.0.0 — Database Architecture**
+
+- **Migration Ordering:** Resolved `errno: 150` (Foreign Key Constraint) by prioritizing the "Parent" table (Events) in the migration sequence.
+- **Schema Alignment:** Added `transaction_id` and `amount` columns to the `payments` table to support realistic checkout simulation.
+
+### Updated API Endpoints (For your README)
+
+Since you've built out the full relational structure, here are the core endpoints your frontend applications are using:
+
+| Endpoint             | Method | Description                                              |
+| :------------------- | :----- | :------------------------------------------------------- |
+| `/api/events`        | `GET`  | Fetch all events with images and locations.              |
+| `/api/events/{slug}` | `GET`  | Get detailed information for a single event.             |
+| `/api/attendees`     | `POST` | Register a new attendee for an event.                    |
+| `/api/tickets`       | `POST` | Process a ticket purchase and generate a payment record. |
+| `/api/admin/stats`   | `GET`  | (Dashboard) Get total attendees and revenue per event.   |
 
 6. Install frontend dependencies for the landing page:
 
@@ -85,7 +120,7 @@ The landing page will be accessible at `http://localhost:5173`.
 
 ### Screenshot
 
-![image](https://github.com/FREDVUNI/laravel-vue-events/assets/41730664/13e9294c-362a-46d5-8897-b5ebfd1f27ae)
+![image](https://github.com/FREDVUNI/laravel-vue-events/assets/41730664/f6da752b-d6d9-4016-a284-256ab84e0ed1)
 
 ### Dashboard
 
@@ -103,7 +138,6 @@ The dashboard will be accessible at `http://localhost:5179`
 ### Screenshot
 
 ![image](https://github.com/FREDVUNI/laravel-vue-events/assets/41730664/a75770db-1057-415f-b731-c1b783de7f95)
-
 
 ## API Endpoints
 

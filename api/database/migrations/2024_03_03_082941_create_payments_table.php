@@ -16,12 +16,13 @@ class CreatePaymentsTable extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('ticket_id')->constrained()->onDelete('cascade');
+            $table->string('payment_status')->default('pending');
             $table->string('payment_method');
-            $table->enum('payment_status', ['pending', 'completed', 'canceled'])->default('pending');
+            $table->string('transaction_id')->unique();
+            $table->integer('amount');
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      *

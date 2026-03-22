@@ -84,7 +84,7 @@
           >
           <VueDatePicker
             v-model="formData.start_date"
-            :config="{ format: 'YYYY-MM-DD H:i:s', enableTime: true }"
+            :config="{ format: 'Y-m-d H:i:s', enableTime: true }"
             @input="clearError('start_date')"
             class="w-full px-4 py-2 rounded-lg border placeholder-[#959ead] text-dark-hard"
           />
@@ -100,7 +100,7 @@
           >
           <VueDatePicker
             v-model="formData.end_date"
-            :config="{ format: 'YYYY-MM-DD H:i:s', enableTime: true }"
+            :config="{ format: 'Y-m-d H:i:s', enableTime: true }"
             @input="clearError('end_date')"
             class="w-full px-4 py-2 rounded-lg border placeholder-[#959ead] text-dark-hard"
           />

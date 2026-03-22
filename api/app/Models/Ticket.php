@@ -14,25 +14,25 @@ class Ticket extends Model
 
     public static function FetchTickets()
     {
-        return self::where('payment_status', 'paid')->get();
+        // Use Eager Loading to avoid the "N+1" query problem
+        return Payment::where('payment_status', 'paid')
+            ->with('ticket')
+            ->get()
+            ->pluck('ticket');
     }
 
     public static function createTicket(array $data)
     {
         $event = Event::findOrFail($data['event_id']);
+        $user_id = auth()->id();
+
         $ticket = self::create([
             'ticket_type' => $data['ticket_type'],
             'price' => $data['price'],
-            'slug' => Str::slug($event->title),
-            'payment_id' => $data['payment_id'],
-            'user_id' => $data['user_id'],
+            'slug' => Str::slug($event->title . ' ' . $data['ticket_type']),
+            'user_id' => $user_id,
+            'event_id' => $data['event_id']
         ]);
-
-        $ticket->events()->attach($event, [
-            'start_date' => $event->start_date,
-            'end_date' => $event->end_date,
-        ]);
-
         return $ticket;
     }
 
@@ -81,6 +81,7 @@ class Ticket extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
     public function payment()
     {
         return $this->hasOne(Payment::class);
