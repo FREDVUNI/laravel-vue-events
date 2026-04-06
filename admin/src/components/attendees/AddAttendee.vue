@@ -178,7 +178,7 @@ export default {
             event_id: formData.event_id,
             slug: formData.name + " " + formData.email,
           },
-          setHeaders()
+          setHeaders(),
         );
         await router.push("/attendee-management");
         toast.success("Event has been created.", {
