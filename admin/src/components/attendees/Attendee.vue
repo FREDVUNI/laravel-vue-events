@@ -51,7 +51,10 @@
                   <td>{{ item.email }}</td>
                   <td v-if="!isSmallScreen">{{ item.phone }}</td>
                   <td>
-                    <router-link :to="'/attendee-management/edit/' + item.slug" class="mx-2">
+                    <router-link
+                      :to="'/attendee-management/edit/' + item.slug"
+                      class="mx-2"
+                    >
                       <v-icon>mdi-pencil</v-icon>
                     </router-link>
                     <v-icon @click="deleteAttendee(item.id)" class="mx-2"
@@ -90,6 +93,8 @@ export default {
     const fetchattendeesData = async () => {
       try {
         const response = await axios.get(`${url}/attendees`, setHeaders());
+
+        // console.log("Fetched attendees data:", response.data.attendees);
         attendeesData.value = response.data.attendees;
       } catch (error) {
         console.error(error);
