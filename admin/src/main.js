@@ -29,5 +29,6 @@ app.use(pinia);
 app.use(router);
 app.component("VueDatePicker", VueDatePicker);
 
-app.component("useAuthStore", useAuthStore);
+const authStore = useAuthStore();
+authStore.initializeAuth();
 app.mount("#app");
