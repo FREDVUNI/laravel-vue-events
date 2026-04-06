@@ -48,7 +48,7 @@
               <template v-slot:item="{ item, index }">
                 <tr>
                   <td v-if="!isSmallScreen">{{ index + 1 }}</td>
-                  <td>{{ item.title }}</td>
+                  <td>{{ shortenDetails(item.title, 14) }}</td>
                   <td>{{ shortenDetails(item.description, 10) }}</td>
                   <td v-if="!isSmallScreen">
                     {{ formatDateTime(item.start_date) }}
