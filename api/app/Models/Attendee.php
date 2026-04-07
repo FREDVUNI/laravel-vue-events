@@ -14,7 +14,7 @@ class Attendee extends Model
 
     public static function fetchAttendees()
     {
-        return self::all();
+        return self::with('events')->latest()->get();
     }
 
     public static function createAttendee(array $data)
@@ -66,7 +66,7 @@ class Attendee extends Model
         $attendee->delete();
         return $attendee;
     }
-    
+
     public function events()
     {
         return $this->belongsToMany(Event::class);
