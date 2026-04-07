@@ -20,15 +20,6 @@ const router = createRouter({
       path: "/login",
       name: "signin",
       component: LoginView,
-      beforeEnter: (to, from, next) => {
-        const authStore = useAuthStore();
-        const isAuthenticated = authStore.isAuthenticated;
-        if (isAuthenticated) {
-          next({ name: "home" });
-        } else {
-          next();
-        }
-      },
     },
     {
       path: "/",
@@ -98,17 +89,25 @@ const router = createRouter({
   ],
 });
 
+// Global navigation guard
 router.beforeEach((to, from, next) => {
   const authStore = useAuthStore();
-  const isAuthenticated = authStore.isAuthenticated || localStorage.getItem("token");
-  if (to.name === "signin" && isAuthenticated) {
-    next({ name: "home" });
-  } else if (
-    to.name !== "signin" &&
-    to.matched.some((record) => record.meta.requiresAuth) &&
-    !isAuthenticated
-  ) {
-    next({ name: "signin" });
+  const token = localStorage.getItem("token");
+  const isAuthenticated = authStore.isAuthenticated || !!token;
+
+  console.log(
+    "Route guard - Path:",
+    to.path,
+    "Authenticated:",
+    isAuthenticated,
+  ); // Debug log
+
+  if (to.meta.requiresAuth && !isAuthenticated) {
+    console.log("Redirecting to login - not authenticated");
+    next("/login");
+  } else if (to.path === "/login" && isAuthenticated) {
+    console.log("Redirecting to home - already authenticated");
+    next("/");
   } else {
     next();
   }
