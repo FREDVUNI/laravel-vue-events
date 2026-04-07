@@ -29,8 +29,7 @@ class PaymentController extends Controller
     public function index()
     {
         try {
-            $payments = Payment::all();
-
+            $payments = Payment::with(['ticket.event', 'ticket.user'])->latest()->get();
             return response()->json($payments);
         } catch (\Exception $e) {
             return response()->json(['message' => 'Something went wrong.'], 500);
