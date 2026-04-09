@@ -14,7 +14,7 @@ class Event extends Model
 
     public static function FetchEvents()
     {
-        return self::all();
+        return self::latest()->get();
     }
 
     public static function createEvent(array $data)
@@ -68,7 +68,7 @@ class Event extends Model
     {
         return $this->belongsToMany(Attendee::class);
     }
-    
+
     public function tickets()
     {
         return $this->hasMany(Ticket::class);
