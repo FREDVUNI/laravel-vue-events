@@ -14,11 +14,13 @@ class Ticket extends Model
 
     public static function FetchTickets()
     {
-        // Use Eager Loading to avoid the "N+1" query problem
-        return Payment::where('payment_status', 'paid')
-            ->with('ticket')
-            ->get()
-            ->pluck('ticket');
+        // It only fetches the tickets, and it does it in ONE query.
+        return self::whereHas('payments', function ($query) {
+            $query->where('payment_status', 'paid');
+        })
+            ->with(['event', 'user'])
+            ->latest()
+            ->get();
     }
 
     public static function createTicket(array $data)
