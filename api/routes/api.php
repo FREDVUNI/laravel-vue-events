@@ -8,6 +8,7 @@ use App\Http\Controllers\AttendeeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,9 +48,8 @@ Route::group(["prefix" => "users"], function () {
 
 //events
 Route::group(["prefix" => "events"], function () {
-    Route::get("/", [EventController::class, 'events']);
-
     Route::group(["middleware" => ["auth:sanctum"]], function () {
+        Route::get("/", [EventController::class, 'events']);
         Route::post('/', [EventController::class, 'store']);
         Route::get('/events-count', [EventController::class, 'count']);
         Route::get('/upcoming-events-count', [EventController::class, 'countUpcomingEvents']);
@@ -94,4 +94,10 @@ Route::group(["prefix" => "payments"],  function () {
         Route::patch('/{slug}', [PaymentController::class, 'update']);
         Route::delete('/{slug}', [PaymentController::class, 'cancel']);
     });
+});
+
+
+// Dashboard
+Route::group(["middleware" => ["auth:sanctum"]], function () {
+    Route::get('/dashboard-stats', [DashboardController::class, 'getDashboardStats']);
 });
