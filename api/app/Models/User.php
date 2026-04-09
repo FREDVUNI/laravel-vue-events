@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\ValidationException; 
+use Illuminate\Validation\ValidationException;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
@@ -29,7 +29,7 @@ class User extends Authenticatable
 
     public static function FetchUsers()
     {
-        return self::all();
+        return self::latest()->get();
     }
 
     public static function createUser(array $data)
