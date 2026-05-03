@@ -7,7 +7,6 @@ use App\Models\Ticket;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-
 class DashboardController
 {
     public function getDashboardStats()
