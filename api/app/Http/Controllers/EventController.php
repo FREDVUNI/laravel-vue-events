@@ -130,6 +130,17 @@ class EventController extends Controller
             return response()->json(['message' => 'Something went wrong.'], 500);
         }
     }
+
+    public function publicUpcoming()
+    {
+        $events = Event::where('start_date', '>', now())
+            ->orderBy('start_date')
+            ->take(6)
+            ->get(['title', 'slug', 'image', 'start_date', 'description']);
+
+        return response()->json(['events' => $events]);
+    }
+
     public function countUpcomingEvents()
     {
         try {
