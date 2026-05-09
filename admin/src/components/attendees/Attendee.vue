@@ -5,7 +5,7 @@
         <v-col>
           <div class="flex justify-between items-center mb-4">
             <h1 class="text-2xl font-semibold mb-4">Attendees</h1>
-            <router-link
+            <router-link 
               to="/attendee-management/create"
               class="bg-blue-500 text-white px-3 py-1 rounded"
               >Add</router-link
