@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\EventController;
@@ -12,92 +11,89 @@ use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
-| API Routes
+| PUBLIC routes (landing page — no auth)
 |--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
 */
+Route::get('/events',           [EventController::class, 'events']);
+Route::get('/events/show/{slug}', [EventController::class, 'show']);
 
-Route::group(["prefix" => "auth"], function () {
+/*
+|--------------------------------------------------------------------------
+| AUTH routes
+|--------------------------------------------------------------------------
+*/
+Route::prefix('auth')->group(function () {
     Route::post('signup', [AuthController::class, 'signup']);
     Route::post('signin', [AuthController::class, 'signin']);
 
-    Route::group(["middleware" => ["auth:sanctum"]], function () {
-        Route::get('user', function (Request $request) {
-            return $request->user();
-        });
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::get('user',    [AuthController::class, 'user']);
         Route::post('logout', [AuthController::class, 'logout']);
-        Route::get('/user', [AuthController::class, 'user']);
     });
 });
 
-//users
-Route::group(["prefix" => "users"], function () {
-    Route::group(["middleware" => ["auth:sanctum"]], function () {
-        Route::get("/", [UserController::class, 'users']);
-        Route::get('/users-count', [UserController::class, 'count']);
-        Route::get('show/{id}', [UserController::class, 'show']);
-        Route::get('edit/{id}', [UserController::class, 'edit']);
-        Route::patch('update/{id}', [UserController::class, 'update']);
-        Route::delete('delete/{id}', [UserController::class, 'delete']);
-    });
-});
+/*
+|--------------------------------------------------------------------------
+| AUTHENTICATED (any role)
+|--------------------------------------------------------------------------
+*/
+Route::middleware('auth:sanctum')->group(function () {
 
-//events
-Route::group(["prefix" => "events"], function () {
-    Route::group(["middleware" => ["auth:sanctum"]], function () {
-        Route::get("/", [EventController::class, 'events']);
-        Route::post('/', [EventController::class, 'store']);
-        Route::get('/events-count', [EventController::class, 'count']);
-        Route::get('/upcoming-events-count', [EventController::class, 'countUpcomingEvents']);
-        Route::get('show/{slug}', [EventController::class, 'show']);
-        Route::get('edit/{slug}', [EventController::class, 'edit']);
-        Route::patch('update/{slug}', [EventController::class, 'update']);
-        Route::delete('delete/{slug}', [EventController::class, 'delete']);
-    });
-});
-
-//attendees 
-Route::group(["prefix" => "attendees"], function () {
-    Route::group(["middleware" => ["auth:sanctum"]], function () {
-        Route::get("/", [AttendeeController::class, 'attendees']);
-        Route::post('/', [AttendeeController::class, 'store']);
-        Route::get('show/{slug}', [AttendeeController::class, 'show']);
-        Route::get('edit/{slug}', [AttendeeController::class, 'edit']);
-        Route::patch('update/{slug}', [AttendeeController::class, 'update']);
-        Route::delete('delete/{slug}', [AttendeeController::class, 'delete']);
-    });
-});
-
-//tickets
-Route::group(["prefix" => "tickets"], function () {
-    Route::group(["middleware" => ["auth:sanctum"]], function () {
-        Route::post('/', [TicketController::class, 'store']);
-        Route::get("/", [TicketController::class, 'tickets']);
-        Route::get('/sold-tickets-count', [TicketController::class, 'count']);
-        Route::get('show/{slug}', [TicketController::class, 'show']);
-        Route::get('edit/{slug}', [TicketController::class, 'edit']);
-        Route::patch('update/{slug}', [TicketController::class, 'update']);
-        Route::delete('delete/{slug}', [TicketController::class, 'delete']);
-    });
-});
-
-// Payments 
-Route::group(["prefix" => "payments"],  function () {
-    Route::group(["middleware" => ["auth:sanctum"]], function () {
-        Route::post('/', [PaymentController::class, 'store']);
-        Route::get('/', [PaymentController::class, 'index']);
-        Route::get('/{slug}', [PaymentController::class, 'show']);
-        Route::patch('/{slug}', [PaymentController::class, 'update']);
-        Route::delete('/{slug}', [PaymentController::class, 'cancel']);
-    });
-});
-
-
-// Dashboard
-Route::group(["middleware" => ["auth:sanctum"]], function () {
+    // Dashboard stats (controller filters by role)
     Route::get('/dashboard-stats', [DashboardController::class, 'getDashboardStats']);
+
+    // Attendee: RSVP to an event
+    Route::post('/attendees', [AttendeeController::class, 'store']);
+
+    // Attendee: own tickets
+    Route::get('/tickets',      [TicketController::class, 'tickets']);
+    Route::post('/tickets',     [TicketController::class, 'store']);
+    Route::get('/tickets/show/{slug}', [TicketController::class, 'show']);
+
+    // Payments
+    Route::post('/payments',          [PaymentController::class, 'store']);
+    Route::get('/payments',           [PaymentController::class, 'index']);
+    Route::get('/payments/{slug}',    [PaymentController::class, 'show']);
+    Route::patch('/payments/{slug}',  [PaymentController::class, 'update']);
+    Route::delete('/payments/{slug}', [PaymentController::class, 'cancel']);
+});
+
+/*
+|--------------------------------------------------------------------------
+| ADMIN ONLY
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth:sanctum', 'role:admin'])->prefix('users')->group(function () {
+    Route::get('/',              [UserController::class, 'users']);
+    Route::get('/users-count',   [UserController::class, 'count']);
+    Route::get('show/{id}',      [UserController::class, 'show']);
+    Route::get('edit/{id}',      [UserController::class, 'edit']);
+    Route::patch('update/{id}',  [UserController::class, 'update']);
+    Route::delete('delete/{id}', [UserController::class, 'delete']);
+});
+
+/*
+|--------------------------------------------------------------------------
+| ADMIN + ORGANIZER (event management)
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth:sanctum', 'role:admin,organizer'])->group(function () {
+
+    // Events CRUD
+    Route::post('/events',                [EventController::class, 'store']);
+    Route::patch('/events/update/{slug}', [EventController::class, 'update']);
+    Route::delete('/events/delete/{slug}',[EventController::class, 'delete']);
+    Route::get('/events/edit/{slug}',     [EventController::class, 'edit']);
+
+    // Counts for dashboards
+    Route::get('/events-count',            [EventController::class, 'count']);
+    Route::get('/upcoming-events-count',   [EventController::class, 'countUpcomingEvents']);
+    Route::get('/tickets/sold-tickets-count', [TicketController::class, 'count']);
+
+    // Attendee management (view/edit/delete — creation happens via RSVP above)
+    Route::get('/attendees',                [AttendeeController::class, 'attendees']);
+    Route::get('/attendees/show/{slug}',    [AttendeeController::class, 'show']);
+    Route::get('/attendees/edit/{slug}',    [AttendeeController::class, 'edit']);
+    Route::patch('/attendees/update/{slug}',[AttendeeController::class, 'update']);
+    Route::delete('/attendees/delete/{slug}',[AttendeeController::class, 'delete']);
 });
