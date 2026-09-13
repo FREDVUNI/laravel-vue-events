@@ -107,13 +107,13 @@ export default {
     async fetchDashboardStats() {
       try {
         const response = await axios.get(
-          `${url}/dashboard-stats`,
+          `${url}/dashboard-stats`, 
           setHeaders(),
         );
         const data = response.data;
 
         // Update stats
-        this.stats = {
+        this.stats = { 
           total_events: data.total_events,
           upcoming_events: data.upcoming_events,
           registered_users: data.registered_users,
