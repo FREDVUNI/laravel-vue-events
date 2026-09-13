@@ -13,20 +13,47 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
+    const ROLE_ADMIN     = 'admin';
+    const ROLE_ORGANIZER = 'organizer';
+    const ROLE_ATTENDEE  = 'attendee';
 
     protected $guarded = [];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
 
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
+
+    // ---- Role helpers ----
+    public function isAdmin(): bool
+    {
+        return $this->role === self::ROLE_ADMIN;
+    }
+    public function isOrganizer(): bool
+    {
+        return $this->role === self::ROLE_ORGANIZER;
+    }
+    public function isAttendee(): bool
+    {
+        return $this->role === self::ROLE_ATTENDEE;
+    }
+
+    // ---- Relations ----
+    public function organizedEvents()
+    {
+        return $this->hasMany(Event::class, 'organizer_id');
+    }
+
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class);
+    }
+
+    // ---- Static queries (kept from your original) ----
     public static function FetchUsers()
     {
         return self::latest()->get();
@@ -35,10 +62,10 @@ class User extends Authenticatable
     public static function createUser(array $data)
     {
         return self::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
+            'name'     => $data['name'],
+            'email'    => $data['email'],
             'password' => Hash::make($data['password']),
-            'role' => $data['role'],
+            'role'     => $data['role'] ?? self::ROLE_ATTENDEE,
         ]);
     }
 
@@ -50,72 +77,33 @@ class User extends Authenticatable
                 'email' => 'Wrong email password combination.',
             ]);
         }
-
         return $user;
     }
 
     public static function getUser($id)
     {
-        return self::where('id', $id)->firstOrFail();
+        return self::findOrFail($id);
     }
-
-    /**
-     * Undocumented function
-     *
-     * @param [type] $id
-     * @return void
-     */
     public static function editUser($id)
     {
-        return self::where('id', $id)->firstOrFail();
+        return self::findOrFail($id);
     }
 
     public static function updateUser($id, array $data)
     {
-        $user = self::where('id', $id)->firstOrFail();
-
-        if (!$user) {
-            return $user;
-        }
+        $user = self::findOrFail($id);
         $user->update([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'role' => $data['role'],
+            'name'     => $data['name'],
+            'email'    => $data['email'],
+            'role'     => $data['role'] ?? $user->role,
+            // only update password if provided
+            ...(isset($data['password']) ? ['password' => Hash::make($data['password'])] : []),
         ]);
-
         return $user;
     }
 
-    /**
-     * Delete a user by ID
-     *
-     * @param [type] $id
-     * @return void
-     */
     public static function deleteUser($id)
     {
-        $user = self::where('id', $id)->firstOrFail();
-        $user->delete();
+        self::findOrFail($id)->delete();
     }
-
-    public function tickets()
-    {
-        return $this->hasMany(Ticket::class);
-    }
-
-    protected $hidden = [
-        'password',
-        'remem
-        ber_token',
-    ];
-
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
 }
