@@ -12,7 +12,7 @@ export const useAuthStore = defineStore("auth", {
     },
     setAuthenticated(value) {
       this.isAuthenticated = value;
-    },
+     },
     setToken(token) {
       this.token = token;
       this.isAuthenticated = true; // Automatically set authenticated when token is set
